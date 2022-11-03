@@ -1,0 +1,43 @@
+import React,{useState} from 'react'
+import {Link} from "react-router-dom"
+import "bootstrap/dist/css/bootstrap.min.css"
+import {Container,Nav,Navbar} from "react-bootstrap"
+
+function Navigate() {
+
+  const [nav, setNav] = useState(false)
+
+  function change(){
+    if(window.scrollY >= 100){
+      setNav(true)
+    }
+    else{
+      setNav(false)
+    }
+  }
+
+  window.addEventListener('scroll',change)
+  return (
+    <React.Fragment>
+        <Navbar fixed='top' className={`${nav ? "nav-active" : "nav"} bar `} expand="lg">
+            <Container  className='bg-transparent py-3'>
+                <Link Navigate to="/"  className={`${nav ? "brand-active" : "brand"} ms-3 `}> <h3>Start Bootstrap</h3></Link>
+                <Navbar.Toggle aria-controls="basic-navbar-nav"  />
+                <Navbar.Collapse id="basic-navbar-nav" >
+                <Nav className="me-auto mar">
+                <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>About</a></Nav.Link>
+
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>Services</a></Nav.Link>
+
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>Portfolio</a></Nav.Link>
+
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>Contact</a></Nav.Link>
+                </Nav>
+                </Navbar.Collapse>
+            </Container>
+            </Navbar>
+    </React.Fragment>
+  )
+}
+
+export default Navigate
