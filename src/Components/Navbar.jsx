@@ -25,13 +25,15 @@ function Navigate() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"  />
                 <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav className="me-auto mar">
-                <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>About</a></Nav.Link>
+                <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="" className={nav ? "link-active" : "link"}>About</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>Services</a></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="" className={nav ? "link-active" : "link"}>Services</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>Portfolio</a></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Login" className={nav ? "link-active" : "link"}>Login</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><a href='' className={nav ? "link-active" : "link"}>Contact</a></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Signup" className={nav ? "link-active" : "link"}>Signup</Link></Nav.Link>
+
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="" className={nav ? "link-active" : "link"}>Contact</Link></Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
