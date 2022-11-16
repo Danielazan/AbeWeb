@@ -1,0 +1,100 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.menu{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.widget{
+    position: fixed;
+    top: 100px;
+    left: 1;
+    z-index: 3;
+    border-left: 1px solid rgb(146, 158, 164);
+}
+
+.main-h2{
+    border-bottom: 1px solid rgb(146, 158, 164);
+}
+
+.main-border{
+    border: 1px solid rgb(146, 158, 164);  
+}
+
+li{
+    list-style: none;
+    line-height: 30px;
+}
+
+.list{
+    text-decoration: none;
+    color: rgb(146, 158, 164);
+    font-weight: 700;
+}
+
+.list:hover{
+    color: rgb(54, 170, 140);
+}
+
+.txt{
+    color: rgb(146, 158, 164);
+}
+
+.icon{
+    color: white;
+    background-color: rgb(61, 176, 255);
+    border-radius: 5px;
+}
+
+.created{
+    color: rgb(54, 170, 140);
+}
+
+.main-col{
+    margin-top: -12%;
+}
+
+.main{
+    overflow-y: scroll;
+    height: 50vh;
+}
+
+.card-body{
+    background-color:rgba(65, 77, 87, 0.552);
+}
+
+.card-line{
+    background-color: rgb(54, 170, 140);
+    height: 4px;
+    border: none;
+}
+
+.admin{
+    background-color: rgb(25, 26, 36);
+}
+
+
+@media screen and (max-width: 980px){
+    
+    .menu{
+        justify-content: flex-start;
+    }
+
+    .main-col{
+        margin-top: 0;
+    }
+
+    .widget{
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        border-left: 1px solid rgb(146, 158, 164);
+    }
+}
+
