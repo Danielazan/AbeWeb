@@ -5,9 +5,6 @@ import Sidebar from './Sidebar'
 import Main from './Main'
 import Style from "Pages/AdminComponent/Style/Style.css"
 import Sectiontrack from './Sectiontrack'
-import Datum  from "./data"
-import TodoForm from "./components/todoForm"
-import TodoList from "Pages/AdminComponent/components/todoList"
 
 function Admin() {
   return (
@@ -21,8 +18,6 @@ function Admin() {
                 <Col xs={12} lg={6}>
 
                   <Main/>
-
-                  <TodoList/>
                   
                 </Col>
 
