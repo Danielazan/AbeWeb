@@ -34,7 +34,7 @@ function TodoList() {
     
 
   return (
-   <div>
+   <div className='text-white'>
     <h1>Collection Name</h1>
       <div>
           {

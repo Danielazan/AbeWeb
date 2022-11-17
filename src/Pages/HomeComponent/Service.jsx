@@ -17,9 +17,9 @@ function Service() {
 
                         <BsGem className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
-                        <h4>Sturdy Themes</h4>
+                        <h4 className='text-black'>Sturdy Themes</h4>
 
-                        <p>Our themes are updated regularly to keep them bug free!</p>
+                        <p className='text-black'>Our themes are updated regularly to keep them bug free!</p>
                        
                     </Col>
 
@@ -27,9 +27,9 @@ function Service() {
 
                         <BsLaptop className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
-                        <h4>Up to Date</h4>
+                        <h4 className='text-black'>Up to Date</h4>
 
-                        <p>All dependencies are kept current to keep things fresh.</p>
+                        <p className='text-black'>All dependencies are kept current to keep things fresh.</p>
 
                     </Col>
 
@@ -37,9 +37,9 @@ function Service() {
 
                         <BsGlobe className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
-                        <h4>Ready to Publish</h4>
+                        <h4 className='text-black'>Ready to Publish</h4>
 
-                        <p>You can use this design as is, or you can make changes!</p>
+                        <p className='text-black'>You can use this design as is, or you can make changes!</p>
 
                     </Col>
 
@@ -47,9 +47,9 @@ function Service() {
 
                         <BsHeart className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
-                        <h4>Made with Love</h4>
+                        <h4 className='text-black'>Made with Love</h4>
 
-                        <p>Is it really open source if it's not made with love?</p>
+                        <p className='text-black'>Is it really open source if it's not made with love?</p>
 
                     </Col>
 

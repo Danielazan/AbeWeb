@@ -16,7 +16,7 @@ function Banner() {
                     <Col xs={12} lg={3}></Col>
 
                     <Col xs={12} lg={6} >
-                        <div className='main'>
+                        <div className='mains'>
                             <h1>Your Favorite Place for Free Bootstrap Themes</h1>
 
                             <center><hr className='banner-line my-4'/></center>
