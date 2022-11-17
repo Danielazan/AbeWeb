@@ -1,11 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import Style from "./Style/Style.css"
+import LoginHook from "Hook/LoginHook"
 
 
 function From() {
+    const [email, setEmail] = useState("")
+
+    const [password, setPassword] = useState("")
+
+    const {LogOut} = LoginHook()
+
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
+
+        
+
+    }
   return (
     <React.Fragment>
         <Row>
@@ -18,12 +31,19 @@ function From() {
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label className='form-label'>Email </Form.Label>
-                            <Form.Control type="email" placeholder="Enter Your Email" />
+
+                            <Form.Control type="email" placeholder="Enter Your Email" 
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
+                            />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label className='form-label'>Password </Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password"
+                            value={password} 
+                            onChange={(e)=>setPassword(e.target.value)}
+                            />
                         </Form.Group>
 
                         <Container fluid className='d-flex justify-content-between'>
@@ -32,7 +52,12 @@ function From() {
                             <Link Navigate to="/" className='form-label' style={{fontSize:"12px"}}>Forgot Password</Link>                    
                         </Container>
 
-                        <Button variant='dark' className='w-100 mt-5'>Sign In</Button>
+                        <Button 
+                        variant='dark' className='w-100 mt-5'
+                        onClick={handleSubmit}
+                        >
+                        Sign In
+                        </Button>
                     </Form>
                     <Container className='d-flex justify-content-around my-4'>
                         <p className='form-p'>Don't have an account?</p>
