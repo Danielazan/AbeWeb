@@ -60,8 +60,8 @@ function Image() {
   return (
     <React.Fragment>
         <section className='mt-4'>
-            <h4>Product Widgets</h4>
-            <p>Map Through Bible API</p>
+            <h4 style={{color:"#fda07e"}}>Product Widgets</h4>
+            <p style={{color:"#fda07e"}}>Map Through Bible API</p>
 
             <div>
             <h3>Form </h3>
