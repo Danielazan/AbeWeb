@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Sales{
+    min-height: 150vh;
+    background-color: rgb(180, 180, 180);
+    padding-top: 15vh;
+}
