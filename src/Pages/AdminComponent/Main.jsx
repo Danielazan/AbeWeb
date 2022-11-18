@@ -24,10 +24,10 @@ const [materials, setmaterials] = useState([])
 
             console.log(res.data.materialss)
 
+
             dispatch({type:"ROOFING",payload:materials})
         })
-    //         dispatch({type:"ROOFING",payload:materials})
-    //     })
+
     }
 
     const GetProducts = async ()=>{
@@ -52,7 +52,6 @@ const [materials, setmaterials] = useState([])
 
             <p style={{color:"#fda07e"}}>Map Through News API</p>
             
-            <button onClick={getp}>Click</button>
             <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
                 <thead>
                     <tr>
