@@ -7,6 +7,7 @@ import Login from "Pages/LoginComponent/Login"
 import Signup from "Pages/SignupComponent/Signup"
 import Admin from 'Pages/AdminComponent/Admin';
 import About from "Pages/AdminComponent/Admin"
+import Sales from "Pages/SalesComponent/Sales"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/Signup' element={<Signup/>}/>
             <Route path='/Admin' element={<Admin/>}/>
             <Route path="/about" element={<About/>}/>
+            <Route path="/Sales" element={<Sales/>}/>
           </Routes>
       </BrowserRouter>
     </div>

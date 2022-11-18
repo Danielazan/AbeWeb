@@ -15,17 +15,17 @@ function Main() {
         
     },[dispatch])
 
-    // function getp(){
+    function getp(){
 
-    //     axios.get("https://abe-api.onrender.com/api/products/roofing")
-    //         .then(res=>{
-    //         setmaterials(res.data.materialss)
+        axios.get("https://abe-api.onrender.com/api/products/roofing")
+            .then(res=>{
+            setmaterials(res.data.materialss)
 
-    //         console.log(res.data.materialss)
+            console.log(res.data.materialss)
 
-    //         dispatch({type:"ROOFING",payload:materials})
-    //     })
-    // }
+            dispatch({type:"ROOFING",payload:materials})
+        })
+    }
     
   return (
     <React.Fragment>
@@ -37,7 +37,7 @@ function Main() {
 
             <p style={{color:"#fda07e"}}>Map Through News API</p>
             
-            {/* <button onClick={getp}>Click</button> */}
+            <button onClick={getp}>Click</button>
             <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
                 <thead>
                     <tr>

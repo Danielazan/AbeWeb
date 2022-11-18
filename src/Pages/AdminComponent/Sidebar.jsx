@@ -14,6 +14,8 @@ function SideBar2() {
 
     const [show, setShow] = useState(false);
 
+    const [data, setData] = useState([])
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -24,9 +26,9 @@ function SideBar2() {
 
           console.log(res.data.materialss)
 
-          dispatch({type:"ROOFING",payload:res.data.materialss})
+          // dispatch({type:"ROOFING",payload:res.data.materialss})
 
-          console.log(dispatch.payload)
+          // console.log(dispatch.payload)
 
       })
   }
