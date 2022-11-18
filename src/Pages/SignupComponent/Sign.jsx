@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import SigninHook from "Hook/signinHook"
+import { useNavigate } from 'react-router-dom';
 
 function Sign() {
   const [name, setName] = useState("")
@@ -10,10 +11,14 @@ function Sign() {
   const [password, setPassword] = useState("")
   const {signin,error,isloading}=SigninHook()
 
+  const navigate = useNavigate();
+
   const handleSubmit=async (e)=>{
     e.preventDefault()
 
     await signin(email,password)
+
+    navigate('/Verify')
   }
 
   return (
