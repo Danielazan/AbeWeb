@@ -7,6 +7,22 @@ import Style from "Pages/AdminComponent/Style/Style.css"
 import Sectiontrack from './Sectiontrack'
 
 function Admin() {
+  const getp= async ()=>{
+    // const url ="http://localhost:5000/api/products"
+    
+    // const response = await axios.get(url)
+    
+    // const json = await response.data
+
+    // dispatch ({type:"SET Collection", payload:json})
+
+    // const res=json.map(iteam=>{
+    //    return iteam.collectionName
+    // })
+
+    //   console.log(res)
+    //  //console.log (Collection)
+}
   return (
     <React.Fragment>
         <Navbar/>

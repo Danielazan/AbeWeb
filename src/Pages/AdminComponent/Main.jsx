@@ -2,17 +2,18 @@ import React,{useEffect,useState} from 'react'
 import {Card,Button,Table} from "react-bootstrap";
 import axios from 'axios';
 import Imageapi from "./Imageapi"
-import NewContext from "Hook/useCollection"
+import {useProductContext} from "Hook/useProduct"
 
 
 function Main() {
 
-    const {state,dispatch} = NewContext()
+    
+const {Product, dispatch} = useProductContext()
 
-    const [materials, setmaterials] = useState([])
+const [materials, setmaterials] = useState([])
 
     useEffect(() => {
-        
+        GetProducts()
     },[dispatch])
 
     function getp(){
@@ -23,8 +24,25 @@ function Main() {
 
             console.log(res.data.materialss)
 
+<<<<<<< HEAD
             dispatch({type:"ROOFING",payload:materials})
         })
+=======
+    //         dispatch({type:"ROOFING",payload:materials})
+    //     })
+    // }
+
+    const GetProducts = async ()=>{
+        const name = "roofing"
+        const url = `https://abe-api.onrender.com/api/products/${name}`
+        const response =await axios.get(url)
+
+        const json = await response.data.materialss
+
+        dispatch({type:"SET Product", payload:json})
+
+        console.log (json)
+>>>>>>> ee258e3c0534358b098f71e8be83f8d3103d4412
     }
     
   return (
@@ -49,7 +67,7 @@ function Main() {
                 </thead>
                 <tbody>
                     {
-                        materials && materials.map(item=>{
+                        Product && Product.map(item=>{
                             return(
                                 <tr key={item._id}>
                                     <td>{item.Name}</td>

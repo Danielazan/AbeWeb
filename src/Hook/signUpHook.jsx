@@ -1,15 +1,17 @@
 import React,{useState} from 'react'
 import UserHook from "./UserHook"
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 
 
-function SigninHook() {
+function SignUpHook() {
     const [isLoading, setisLoading] = useState(false)
     const [error, seterror] = useState(null)
     const {dispatch}=UserHook()
+    const navigate = useNavigate();
 
-    const signin = async (email,password)=>{
+    const signUp = async (email,name,password)=>{
         const url ="http://localhost:5000/api/signup"
 
         setisLoading(true)
@@ -21,7 +23,7 @@ function SigninHook() {
             headers:{
                 "Conten-Type":"application/json",
             },
-            body:JSON.stringify({email,password})
+            body:JSON.stringify({email,name,password})
         })
 
         const json =await response.json()
@@ -34,14 +36,17 @@ function SigninHook() {
 
         if (response.ok){
             localStorage.setItem("User", JSON.stringify(json))
+
         }
 
         dispatch({type:"Login", payload:json})
+
+        
     }
 
   return (
-    {signin,isLoading,error}
+    {signUp,isLoading,error}
   )
 }
 
-export default SigninHook
+export default SignUpHook
