@@ -44,7 +44,7 @@ function SideBar2() {
     }
 
     const getp= async ()=>{
-      const url ="http://localhost:5000/api/products"
+      const url ="https://abe-api.onrender.com/api/products"
       
       const response = await axios.get(url)
       
