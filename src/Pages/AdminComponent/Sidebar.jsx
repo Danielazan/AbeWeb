@@ -1,34 +1,63 @@
-import React, {useState} from 'react'
-import {Button,Offcanvas,ListGroup} from "react-bootstrap"
-import { MdSettingsSuggest,MdLocalActivity,MdRoofing } from "react-icons/md"
-import {FaHandHoldingWater} from "react-icons/fa"
-import {RiVideoAddLine} from "react-icons/ri"
-import axios from 'axios'
-import NewContext from "Hook/useCollection"
+import React, {useState, useEffect} from 'react'
 
+import {Button,Offcanvas,ListGroup} from "react-bootstrap"
+
+import { MdSettingsSuggest,MdLocalActivity,MdRoofing } from "react-icons/md"
+
+import {FaHandHoldingWater} from "react-icons/fa"
+
+import {RiVideoAddLine} from "react-icons/ri"
+
+import axios from 'axios'
+
+import {useCollectionContext} from "Hook/CollectionHook"
+
+import {useProductContext} from "Hook/useProduct"
 
 
 function SideBar2() {
-  const {state,dispatch} = NewContext()
-
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    function getp(){
+    const {Collection, dispatch2}= useCollectionContext()
 
-      axios.get("https://abe-api.onrender.com/api/products/roofing")
-          .then(res=>{
+    const {Product, dispatch} = useProductContext()
 
-          console.log(res.data.materialss)
+    useEffect(() => {
+      getp()
+    }, [dispatch])
 
-          dispatch({type:"ROOFING",payload:res.data.materialss})
+    
+    const handleGet = async (name)=>{
+      //const name = "roofing"
+        const url = `https://abe-api.onrender.com/api/products/${name}`
+        const response =await axios.get(url)
 
-          console.log(dispatch.payload)
+        const json = await response.data.materialss
 
+        dispatch({type:"SET Product", payload:json})
+
+        console.log (json)
+        console.log(name)
+    }
+
+    const getp= async ()=>{
+      const url ="http://localhost:5000/api/products"
+      
+      const response = await axios.get(url)
+      
+      const json = await response.data
+
+      dispatch2 ({type:"SET Collection", payload:json})
+
+      const res=json.map(iteam=>{
+         return iteam.collectionName
       })
+
+        console.log(res)
+       console.log (Collection)
   }
   
   return (
@@ -44,16 +73,25 @@ function SideBar2() {
         <Offcanvas.Body   style={{backgroundColor:"#210440"}} >
         
           <ListGroup  className="SideList mt-4" variant='flush'> 
-              <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" action onClick={getp} >
-                <MdRoofing className='me-2' size={"1.5em"} />Roofing Collection
+              {
+                Collection && Collection.map(item =>{
+                  return(
+                    <ListGroup.Item 
+                        style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" 
+                        action 
+
+                        onClick={()=>handleGet(item.collectionName)}
+               >
+                <MdRoofing 
+                className='me-2' 
+                size={"1.5em"}/>
+
+                {item.collectionName}
               </ListGroup.Item>
-
-             
-              <ListGroup.Item  style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" action ><FaHandHoldingWater className='me-2' size={"1.5em"}/>Water Collection</ListGroup.Item>
-
-              <ListGroup.Item  style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" action ><RiVideoAddLine className='me-2' size={"1.5em"}/>Add New Videos</ListGroup.Item>
-
-              <ListGroup.Item  style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" action ><MdLocalActivity className='me-2' size={"1.5em"}/>Events</ListGroup.Item>
+                  )
+                
+                })
+              }
           </ListGroup>
         </Offcanvas.Body>
       </Offcanvas>

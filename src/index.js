@@ -4,16 +4,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App'
 import {ProductContextProvider} from "Context/ProductsContext"
-import { CallPro } from 'Context/Collection';
+import { CollectionContextProvider} from "Context/CollectionContext"
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <CollectionContextProvider>
     <ProductContextProvider>
-      <CallPro>
+      
         <App />
-      </CallPro>
+      
     </ProductContextProvider>
+    </CollectionContextProvider>
     
   </React.StrictMode>
 );
