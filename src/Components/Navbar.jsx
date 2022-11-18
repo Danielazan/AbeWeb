@@ -30,7 +30,7 @@ function Navigate() {
 
                     <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/" className={nav ? "link-active" : "link"}>Home</Link></Nav.Link>
 
-                    {/* <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Sales" className={nav ? "link-active" : "link"}>Sales</Link></Nav.Link> */}
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Sales" className={nav ? "link-active" : "link"}>Sales</Link></Nav.Link>
 
                     <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Login" className={nav ? "link-active" : "link"}>Login</Link></Nav.Link>
 
