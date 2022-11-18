@@ -24,13 +24,11 @@ const [materials, setmaterials] = useState([])
 
             console.log(res.data.materialss)
 
-<<<<<<< HEAD
             dispatch({type:"ROOFING",payload:materials})
         })
-=======
     //         dispatch({type:"ROOFING",payload:materials})
     //     })
-    // }
+    }
 
     const GetProducts = async ()=>{
         const name = "roofing"
@@ -42,7 +40,6 @@ const [materials, setmaterials] = useState([])
         dispatch({type:"SET Product", payload:json})
 
         console.log (json)
->>>>>>> ee258e3c0534358b098f71e8be83f8d3103d4412
     }
     
   return (

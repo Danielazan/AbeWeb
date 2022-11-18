@@ -31,11 +31,6 @@ function SideBar2() {
       getp()
     }, [dispatch])
 
-<<<<<<< HEAD
-          // dispatch({type:"ROOFING",payload:res.data.materialss})
-
-          // console.log(dispatch.payload)
-=======
     
     const handleGet = async (name)=>{
       //const name = "roofing"
@@ -43,7 +38,6 @@ function SideBar2() {
         const response =await axios.get(url)
 
         const json = await response.data.materialss
->>>>>>> ee258e3c0534358b098f71e8be83f8d3103d4412
 
         dispatch({type:"SET Product", payload:json})
 
