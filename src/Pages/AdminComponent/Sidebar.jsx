@@ -44,7 +44,6 @@ function SideBar2() {
 
         const json = await response.data.materialss
 
-
         dispatch({type:"SET Product", payload:json})
 
         console.log (json)
