@@ -2,23 +2,70 @@ import React,{useState} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import SignUpHook from "Hook/signUpHook"
+import UserHook from "Hook/UserHook"
+import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
 function Sign() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const {signUp,error,isloading}=SignUpHook()
+  //const {signUp,error,isloading}=SignUpHook()
+
+  const [isLoading, setisLoading] = useState(false)
+  const [error, seterror] = useState(null)
+  const {dispatch}=UserHook()
 
   const navigate = useNavigate();
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
 
-    await signUp(email,name,password)
+    const url ="https://abe-api.onrender.com/api/signup"
 
-    navigate('/Verify')
+    const obj= {name,email,password}
+
+    console.log(obj)
+         setisLoading(true)
+
+        seterror(null)
+
+        const response = await axios({
+          method:"post",
+          url:url,
+         data:JSON.stringify(obj),
+         headers:{
+           "Content-Type":"application/json"
+         }
+        })
+
+        const json =await response.data
+          setisLoading(true)
+
+        if(!response){
+            setisLoading(false)
+
+            seterror(json.error)
+        }
+
+        if (response){
+            localStorage.setItem("User", JSON.stringify(json))
+
+            setName("")
+
+            setEmail("")
+        
+            setPassword("")
+        
+            navigate('/Verify')
+
+        }
+
+        dispatch({type:"Login", payload:json})
+
+        
+
+   
   }
 
   return (
@@ -61,7 +108,7 @@ function Sign() {
 
 
                     <Button 
-                    disabled={isloading}
+                    disabled={isLoading}
                     className='w-100 mt-5 sign-btn py-2'
                     onClick={handleSubmit}
                     >Create Account</Button>
