@@ -1,46 +1,106 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
-import {Container,Row,Col,Button,Form,Table} from "react-bootstrap"
+import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import Style from "./Style/Style.css"
 import Navbar from 'Components/Navbar'
+import axios from 'axios'
 
 function Sales() {
+
+    const [prod, setProd] = useState("")
+    const [materials, setMaterials] = useState([])
+    const [quantity, setQuantity] = useState(1)
+
+    function searchValue(e){
+
+        setProd(e.target.value)
+    }
+
+    async function handleDatabaseSearch(){
+        await axios.get(`https://abe-api.onrender.com/api/products/${prod}`)
+            .then(res=>{
+                console.log(res.data.materialss)
+
+                setMaterials(res.data.materialss)
+            })
+    }
+
+    function increase(item){
+        setQuantity(quantity +1)
+    }
+
+    function reduce(){
+        if (quantity === 1){
+
+        }else{
+            setQuantity(quantity -1)
+        }
+    }
+
   return (
     <React.Fragment>
     <Container fluid className='Sales'>
     <Navbar/>
         <Container>
         <div className='d-flex align-items-end justify-content-between'>
-        <p>Search For Desired Product</p>
-        <Form.Control type="search" className='w-25 rounded-3 bg-white' placeholder="Search For Product" />
+        <p style={{color:"rgb(26, 20, 100)"}}>Search For Desired Product</p>
+        <div className='d-flex'>
+        <Form.Control type="search" value={prod} onChange={searchValue} className='w-75 me-3 rounded-3 bg-white' placeholder="Search For Product" />
+        <Button className='rounded-pill px-3 py-2' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={handleDatabaseSearch}>Submit</Button>
       
         </div>
+        </div>
             <Row className='mt-5'>
-                <Col xs={12} className="">
-                   <Row style={{borderBlock:"2px solid rgb(5, 96, 189)",fontWeight:"600"}} className="py-3">
-                        <Col xs={3}>S/N</Col>
-                        <Col xs={3}>Product</Col>
-                        <Col xs={3}>Price</Col>
-                        <Col xs={3}>Quantity</Col>
+                <Col xs={12} xl={8} className="">
+                   <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3 text-center">
+                        <Col xl={3} xs={3}>Product</Col>
+                        <Col xl={3} xs={2}>Price</Col>
+                        <Col xl={4} xs={5}>Quantity</Col>
+                        <Col xl={2} xs={1}>Add</Col>
                    </Row>
-                </Col>
 
-                <Col xs={12} xl={9}>
+            
+                    {
+                        materials && materials.map(item=>{
+                            return(
+
+                                <Row key={item._id} className="py-4" style={{borderBottom:"1px solid rgb(26, 20, 100)"}}>
+
+                                    <Col xl={3} xs={3} className="text-center">{item.Name}</Col>
+
+                                    <Col xl={3} xs={2} className="text-center">{item.Price}</Col>
+
+                                    <Col xl={4} xs={5}>
+                                        <div className='justify-content-around d-flex'>
+                                            <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={reduce}>-</Button>
+                                            <Button className='bg-transparent border-0 text-black'>{quantity}</Button>
+                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> increase("one")}>+</Button>
+                                        </div>
+                                    </Col>
+
+                                    <Col xl={2} xs={2} className="text-center">
+                                        <Button className='mx-0 border-0' style={{backgroundColor:"rgb(26, 20, 100)"}} >Add</Button>
+                                    </Col>
+
+                                </Row>                     
+                            )
+                        })
+                    }
+  
+                </Col>
                 
+                <Col xs={12} xl={1}>
+
                 </Col>
 
-                <Col xs={12} xl={3} >
-                    <div className='mt-5'>
-                    <Table striped bordered hover variant="dark">
-                        <thead>
-                            <tr>
-                                <th>Total</th>
-                                <td>900</td>
-                            </tr>
-                        </thead>
-                    </Table>
-                    <Button className='w-100 rounded-pill py-3' style={{backgroundColor:"rgb(5, 96, 189)"}}>Checkout</Button>
-                    </div>
+                <Col xs={12} xl={3} className="mt-4 mt-xl-0">
+                    <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3">
+                        <Col xs={6}>Description</Col>
+                        <Col xs={6}>Price</Col>
+                    </Row>
+                 
+                    
+                    <Button className='w-100 rounded-pill py-3 mt-4' style={{backgroundColor:"rgb(26, 20, 100)"}}>Checkout</Button>
                 </Col>
 
             </Row>
