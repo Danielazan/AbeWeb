@@ -27,6 +27,14 @@ const [materials, setmaterials] = useState([])
 
             dispatch({type:"ROOFING",payload:materials})
 
+
+        })      
+       
+
+
+
+
+
     }
 
     const GetProducts = async ()=>{
@@ -51,6 +59,13 @@ const [materials, setmaterials] = useState([])
 
             <p style={{color:"#fda07e"}}>Map Through News API</p>
             
+
+
+            <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} > 
+
+            <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
+
+
 
                 <thead>
                     <tr>
