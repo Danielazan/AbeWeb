@@ -61,7 +61,7 @@ function Sign() {
 
         }
 
-        dispatch({type:"Login", payload:json})
+        dispatch({type:"Verify Email", payload:json})
 
         
 
