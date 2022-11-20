@@ -12,7 +12,7 @@ function SignUpHook() {
     const navigate = useNavigate();
 
     const signUp = async (email,name,password)=>{
-        const url ="http://localhost:5000/api/signup"
+        const url ="https://abe-api.onrender.com/api/signup"
 
         setisLoading(true)
         seterror(null)
