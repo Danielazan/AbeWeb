@@ -3,7 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import Style from "./Style/Style.css"
-import LoginHook from "Hook/LoginHook"
+import axios from "axios"
+import UserHook from "Hook/UserHook"
+import { useNavigate } from 'react-router-dom';
 
 
 function From() {
@@ -11,10 +13,61 @@ function From() {
 
     const [password, setPassword] = useState("")
 
-    const {LogOut} = LoginHook()
+    const [isLoading, setisLoading] = useState(false)
+
+    const [error, setError] = useState(null)
+
+    const {dispatch}=UserHook()
+
+    const navigate = useNavigate();
+
+    
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
+
+    const url ="https://abe-api.onrender.com/api/login"
+
+    const obj= {email,password}
+
+    console.log(obj)
+         setisLoading(true)
+
+        setError(null)
+
+        const response = await axios({
+          method:"post",
+          url:url,
+         data:JSON.stringify(obj),
+         headers:{
+           "Content-Type":"application/json"
+         }
+        })
+
+        const json =await response.data
+          setisLoading(true)
+
+        if(!response){
+            setisLoading(false)
+
+            setError(json.error)
+        }
+
+        if (response){
+            localStorage.setItem("User", JSON.stringify(json))
+
+        
+
+            setEmail("")
+        
+            setPassword("")
+        
+            navigate('/Sales')
+
+        }
+
+        dispatch({type:"Login", payload:json})
+
 
         
 
@@ -52,12 +105,14 @@ function From() {
                             <Link Navigate to="/" className='form-label' style={{fontSize:"12px"}}>Forgot Password</Link>                    
                         </Container>
 
-                        <Button 
+                        <Button
+                        disabled={isLoading} 
                         variant='dark' className='w-100 mt-5'
                         onClick={handleSubmit}
                         >
                         Sign In
                         </Button>
+                        {Error && <p>{Error}</p>}
                     </Form>
                     <Container className='d-flex justify-content-around my-4'>
                         <p className='form-p'>Don't have an account?</p>
