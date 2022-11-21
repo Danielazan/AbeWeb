@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
-import Style from "./Style/Style.css"
+import "./Style/Style.css"
 import Navbar from 'Components/Navbar'
 import axios from 'axios'
 import img from "Assets/Images/pic14.svg"
@@ -12,6 +12,7 @@ function Sales() {
     const [materials, setMaterials] = useState([])
     const [quantity, setQuantity] = useState(1)
     const [loading, setLoading] = useState(true)
+    const [cart, setCart] = useState([])
 
     function searchValue(e){
 
@@ -28,7 +29,7 @@ function Sales() {
             setLoading(false)
         })
      
-    }, )
+    },)
 
     function increase(item){
         setQuantity(quantity +1)
@@ -40,6 +41,25 @@ function Sales() {
         }else{
             setQuantity(quantity -1)
         }
+    }
+
+    function handleClick(item){
+        cart.push(item)
+        console.log(cart)
+    }
+
+    let sum = cart.map((price)=>{
+        return price.Price
+    })
+
+    var total = sum.reduce((acc,item)=>{
+        return acc = acc + item
+    },0)
+
+    function handleRemove(_id){
+        let arr = cart.filter((item)=> item._id !== _id)
+        setCart(arr)
+        
     }
 
   return (
@@ -87,7 +107,7 @@ function Sales() {
                                     </Col>
 
                                     <Col xl={2} xs={2} className="text-center">
-                                        <Button className='mx-0 border-0' style={{backgroundColor:"rgb(26, 20, 100)"}} >Add</Button>
+                                        <Button className='mx-0 border-0' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={()=> handleClick(item)}>Add</Button>
                                     </Col>
 
                                 </Row>                     
@@ -103,8 +123,40 @@ function Sales() {
 
                 <Col xs={12} xl={3} className="mt-4 mt-xl-0">
                     <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3">
-                        <Col xs={6}>Description</Col>
-                        <Col xs={6}>Price</Col>
+                        <Col xs={5}>Description</Col>
+                        <Col xs={5}>Price</Col>
+                        <Col xs={2}></Col>
+                    </Row>
+
+                    {
+                        cart.map((material)=>{
+                            return(
+                                <Row key={material._id} className="my-3">
+
+                                    <Col xs={5}>
+                                        <div>
+                                            <p className="text-black">{material.Name} x {}</p>
+                                        </div>
+                                    </Col>
+
+                                    <Col xs={4}>
+                                        <p className="text-black">{material.Price}</p>
+                                    </Col>
+
+                                    <Col xs={3}>
+                                        <Button className='border-0 mt-2' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={()=>handleRemove(material._id)}>Remove</Button>
+                                    </Col>
+
+
+                                </Row>
+                            )
+                        })
+                    }
+
+                    <Row>
+                        <Col xs={5}><p className='heavy'>Total</p></Col>
+
+                        <Col xs={4} className='heavy'>{total}</Col>
                     </Row>
                  
                     
