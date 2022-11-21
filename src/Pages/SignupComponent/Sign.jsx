@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 import UserHook from "Hook/UserHook"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import Navbar2 from "Components/Navbar2"
 
 function Sign() {
   const [name, setName] = useState("")
@@ -70,6 +71,7 @@ function Sign() {
 
   return (
     <React.Fragment>
+        <Navbar2/>
         <Container className='sign'>
           <Row>
               <Col xs={12} lg={1}></Col>
