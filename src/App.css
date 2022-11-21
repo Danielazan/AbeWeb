@@ -13,6 +13,14 @@
   transition: 1s ease;
 }
 
+.nav2{
+  background-color: rgb(76, 49, 111);
+}
+
+.nav3{
+  background-color: rgb(2, 23, 50);
+}
+
 .nav-active{
   background-color: white;
   box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.34);
@@ -24,6 +32,10 @@
   margin-left: 50%;
 }
 
+.mar2{
+  margin-left: 80%;
+}
+
 .footer{
   background-color: rgb(248, 249, 250);
 }
@@ -32,4 +44,9 @@
   .mar{
     margin-left: 0%;
   }
+
+  .mar2{
+    margin-left: 0%;
+  }
+  
 }

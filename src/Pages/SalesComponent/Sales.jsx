@@ -4,26 +4,31 @@ import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import Style from "./Style/Style.css"
 import Navbar from 'Components/Navbar'
 import axios from 'axios'
+import img from "Assets/Images/pic14.svg"
 
 function Sales() {
 
     const [prod, setProd] = useState("")
     const [materials, setMaterials] = useState([])
     const [quantity, setQuantity] = useState(1)
+    const [loading, setLoading] = useState(true)
 
     function searchValue(e){
 
         setProd(e.target.value)
     }
 
-    async function handleDatabaseSearch(){
-        await axios.get(`https://abe-api.onrender.com/api/products/${prod}`)
-            .then(res=>{
-                console.log(res.data.materialss)
+    useEffect(() => {
 
-                setMaterials(res.data.materialss)
-            })
-    }
+        axios.get(`https://abe-api.onrender.com/api/material`)
+        .then(res=>{
+
+            setMaterials(res.data)
+
+            setLoading(false)
+        })
+     
+    }, )
 
     function increase(item){
         setQuantity(quantity +1)
@@ -45,11 +50,13 @@ function Sales() {
         <div className='d-flex align-items-end justify-content-between'>
         <p style={{color:"rgb(26, 20, 100)"}}>Search For Desired Product</p>
         <div className='d-flex'>
-        <Form.Control type="search" value={prod} onChange={searchValue} className='w-75 me-3 rounded-3 bg-white' placeholder="Search For Product" />
-        <Button className='rounded-pill px-3 py-2' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={handleDatabaseSearch}>Submit</Button>
+        <Form.Control type="search" value={prod} onChange={searchValue} className='w-100 rounded-3 bg-white' placeholder="Search For Product" />
       
         </div>
         </div>
+
+        {loading ? <center><img src={img} height="100px"/></center> : null}
+
             <Row className='mt-5'>
                 <Col xs={12} xl={8} className="">
                    <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3 text-center">
@@ -58,10 +65,11 @@ function Sales() {
                         <Col xl={4} xs={5}>Quantity</Col>
                         <Col xl={2} xs={1}>Add</Col>
                    </Row>
-
-            
+                                
                     {
-                        materials && materials.map(item=>{
+                        materials && materials.filter((item)=>{
+                            return prod.toLowerCase() === "" ? item : item.Name.toLowerCase().includes(prod)
+                        }).map(item=>{
                             return(
 
                                 <Row key={item._id} className="py-4" style={{borderBottom:"1px solid rgb(26, 20, 100)"}}>
@@ -100,7 +108,7 @@ function Sales() {
                     </Row>
                  
                     
-                    <Button className='w-100 rounded-pill py-3 mt-4' style={{backgroundColor:"rgb(26, 20, 100)"}}>Checkout</Button>
+                    <Button className='w-100 rounded-pill py-3 mt-4 border-0' style={{backgroundColor:"rgb(26, 20, 100)"}}>Checkout</Button>
                 </Col>
 
             </Row>
