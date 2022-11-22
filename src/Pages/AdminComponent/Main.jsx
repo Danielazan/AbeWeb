@@ -1,16 +1,11 @@
 import React,{useEffect,useState} from 'react'
-	import {Card,Button,Table} from "react-bootstrap";
+	import {Table} from "react-bootstrap";
 	import axios from 'axios';
 	import Imageapi from "./Imageapi"
 	import {useProductContext} from "Hook/useProduct"
 	
-
-	
-
 	function Main() {
 	
-
-	    
 	const {Product, dispatch} = useProductContext()
 	
 
@@ -29,11 +24,7 @@ import React,{useEffect,useState} from 'react'
 	            .then(res=>{
 	            setmaterials(res.data.materialss)
 	
-
 	            console.log(res.data.materialss)
-	
-
-	
 
 	            dispatch({type:"ROOFING",payload:materials})
 	        })

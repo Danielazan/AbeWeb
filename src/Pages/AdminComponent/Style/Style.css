@@ -15,7 +15,7 @@
     top: 100px;
     left: 1;
     z-index: 3;
-    border-left: 1px solid #ffffff;
+    border-left: 1px solid x#ffffff;
 }
 
 .main-h2{
@@ -76,6 +76,14 @@ li{
 
 .admin{
     background-color: #210440;
+}
+
+.format::placeholder{
+    color: #fda07e;
+}
+
+.format{
+    color: red;
 }
 
 
