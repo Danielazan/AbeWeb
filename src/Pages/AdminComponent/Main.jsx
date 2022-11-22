@@ -7,10 +7,10 @@ import React,{useEffect,useState} from 'react'
 	
 	function Main() {
 	
-	const {Product, dispatch} = useProductContext()
+		const {Product, dispatch} = useProductContext()
 	
 
-	const [materials, setmaterials] = useState([])
+		const [materials, setmaterials] = useState([])
 	
 
 	    useEffect(() => {
@@ -20,7 +20,6 @@ import React,{useEffect,useState} from 'react'
 
 	    function getp(){
 	
-
 	        axios.get("https://abe-api.onrender.com/api/products/roofing")
 	            .then(res=>{
 	            setmaterials(res.data.materialss)
@@ -29,9 +28,21 @@ import React,{useEffect,useState} from 'react'
 
 	            dispatch({type:"ROOFING",payload:materials})
 	        })
-	
 
 	    }
+
+		function handleDelete(item){
+
+			axios.delete(`https://abe-api.onrender.com/api/material/${item._id}`)
+			
+				.then((res)=>{
+					console.log(res)
+
+					dispatch({type:"DELETE Product",payload:res.data})
+
+				})
+			
+		}
 	
 
 	    const GetProducts = async ()=>{
@@ -83,7 +94,7 @@ import React,{useEffect,useState} from 'react'
 										<td>
 											<div className="d-flex justify-content-around flex-lg-row flex-column">
 												<MdEdit size={"2em"} style={{color:"rgb(49, 210, 242)"}}/>
-												<MdDelete className='mt-3 mt-lg-0' size={"2em"}  style={{color:"rgb(220, 53, 69)"}}/>
+												<MdDelete className='mt-3 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
 											</div>
 										</td>
 	                                </tr>
