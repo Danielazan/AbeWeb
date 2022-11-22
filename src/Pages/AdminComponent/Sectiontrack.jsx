@@ -2,6 +2,8 @@ import axios from 'axios'
 import React,{useState} from 'react'
 import {Form,Button} from 'react-bootstrap'
 import {useProductContext} from "Hook/useProduct"
+import {useCollectionContext} from "Hook/CollectionHook"
+
 
 // const 
 
@@ -15,6 +17,30 @@ function Sectiontrack() {
 
   const {Product, dispatch} = useProductContext()
 
+  const {Collection, dispatch2}= useCollectionContext()
+
+  function handleCol(e){
+    setCollection(e.target.value)
+  }
+
+
+  const getp= async ()=>{
+
+    const url ="https://abe-api.onrender.com/api/products"
+      
+    const response = await axios.get(url)
+      
+    const json = await response.data
+
+    dispatch2 ({type:"SET Collection", payload:json})
+
+    const res=json.map(iteam=>{
+      return iteam.collectionName
+    })
+
+  }
+
+
   function handlePost(){
 
       let data ={
@@ -23,6 +49,7 @@ function Sectiontrack() {
         collectionName:collection,
         Price:price
       }
+      console.log(data)
       axios.post("https://abe-api.onrender.com/api/material",data)
       
         .then(res=>{
@@ -52,12 +79,21 @@ function Sectiontrack() {
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label style={{color:"#fda07e"}}>Collection</Form.Label>
-              <Form.Control 
-              type="text" placeholder="Name Of Collection"
-              value={collection}
-              onChange={(e)=> setCollection(e.target.value)}
+
+              <Form.Select size=""
               className='format bg-transparent text-white py-3 px-3' style={{borderColor:"#fda07e"}}
-               />
+              onChange={handleCol}
+              >
+                {
+                  Collection && Collection.map((opt)=>{
+
+                    return(
+                      <option value={opt.collectionName}  style={{backgroundColor:"#210440"}}>{opt.collectionName}</option>
+                    )
+                  })
+                }
+              </Form.Select>
+                 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
