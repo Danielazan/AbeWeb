@@ -6,11 +6,33 @@
 
 .Sales{
     min-height: 100vh;
-    background-color:#e8c7ae;
+    background-color:ivory;
     padding-top: 15vh;
 }
 
 .heavy{
     font-weight: 700;
     color: black;
+}
+
+.nava{
+    background-color:rgb(122, 102, 96);
+}
+
+.check{
+    border-inline: 1px solid rgb(26, 20, 100);
+}
+
+.Dis{
+    display: none;
+}
+
+.changeDis{
+    display: block;
+}
+
+@media screen and (max-width:980px) {
+    .check{
+        border-inline:none
+    }
 }

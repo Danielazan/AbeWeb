@@ -1,16 +1,12 @@
 import React,{useEffect,useState} from 'react'
-	import {Card,Button,Table} from "react-bootstrap";
+	import {Table} from "react-bootstrap";
 	import axios from 'axios';
 	import Imageapi from "./Imageapi"
 	import {useProductContext} from "Hook/useProduct"
+	import {MdEdit,MdDelete} from "react-icons/md"
 	
-
-	
-
 	function Main() {
 	
-
-	    
 	const {Product, dispatch} = useProductContext()
 	
 
@@ -29,11 +25,7 @@ import React,{useEffect,useState} from 'react'
 	            .then(res=>{
 	            setmaterials(res.data.materialss)
 	
-
 	            console.log(res.data.materialss)
-	
-
-	
 
 	            dispatch({type:"ROOFING",payload:materials})
 	        })
@@ -76,6 +68,7 @@ import React,{useEffect,useState} from 'react'
 	                        <th>Collection Name</th>
 	                        <th>Price</th>
 	                        <th>Amount Sold</th>
+							<th></th>
 	                    </tr>
 	                </thead>
 	                <tbody>
@@ -87,6 +80,12 @@ import React,{useEffect,useState} from 'react'
 	                                    <td>{item.collectionName}</td>
 	                                    <td>{item.Price}</td>
 	                                    <td>{item.AmonutSold}</td>
+										<td>
+											<div className="d-flex justify-content-around flex-lg-row flex-column">
+												<MdEdit size={"2em"} style={{color:"rgb(49, 210, 242)"}}/>
+												<MdDelete className='mt-3 mt-lg-0' size={"2em"}  style={{color:"rgb(220, 53, 69)"}}/>
+											</div>
+										</td>
 	                                </tr>
 	                            )
 	                        })
