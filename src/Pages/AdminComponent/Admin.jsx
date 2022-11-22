@@ -29,9 +29,9 @@ function Admin() {
 
         <Container fluid className='admin pt-5'>
             <Row className='pt-5'>
-                <Col xs={12} lg={3}><Sidebar/></Col>
+                <Col xs={12} lg={2}><Sidebar/></Col>
 
-                <Col xs={12} lg={6}>
+                <Col xs={12} lg={7}>
 
                   <Main/>
                   
