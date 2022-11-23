@@ -6,6 +6,7 @@ import Navbar from 'Components/NavbarSales'
 import axios from 'axios'
 import img from "Assets/Images/pic14.svg"
 import {IoIosRemoveCircle} from "react-icons/io"
+import SalesForm from './SalesForm'
 
 function Sales() {
 
@@ -13,15 +14,8 @@ function Sales() {
     const [materials, setMaterials] = useState([])
     const [loading, setLoading] = useState(true)
     const [cart, setCart] = useState([])
-    const [first, setFirst] = useState("")
-    const [last, setLast] = useState("")
-    const [phone, setPhone] = useState("")
-    const [driver, setDriver] = useState("")
-    const [site, setSite] = useState("")
-    const [amt, setAmt] = useState("")
     const [tog, setTog] = useState(true)
 
-    
     function searchValue(e){
 
         setProd(e.target.value)
@@ -88,16 +82,20 @@ function Sales() {
         </div>
         </div>
 
-        {loading ? <center><img src={img} height="100px"/></center> : null}
+        {loading ? <center><img src={img} alt="Loading..." height="100px"/></center> : null}
 
             <Row className='mt-5'>
                 <Col xs={12} xl={8} className="check">
-                   <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3 text-center">
-                        <Col xl={3} xs={3}>Product</Col>
-                        <Col xl={3} xs={2}>Price</Col>
-                        <Col xl={4} xs={5}>Quantity</Col>
-                        <Col xl={2} xs={1}>Add</Col>
-                   </Row>
+                <SalesForm tog={tog}/>
+
+                <div className={tog ? "changeDis" : "Dis" } >
+
+                <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3 text-center">
+                    <Col xl={3} xs={3}>Product</Col>
+                    <Col xl={3} xs={2}>Price</Col>
+                    <Col xl={4} xs={5}>Quantity</Col>
+                    <Col xl={2} xs={1}>Add</Col>
+                </Row>
                                 
                     {
                         materials && materials.filter((item)=>{
@@ -131,12 +129,11 @@ function Sales() {
                             )
                         })
                     }
+
+                </div>
+                 
   
                 </Col>
-                
-                {/* <Col xs={12} xl={1}>
-
-                </Col> */}
 
                 <Col xs={12} xl={3} className="mt-4 mt-xl-0">
                     <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3">
@@ -183,62 +180,6 @@ function Sales() {
 
             </Row>
             
-
-            <Container className={tog ? "Dis" : "changeDis"} fluid>
-                <h1 className='mt-5'>Customer Details</h1>
-                <Row>
-                <Col xs={12} lg={3}></Col>
-                <Col xs={12} lg={6}>
-                <Container>
-                
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label className='form-label'>Firstname </Form.Label>
-
-                            <Form.Control type="text" value={first} onChange={(e)=> setFirst(e.target.value)} placeholder="Enter Your Firstname"/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label className='form-label'>Lastname</Form.Label>
-
-                            <Form.Control type="text" value={last} onChange={(e)=> setLast(e.target.value)}  placeholder="Enter Your Lastname"/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label className='form-label'>Phone Number</Form.Label>
-
-                            <Form.Control type="number" value={phone} onChange={(e)=> setPhone(e.target.value)}  placeholder="Enter Your Phone Number"/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label className='form-label'>Site Location</Form.Label>
-
-                            <Form.Control type="text" value={site} onChange={(e)=> setSite(e.target.value)}  placeholder="Enter The Site Location"/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label className='form-label'>Driver's Name</Form.Label>
-
-                            <Form.Control type="text" value={driver} onChange={(e)=> setDriver(e.target.value)}  placeholder="Enter The Driver's Name"/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label className='form-label'>Total Amount</Form.Label>
-
-                            <Form.Control type="number" value={amt} onChange={(e)=> setAmt(e.target.value)}  placeholder="Enter The Total Amount"/>
-                        </Form.Group>
-                       
-
-                        <Button style={{backgroundColor:"rgb(26, 20, 100)"}} className='w-100 mt-5 border-0 py-3 rounded-pill mb-5'>Submit</Button>
-                    </Form>
-                </Container>
-            </Col>
-            <Col xs={12} lg={3}></Col>
-        </Row>
-
-        
-
-            </Container>
         </Container>
     </Container>
 

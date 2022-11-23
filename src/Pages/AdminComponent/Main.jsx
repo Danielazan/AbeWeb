@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from 'react'
 	import {Table} from "react-bootstrap";
 	import axios from 'axios';
-	import Imageapi from "./Imageapi"
 	import {useProductContext} from "Hook/useProduct"
 	import {MdEdit,MdDelete} from "react-icons/md"
 	
@@ -75,10 +74,10 @@ import React,{useEffect,useState} from 'react'
 	            <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 	                <thead>
 	                    <tr>
-	                        <th>Name</th>
-	                        <th>Collection Name</th>
-	                        <th>Price</th>
-	                        <th>Amount Sold</th>
+	                        <th style={{textAlign:"center"}}>Name</th>
+	                        <th style={{textAlign:"center"}}>Collection Name</th>
+	                        <th style={{textAlign:"center"}}>Price</th>
+	                        <th style={{textAlign:"center"}}>Amount Sold</th>
 							<th></th>
 	                    </tr>
 	                </thead>
@@ -88,9 +87,9 @@ import React,{useEffect,useState} from 'react'
 	                            return(
 	                                <tr key={item._id}>
 	                                    <td>{item.Name}</td>
-	                                    <td>{item.collectionName}</td>
-	                                    <td>{item.Price}</td>
-	                                    <td>{item.AmonutSold}</td>
+	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
+	                                    <td style={{textAlign:"center"}}>{item.Price}</td>
+	                                    <td style={{textAlign:"center"}}>{item.AmonutSold}</td>
 										<td>
 											<div className="d-flex justify-content-around flex-lg-row flex-column">
 												<MdEdit size={"2em"} style={{color:"rgb(49, 210, 242)"}}/>
@@ -106,7 +105,6 @@ import React,{useEffect,useState} from 'react'
 	       </section>
 	
 
-	       <Imageapi/>
 	
 
 	      </div>
