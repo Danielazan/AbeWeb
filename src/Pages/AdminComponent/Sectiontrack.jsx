@@ -81,14 +81,14 @@ function Sectiontrack() {
               <Form.Label style={{color:"#fda07e"}}>Collection</Form.Label>
 
               <Form.Select size=""
-              className='format bg-transparent text-white py-3 px-3' style={{borderColor:"#fda07e"}}
+              className='format bg-transparent text-white py-3 px-3' style={{borderColor:"#fda07e",color:"#fda07e"}}
               onChange={handleCol}
               >
                 {
                   Collection && Collection.map((opt)=>{
 
                     return(
-                      <option value={opt.collectionName}  style={{backgroundColor:"#210440"}}>{opt.collectionName}</option>
+                      <option value={opt.collectionName}  style={{backgroundColor:"#210440",color:"#fda07e"}}>{opt.collectionName}</option>
                     )
                   })
                 }
@@ -108,7 +108,7 @@ function Sectiontrack() {
             
           </Form>
 
-          <div className="d-flex ms-3">
+          <div className="d-flex ms-xl-3 mb-4">
             <Button className='w-50 py-3 py-lg-2 rounded-2 me-2' variant='info' onClick={handlePost}>Post</Button>
             <Button className='w-50  py-3 py-lg-2 rounded-2' variant='danger'>Delete</Button>
           </div>
