@@ -15,6 +15,7 @@ function Sales() {
     const [loading, setLoading] = useState(true)
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
+    const [pushe, setPushe] = useState([])
 
     function searchValue(e){
 
@@ -33,20 +34,29 @@ function Sales() {
      
     },)
 
-    function handleChange(quantity,dispatch){
+    function handleChange(amt,dis){
 
-        if(dispatch === +1){
-            quantity += 1 
-            console.log(quantity)
+        if(dis === "+"){
+
+            amt = amt + 1
+            console.log(true)
         }else{
+
+            amt = amt - 1
             console.log(false)
         }
 
     }
 
     function handleClick(item){
+
         cart.push(item)
-        console.log(cart)
+        cart.map((datum)=>{
+            datum= {item:datum.Name, quantity:5}
+
+            pushe.push(datum)
+        })
+
     }
 
     let sum = cart.map((price)=>{
@@ -68,6 +78,10 @@ function Sales() {
     function call(){
         setTog(false)
     }
+
+    const SetP = () => {
+        setPushe([])
+    }
     
   return (
     <React.Fragment>
@@ -86,11 +100,13 @@ function Sales() {
 
             <Row className='mt-5'>
                 <Col xs={12} xl={8} className="check">
-                <SalesForm tog={tog}/>
+
+
+                <SalesForm tog={tog} SetP={SetP} pushe={pushe}/>
 
                 <div className={tog ? "changeDis" : "Dis" } >
 
-                <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3 text-center">
+                <Row style={{borderBlock:"3px solid #2e180e",fontWeight:"600"}} className="py-3 text-center">
                     <Col xl={3} xs={3}>Product</Col>
                     <Col xl={3} xs={2}>Price</Col>
                     <Col xl={4} xs={5}>Quantity</Col>
@@ -102,10 +118,8 @@ function Sales() {
                             return prod.toLowerCase() === "" ? item : item.Name.toLowerCase().includes(prod)
                         }).map(item=>{
 
-                            let quantity =1
-
                             return(
-                                <Row key={item._id} className="py-4" style={{borderBottom:"1px solid rgb(26, 20, 100)"}}>
+                                <Row key={item._id} className="py-4 tb-row" style={{borderBottom:"3px solid #2e180e"}}>
 
                                     <Col xl={3} xs={3} className="text-center">{item.Name}</Col>
 
@@ -113,11 +127,11 @@ function Sales() {
 
                                     <Col xl={4} xs={5}>
                                         <div className='justify-content-around d-flex'>
-                                            <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={()=>handleChange(quantity, -1)}>-</Button>
+                                            <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"-")}>-</Button>
 
-                                            <Button className='bg-transparent border-0 text-black'>{quantity}</Button>
+                                            <Button className='bg-transparent border-0 text-black'>{item.AmonutSold}</Button>
                                             
-                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=>handleChange(quantity,+1)}>+</Button>
+                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"+")}>+</Button>
                                         </div>
                                     </Col>
 
@@ -136,7 +150,7 @@ function Sales() {
                 </Col>
 
                 <Col xs={12} xl={3} className="mt-4 mt-xl-0">
-                    <Row style={{borderBlock:"2px solid rgb(26, 20, 100)",fontWeight:"600"}} className="py-3">
+                    <Row style={{borderBlock:"3px solid #2e180e",fontWeight:"600"}} className="py-3">
                         <Col xs={4}>Description</Col>
                         <Col xs={3}>Price</Col>
                         <Col xs={3}>Sold At</Col>
@@ -146,10 +160,10 @@ function Sales() {
                     {
                         cart.map((material)=>{
                             return(
-                                <Row key={material._id} className="my-3">
+                                <Row key={material._id} className="my-0">
 
                                     <Col xs={4}>
-                                        <p className="text-black">{material.Name} x {}</p>
+                                        <p className="mat-name">{material.Name} x {}</p>
                                     </Col>
 
                                     <Col xs={3}>

@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
+import axios from 'axios'
 
 
 function SalesForm(props) {
@@ -11,6 +12,35 @@ function SalesForm(props) {
     const [driver, setDriver] = useState("")
     const [site, setSite] = useState("")
     const [amt, setAmt] = useState("")
+
+    function submitCustomer(){
+
+        // axios.get("https://abe-api.onrender.com/api/customer")
+        //     .then(res =>{
+        //         console.log(res)
+        //     })
+        let name = props.cart
+        let data={
+
+            DriverName:driver,
+            FirstName:first,
+            LastName:last,
+            PhoneNumber:phone,
+            SiteLocation:site,
+            TotalAmountPaid:amt,
+            itemsBought:props.pushe,
+        }
+
+        axios.post("https://abe-api.onrender.com/api/customer",data)
+            .then(res=>{
+
+              console.log(res)
+
+            })
+            
+        props.SetP()
+        
+    }
 
   return (
     <React.Fragment>
@@ -59,7 +89,7 @@ function SalesForm(props) {
                         </Form.Group>
                        
 
-                        <Button style={{backgroundColor:"rgb(26, 20, 100)"}} className='w-100 mt-5 border-0 py-3 rounded-pill mb-5'>Submit</Button>
+                        <Button style={{backgroundColor:"rgb(26, 20, 100)"}} className='w-100 mt-5 border-0 py-3 rounded-pill mb-5' onClick={submitCustomer}>Submit</Button>
                     </Form>
                 </Container>
                 </Col>

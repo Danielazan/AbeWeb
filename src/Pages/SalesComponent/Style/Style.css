@@ -19,8 +19,13 @@
     background-color:rgb(122, 102, 96);
 }
 
+.mat-name{
+    color: rgb(122, 102, 96);
+    font-weight: 500;
+}
+
 .check{
-    border-inline: 1px solid rgb(26, 20, 100);
+    border-right: 3px solid #2e180e;
 }
 
 .Dis{
@@ -29,6 +34,10 @@
 
 .changeDis{
     display: block;
+}
+
+.tb-row:nth-child(even){
+    background-color: rgb(255, 255, 230);
 }
 
 @media screen and (max-width:980px) {
