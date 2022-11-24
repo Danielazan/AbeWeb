@@ -4,14 +4,11 @@ import {Form,Button} from 'react-bootstrap'
 import {useProductContext} from "Hook/useProduct"
 import {useCollectionContext} from "Hook/CollectionHook"
 
-
-// const 
-
 function Sectiontrack() {
 
   const [name, setName] = useState("")
   
-  const [collection, setCollection] = useState("")
+  const [collection, setCollection] = useState("roofing")
 
   const [price, setPrice] = useState("")
 
@@ -59,6 +56,10 @@ function Sectiontrack() {
           dispatch({type:"CREATE Product",payload:res.data})
           
         })
+
+      setName("")
+
+      setPrice("")
   }
 
   return (
@@ -88,7 +89,7 @@ function Sectiontrack() {
                   Collection && Collection.map((opt)=>{
 
                     return(
-                      <option value={opt.collectionName}  style={{backgroundColor:"#210440",color:"#fda07e"}}>{opt.collectionName}</option>
+                      <option value={opt.collectionName} style={{backgroundColor:"#210440",color:"#fda07e"}}>{opt.collectionName}</option>
                     )
                   })
                 }
