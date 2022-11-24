@@ -16,6 +16,7 @@ function Sales() {
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
     const [pushe, setPushe] = useState([])
+    const [price, setPrice] = useState(0)
 
     function searchValue(e){
 
@@ -50,28 +51,55 @@ function Sales() {
 
     function handleClick(item){
 
-        cart.push(item)
-        cart.map((datum)=>{
-            datum= {item:datum.Name, quantity:5}
+        let present = false
 
-            pushe.push(datum)
+        cart.forEach((prod)=>{
+
+            if(item._id === prod._id){
+                present = true
+            }
+        })
+
+        if (present){
+            return ;
+        }
+            
+        // cart.push(item)
+        setCart([...cart,item])
+        console.log(cart)
+
+        handleElse()
+       
+    }
+
+    function handleElse(){
+         
+        cart.map((datum)=>{
+
+            let data= {item:datum.Name, quantity:5}
+
+            setPushe([...pushe,data])
+
         })
 
     }
 
-    let sum = cart.map((price)=>{
-        return price.Price
-    })
+    function handlePrice(){
+        let ans =0
+        cart.map((item)=>(
 
-    var total = sum.reduce((acc,item)=>{
-        return acc = acc + item
-    },0)
+            ans +=  item.Price * 1
+        ))
 
+        setPrice(ans)
+    }
    
     function handleRemove(_id){
         
-        let arr = cart.filter((item)=> item._id !== _id)
+        const arr = cart.filter((item)=> item._id !== _id)
+        console.log(arr)
         setCart(arr)
+        console.log(cart)
         
     }
 
@@ -81,7 +109,14 @@ function Sales() {
 
     const SetP = () => {
         setPushe([])
+        console.log(pushe)
     }
+
+    useEffect(() => {
+      
+      handlePrice()
+    })
+    
     
   return (
     <React.Fragment>
@@ -171,7 +206,7 @@ function Sales() {
                                     </Col>
 
                                     <Col xs={3}>
-                                        <Form.Control value={material.Price} className="text-black"/>
+                                        <Form.Control readOnly value={material.Price} className="text-black"/>
                                     </Col>
 
                                     <Col xs={2}>
@@ -185,7 +220,7 @@ function Sales() {
                     <Row>
                         <Col xs={4}><p className='heavy'>Total</p></Col>
 
-                        <Col xs={3} className='heavy'>{total}</Col>
+                        <Col xs={3} className='heavy'>{price}</Col>
                     </Row>
                  
                     
