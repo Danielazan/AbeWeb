@@ -20,7 +20,7 @@ function Sales() {
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
     const [pushe, setPushe] = useState([])
-
+    const [Added, setAdded] = useState(0)
     const {iteam, dispatchItem} = IteamHook()
     const {Product, dispatch} = useProductContext()
 
@@ -55,6 +55,10 @@ function Sales() {
             console.log(false)
         }
 
+    }
+    const handleAdd = ()=>{
+        setAdded(Added + 1)
+        console.log(Added)
     }
 
     const handleClick = async (item)=>{
@@ -155,7 +159,7 @@ function Sales() {
 
                                             <Button  className='bg-transparent border-0 text-black'>{item.quantity}</Button>
                                             
-                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"+")}>+</Button>
+                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={handleAdd}>+</Button>
                                         </div>
                                     </Col>
 
@@ -187,7 +191,7 @@ function Sales() {
                                 <Row key={material._id} className="my-0">
 
                                     <Col xs={4}>
-                                        <p className="mat-name">{material.Name} x {}</p>
+                                        <p className="mat-name">{material.item} x {}</p>
                                     </Col>
 
                                     <Col xs={3}>
