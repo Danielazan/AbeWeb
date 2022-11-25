@@ -76,7 +76,7 @@ import React,{useEffect,useState} from 'react'
 	
 			{
 				<div className={visibility ? "vis" : "notvis"}>
-					{/* <h2>Product : {customer[0].itemsBought.item}</h2> */}
+					<h2>Product : {customer[0].itemsBought.item}</h2>
 
 					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 					<thead>
