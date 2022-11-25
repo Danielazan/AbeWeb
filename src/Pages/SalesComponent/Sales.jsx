@@ -57,14 +57,38 @@ function Sales() {
 
     }
 
-const handleClick = async (item)=>{
-    const datas = await {
-        
-    }
-    await dispatchItem({type:"Create item", payload:item})
+    const handleClick = async (item)=>{
 
-    console.log(iteam)
-}
+        const datas = await {
+            
+        }
+
+        let present = false
+
+        iteam.forEach((prod)=>{
+
+            if(item._id === prod._id){
+                present = true
+            }
+        })
+
+        if (present){
+            return ;
+        }
+            
+        await dispatchItem({type:"Create item", payload:item})
+
+        console.log(iteam)
+
+        iteam.map((datum)=>{
+
+            let data= {item:datum.Name, quantity:Math.floor(Math.random() * (400 - 10 + 1) + 10)}
+
+            setPushe([...pushe,data])
+
+        })
+
+    }
 //     function handleClick(item){
 
 //         dispatchItem({type:"SET iteam", payload:item})
@@ -82,7 +106,7 @@ const handleClick = async (item)=>{
 
 //     }
 
-    let sum = cart.map((price)=>{
+    let sum = iteam.map((price)=>{
         return price.Price
     })
 
@@ -93,13 +117,13 @@ const handleClick = async (item)=>{
    
     function handleRemove(_id){
         
-        let arr = cart.filter((item)=> item._id !== _id)
+        let arr = iteam.filter((item)=> item._id !== _id)
         setCart(arr)
         
     }
 
     function call(){
-        setTog(false)
+        setTog(!tog)
     }
 
     const SetP = () => {
@@ -152,7 +176,7 @@ const handleClick = async (item)=>{
                                         <div className='justify-content-around d-flex'>
                                             <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"-")}>-</Button>
 
-                                            <Button className='bg-transparent border-0 text-black'>{item.AmonutSold}</Button>
+                                            <Button  className='bg-transparent border-0 text-black'>{item.quantity}</Button>
                                             
                                             <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"+")}>+</Button>
                                         </div>
@@ -181,7 +205,7 @@ const handleClick = async (item)=>{
                     </Row>
 
                     {
-                        cart.map((material)=>{
+                        iteam.map((material)=>{
                             return(
                                 <Row key={material._id} className="my-0">
 
@@ -194,7 +218,7 @@ const handleClick = async (item)=>{
                                     </Col>
 
                                     <Col xs={3}>
-                                        <Form.Control value={material.Price} className="text-black"/>
+                                        <Form.Control readOnly value={material.Price} className="text-black"/>
                                     </Col>
 
                                     <Col xs={2}>

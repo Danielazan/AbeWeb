@@ -89,6 +89,20 @@ li{
     color: red;
 }
 
+.name-btn{
+    background-color: transparent;
+    color: #fda07e;
+    width: 100%;
+    border: none;
+}
+
+.vis{
+    display: block;
+}
+
+.notvis{
+    display: none;
+}
 
 @media screen and (max-width: 980px){
     

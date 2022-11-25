@@ -7,9 +7,10 @@ import React,{useEffect,useState} from 'react'
 	function Main() {
 	
 		const {Product, dispatch} = useProductContext()
-	
 
 		const [materials, setmaterials] = useState([])
+		const [customer, setCustomer] = useState([])
+		const [visibility, setVisibility] = useState(false)
 	
 
 	    useEffect(() => {
@@ -42,6 +43,19 @@ import React,{useEffect,useState} from 'react'
 				})
 			
 		}
+
+		function handleMaterialCustomer(name){
+			let data={
+				materialName:name
+			}
+			axios.patch("https://abe-api.onrender.com/api/materialCustomer",data)
+				.then(res=>{
+					setCustomer(res.data.customers)
+
+					console.log(customer)
+				})
+			setVisibility(true)
+		}
 	
 
 	    const GetProducts = async ()=>{
@@ -49,23 +63,17 @@ import React,{useEffect,useState} from 'react'
 	        const url = `https://abe-api.onrender.com/api/products/${name}`
 	        const response =await axios.get(url)
 	
-
 	        const json = await response.data.materialss
 	
-
 	        dispatch({type:"SET Product", payload:json})
 	
-
-	        console.log (json)
 	    }
 	    
 	  return (
 	    <React.Fragment>
 	      <div style={{color:"#fda07e"}}>
 	        <h2 className='main-h2 pb-3'>Collections</h2>
-	
-
-	       <section id='cardwidget'>
+	       <section>
 	        <h4 style={{color:"#fda07e"}}>New Widget</h4>
 	
 
@@ -86,7 +94,7 @@ import React,{useEffect,useState} from 'react'
 	                        Product && Product.map(item=>{
 	                            return(
 	                                <tr key={item._id}>
-	                                    <td>{item.Name}</td>
+	                                    <td><button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name)} className='name-btn'>{item.Name}</button></td>
 	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
 	                                    <td style={{textAlign:"center"}}>{item.Price}</td>
 	                                    <td style={{textAlign:"center"}}>{item.AmonutSold}</td>
@@ -103,6 +111,42 @@ import React,{useEffect,useState} from 'react'
 	                </tbody>
 	            </Table>
 	       </section>
+
+		   
+			{
+				<div className={visibility ? "vis" : "notvis"}>
+					{/* <h2>Product : {customer[0].itemsBought.item}</h2> */}
+
+					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
+					<thead>
+	                    <tr>
+	                        <th style={{textAlign:"center"}}>Customer Name</th>
+	                        <th style={{textAlign:"center"}}>Phone No</th>
+	                        <th style={{textAlign:"center"}}>Amount Paid</th>
+							<th style={{textAlign:"center"}}>Site Location</th>
+	                        <th style={{textAlign:"center"}}>Quantity</th>
+	                    </tr>
+	                </thead>
+					<tbody>
+						{
+							customer.map((person)=>{
+								return(
+									<tr key={person._id}>
+										<td>{person.FirstName} {person.LastName}</td>
+										<td style={{textAlign:"center"}}>{person.PhoneNumber}</td>
+										<td style={{textAlign:"center"}}>{person.TotalAmountPaid}</td>
+										<td>{person.SiteLocation}</td>
+										<td style={{textAlign:"center"}}>{person.itemsBought.quantity}</td>
+									</tr>
+								)
+							})
+						}
+					</tbody>
+						
+					</Table>
+				</div>
+			}
+			
 	
 
 	
