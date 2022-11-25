@@ -8,14 +8,21 @@ import img from "Assets/Images/pic14.svg"
 import {IoIosRemoveCircle} from "react-icons/io"
 import SalesForm from './SalesForm'
 
+import IteamHook from "Hook/IteamHook"
+import {useProductContext} from "Hook/useProduct"
+import CustomerHook from "Hook/CustomerHook"
+
 function Sales() {
 
     const [prod, setProd] = useState("")
-    const [materials, setMaterials] = useState([])
+    
     const [loading, setLoading] = useState(true)
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
     const [pushe, setPushe] = useState([])
+
+    const {iteam, dispatchItem} = IteamHook()
+    const {Product, dispatch} = useProductContext()
 
     function searchValue(e){
 
@@ -27,12 +34,14 @@ function Sales() {
         axios.get(`https://abe-api.onrender.com/api/material`)
         .then(res=>{
 
-            setMaterials(res.data)
+            const json= res.data
+            dispatch({type:"SET Product", payload:json})
 
             setLoading(false)
         })
+        console.log(Product)
      
-    },)
+    },[dispatch])
 
     function handleChange(amt,dis){
 
@@ -48,16 +57,30 @@ function Sales() {
 
     }
 
-    function handleClick(item){
-
-        cart.push(item)
-        cart.map((datum)=>{
-            datum= {item:datum.Name, quantity:5}
-
-            pushe.push(datum)
-        })
-
+const handleClick = async (item)=>{
+    const datas = await {
+        
     }
+    await dispatchItem({type:"Create item", payload:item})
+
+    console.log(iteam)
+}
+//     function handleClick(item){
+
+//         dispatchItem({type:"SET iteam", payload:item})
+
+//         iteam.map(datum =>{
+//            const datu= {item:datum.Name, quantity:5}
+//         })
+// // push into the cart/ customer array
+//         cart.push(item)                                 
+//         cart.map((datum)=>{
+//             datum= {item:datum.Name, quantity:5}
+
+//             pushe.push(datum)
+//         })
+
+//     }
 
     let sum = cart.map((price)=>{
         return price.Price
@@ -114,7 +137,7 @@ function Sales() {
                 </Row>
                                 
                     {
-                        materials && materials.filter((item)=>{
+                        Product && Product.filter((item)=>{
                             return prod.toLowerCase() === "" ? item : item.Name.toLowerCase().includes(prod)
                         }).map(item=>{
 
