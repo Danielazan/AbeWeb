@@ -2,11 +2,9 @@ import React, {useState, useEffect} from 'react'
 
 import {Button,Offcanvas,ListGroup} from "react-bootstrap"
 
-import { MdSettingsSuggest,MdLocalActivity,MdRoofing } from "react-icons/md"
+import { MdSettingsSuggest,MdRoofing } from "react-icons/md"
 
-import {FaHandHoldingWater} from "react-icons/fa"
-
-import {RiVideoAddLine} from "react-icons/ri"
+import {AiFillFolderAdd} from "react-icons/ai"
 
 import axios from 'axios'
 
@@ -41,8 +39,6 @@ function SideBar2() {
 
         dispatch({type:"SET Product", payload:json})
 
-        console.log (json)
-        console.log(name)
     }
 
     const getp= async ()=>{
@@ -55,11 +51,19 @@ function SideBar2() {
       dispatch2 ({type:"SET Collection", payload:json})
 
       const res=json.map(iteam=>{
-         return iteam.collectionName
+        return iteam.collectionName
+    
       })
 
+  }
+
+  function createProduct(){
+    let collectionName="tiles"
+    axios.post("https://abe-api.onrender.com/api/products",JSON.stringify(collectionName))
+      .then(res=>{
         console.log(res)
-       console.log (Collection)
+
+      })
   }
   
   return (
@@ -73,15 +77,20 @@ function SideBar2() {
           <Offcanvas.Title  >Settings</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body   style={{backgroundColor:"#210440"}} >
+
         
           <ListGroup  className="SideList mt-4" variant='flush'> 
+            <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e"}}>
+              <Button className='border-0' onClick={createProduct} style={{backgroundColor:"#fda07e",color:"#210440"}}> <AiFillFolderAdd size={"1.5em"}/> Collection</Button>
+            </ListGroup.Item>
+
               {
                 Collection && Collection.map(item =>{
                   return(
                     <ListGroup.Item 
                         style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" 
                         action 
-
+                        key={item._id}
                         onClick={()=>handleGet(item.collectionName)}
                >
                 <MdRoofing 

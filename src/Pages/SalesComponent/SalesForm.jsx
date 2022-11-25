@@ -1,7 +1,9 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import axios from 'axios'
+import IteamHook from "Hook/IteamHook"
+
 
 
 function SalesForm(props) {
@@ -13,14 +15,12 @@ function SalesForm(props) {
     const [site, setSite] = useState("")
     const [amt, setAmt] = useState("")
 
+    const {iteam} = IteamHook()
+
     function submitCustomer(){
 
-        // axios.get("https://abe-api.onrender.com/api/customer")
-        //     .then(res =>{
-        //         console.log(res)
-        //     })
+        console.log(iteam)
         
-        let name = props.cart
         let data={
 
             DriverName:driver,
@@ -35,7 +35,7 @@ function SalesForm(props) {
         axios.post("https://abe-api.onrender.com/api/customer",data)
             .then(res=>{
 
-              console.log(res)
+              console.log(res.data)
 
             })
             

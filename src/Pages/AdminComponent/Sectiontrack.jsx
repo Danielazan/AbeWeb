@@ -41,10 +41,11 @@ function Sectiontrack() {
   function handlePost(){
 
       let data ={
-        AmonutSold:45,
+        AmonutSold:Math.floor(Math.random() * (200 - 10 + 1) + 10),
         Name:name,
         collectionName:collection,
-        Price:price
+        Price:price,
+        quantity:Math.floor(Math.random() * (400 - 100 + 1) + 100)
       }
       console.log(data)
       axios.post("https://abe-api.onrender.com/api/material",data)
@@ -89,7 +90,7 @@ function Sectiontrack() {
                   Collection && Collection.map((opt)=>{
 
                     return(
-                      <option value={opt.collectionName} style={{backgroundColor:"#210440",color:"#fda07e"}}>{opt.collectionName}</option>
+                      <option key={opt._id} value={opt.collectionName} style={{backgroundColor:"#210440",color:"#fda07e"}}>{opt.collectionName}</option>
                     )
                   })
                 }
