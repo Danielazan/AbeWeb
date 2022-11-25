@@ -29,7 +29,7 @@ function SalesForm(props) {
             PhoneNumber:phone,
             SiteLocation:site,
             TotalAmountPaid:amt,
-            itemsBought:props.pushe,
+            itemsBought:iteam,
         }
 
         axios.post("https://abe-api.onrender.com/api/customer",data)

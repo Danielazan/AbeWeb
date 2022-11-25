@@ -59,52 +59,29 @@ function Sales() {
 
     const handleClick = async (item)=>{
 
-        const datas = await {
-            
+        const itemsBought = {
+            item:item.Name,
+            quantity:6,
+            Price:item.Price
         }
+        // let present = false
 
-        let present = false
+        // iteam.forEach((prod)=>{
 
-        iteam.forEach((prod)=>{
+        //     if(item._id === prod._id){
+        //         present = true
+        //     }
+        // })
 
-            if(item._id === prod._id){
-                present = true
-            }
-        })
-
-        if (present){
-            return ;
-        }
+        // if (present){
+        //     return ;
+        // }
             
-        await dispatchItem({type:"Create item", payload:item})
+        await dispatchItem({type:"Create item", payload:itemsBought})
 
         console.log(iteam)
 
-        iteam.map((datum)=>{
-
-            let data= {item:datum.Name, quantity:Math.floor(Math.random() * (400 - 10 + 1) + 10)}
-
-            setPushe([...pushe,data])
-
-        })
-
     }
-//     function handleClick(item){
-
-//         dispatchItem({type:"SET iteam", payload:item})
-
-//         iteam.map(datum =>{
-//            const datu= {item:datum.Name, quantity:5}
-//         })
-// // push into the cart/ customer array
-//         cart.push(item)                                 
-//         cart.map((datum)=>{
-//             datum= {item:datum.Name, quantity:5}
-
-//             pushe.push(datum)
-//         })
-
-//     }
 
     let sum = iteam.map((price)=>{
         return price.Price
