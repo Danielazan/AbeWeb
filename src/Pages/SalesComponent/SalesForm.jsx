@@ -19,6 +19,7 @@ function SalesForm(props) {
         //     .then(res =>{
         //         console.log(res)
         //     })
+        
         let name = props.cart
         let data={
 
