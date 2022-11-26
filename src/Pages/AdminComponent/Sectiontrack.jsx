@@ -45,7 +45,7 @@ function Sectiontrack() {
         Name:name,
         collectionName:collection,
         Price:price,
-        quantity:Math.floor(Math.random() * (400 - 100 + 1) + 100)
+        quantity:1
       }
       console.log(data)
       axios.post("https://abe-api.onrender.com/api/material",data)
