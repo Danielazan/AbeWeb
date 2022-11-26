@@ -15,12 +15,10 @@ import CustomerHook from "Hook/CustomerHook"
 function Sales() {
 
     const [prod, setProd] = useState("")
-    
     const [loading, setLoading] = useState(true)
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
     const [pushe, setPushe] = useState([])
-
     const {iteam, dispatchItem} = IteamHook()
     const {Product, dispatch} = useProductContext()
 
@@ -39,22 +37,15 @@ function Sales() {
 
             setLoading(false)
         })
-        console.log(Product)
      
     },[dispatch])
 
-    function handleChange(amt,dis){
-
-        if(dis === "+"){
-
-            amt = amt + 1
-            console.log(true)
+    function handleChange(item,dis){
+        if (dis === +1){
+            item.quantity += 1 
         }else{
-
-            amt = amt - 1
-            console.log(false)
+            item.quantity -=1
         }
-
     }
 
     const handleClick = async (item)=>{
@@ -79,10 +70,9 @@ function Sales() {
         await dispatchItem({type:"Create item", payload:item})
 
         console.log(iteam)
-
         iteam.map((datum)=>{
 
-            let data= {item:datum.Name, quantity:Math.floor(Math.random() * (400 - 10 + 1) + 10)}
+            let data= {item:datum.Name, quantity:datum.quantity}
 
             setPushe([...pushe,data])
 
@@ -174,11 +164,11 @@ function Sales() {
 
                                     <Col xl={4} xs={5}>
                                         <div className='justify-content-around d-flex'>
-                                            <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"-")}>-</Button>
+                                            <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={()=> handleChange(item,-1)}>-</Button>
 
                                             <Button  className='bg-transparent border-0 text-black'>{item.quantity}</Button>
                                             
-                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> handleChange(item.AmonutSold,"+")}>+</Button>
+                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> handleChange(item, +1)}>+</Button>
                                         </div>
                                     </Col>
 
