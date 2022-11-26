@@ -13,7 +13,6 @@ function SalesForm(props) {
     const [phone, setPhone] = useState("")
     const [driver, setDriver] = useState("")
     const [site, setSite] = useState("")
-    const [amt, setAmt] = useState("")
 
     const {iteam} = IteamHook()
 
@@ -28,7 +27,7 @@ function SalesForm(props) {
             LastName:last,
             PhoneNumber:phone,
             SiteLocation:site,
-            TotalAmountPaid:amt,
+            TotalAmountPaid:props.price,
             itemsBought:iteam,
         }
 
@@ -39,7 +38,6 @@ function SalesForm(props) {
 
             })
             
-        props.SetP()
         
     }
 
@@ -86,7 +84,7 @@ function SalesForm(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label className='form-label'>Total Amount</Form.Label>
 
-                            <Form.Control type="number" value={amt} onChange={(e)=> setAmt(e.target.value)}  placeholder="Enter The Total Amount"/>
+                            <Form.Control type="number" value={props.price} readOnly placeholder="Enter The Total Amount"/>
                         </Form.Group>
                        
 

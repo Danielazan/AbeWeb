@@ -7,7 +7,7 @@ import axios from 'axios'
 import img from "Assets/Images/pic14.svg"
 import {IoIosRemoveCircle} from "react-icons/io"
 import SalesForm from './SalesForm'
-
+import {TbCurrencyNaira} from "react-icons/tb"
 import IteamHook from "Hook/IteamHook"
 import {useProductContext} from "Hook/useProduct"
 import CustomerHook from "Hook/CustomerHook"
@@ -15,11 +15,10 @@ import CustomerHook from "Hook/CustomerHook"
 function Sales() {
 
     const [prod, setProd] = useState("")
+    const [price, setPrice] = useState(0)
     const [loading, setLoading] = useState(true)
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
-    const [pushe, setPushe] = useState([])
-    const [Added, setAdded] = useState(0)
     const [num, setNum] = useState(1)
     const {iteam, dispatchItem} = IteamHook()
     const {Product, dispatch} = useProductContext()
@@ -35,7 +34,7 @@ function Sales() {
         .then(res=>{
 
             const json= res.data
-            console.log(json)
+
             dispatch({type:"SET Product", payload:json})
 
             setLoading(false)
@@ -47,23 +46,25 @@ function Sales() {
 
         const itemsBought = {
             item:item.Name,
-            quantity:num[0],
+            quantity:Number(num),
             Price:item.Price
         }
             
         await dispatchItem({type:"Create item", payload:itemsBought})
 
+        setNum(1)
+
         console.log(iteam)
 
     }
 
-    let sum = iteam.map((price)=>{
-        return price.Price
-    })
+    // let sum = iteam.map((price)=>{
+    //     return {price:price.Price,quan:price.quantity}
+    // })
 
-    var total = sum.reduce((acc,item)=>{
-        return acc = acc + item
-    },0)
+    // var total = sum.reduce((acc,item)=>{
+    //     return acc = acc + item 
+    // },0)
 
    
     function handleRemove(_id){
@@ -73,13 +74,27 @@ function Sales() {
         
     }
 
+    function handlePrice(){
+        let ans =0
+
+        iteam.map((item)=>{
+
+            ans += item.Price * item.quantity
+        })
+
+        setPrice(ans)
+    }
+
+    useEffect(() => {
+      
+      handlePrice()
+    })
+    
+
     function call(){
         setTog(!tog)
     }
 
-    const SetP = () => {
-        setPushe([])
-    }
     
   return (
     <React.Fragment>
@@ -97,10 +112,10 @@ function Sales() {
         {loading ? <center><img src={img} alt="Loading..." height="100px"/></center> : null}
 
             <Row className='mt-5'>
-                <Col xs={12} xl={8} className="check">
+                <Col xs={12} xl={7} className="check">
 
 
-                <SalesForm tog={tog} SetP={SetP} pushe={pushe}/>
+                <SalesForm tog={tog} price={price}/>
 
                 <div className={tog ? "changeDis" : "Dis" } >
 
@@ -119,13 +134,14 @@ function Sales() {
                             return(
                                 <Row key={item._id} className="py-4 tb-row" style={{borderBottom:"3px solid #2e180e"}}>
 
-                                    <Col xl={3} xs={3} className="text-center">{item.Name}</Col>
+                                    <Col xl={3} xs={3} className="ps-lg-5">{item.Name}</Col>
 
-                                    <Col xl={3} xs={2} className="text-center">{item.Price}</Col>
+                                    <Col xl={3} xs={2} 
+                                    className="text-center"><TbCurrencyNaira/>{item.Price}</Col>
 
                                     <Col xl={3} xs={4}>
 
-                                        <Form.Control value={num} type="number" onChange={(e)=> setNum([e.target.value])} className="text-black text-center"/>
+                                        <Form.Control value={num} type="number" onChange={(e)=> setNum(e.target.value)} className="text-black text-center"/>
 
                                     </Col>
 
@@ -143,7 +159,7 @@ function Sales() {
   
                 </Col>
 
-                <Col xs={12} xl={3} className="mt-4 mt-xl-0">
+                <Col xs={12} xl={4} className="mt-4 mt-xl-0">
                     <Row style={{borderBlock:"3px solid #2e180e",fontWeight:"600"}} className="py-3">
                         <Col xs={4}>Description</Col>
                         <Col xs={3}>Price</Col>
@@ -157,11 +173,11 @@ function Sales() {
                                 <Row key={index } className="my-0">
 
                                     <Col xs={4}>
-                                        <p className="mat-name">{material.item} x {}</p>
+                                        <p className="mat-name">{material.item} x {material.quantity}</p>
                                     </Col>
 
                                     <Col xs={3}>
-                                        <p className="text-black">{material.Price}</p>
+                                        <p className="text-black"><TbCurrencyNaira/>{material.Price}</p>
                                     </Col>
 
                                     <Col xs={3}>
@@ -179,7 +195,7 @@ function Sales() {
                     <Row>
                         <Col xs={4}><p className='heavy'>Total</p></Col>
 
-                        <Col xs={3} className='heavy'>{total}</Col>
+                        <Col xs={3} className='heavy'><TbCurrencyNaira/>{price}</Col>
                     </Row>
                  
                     
