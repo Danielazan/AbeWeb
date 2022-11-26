@@ -19,6 +19,7 @@ function Sales() {
     const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
     const [pushe, setPushe] = useState([])
+    const [Added, setAdded] = useState(0)
     const {iteam, dispatchItem} = IteamHook()
     const {Product, dispatch} = useProductContext()
 
@@ -33,6 +34,7 @@ function Sales() {
         .then(res=>{
 
             const json= res.data
+            console.log(json)
             dispatch({type:"SET Product", payload:json})
 
             setLoading(false)
@@ -47,54 +49,36 @@ function Sales() {
             item.quantity -=1
         }
     }
+    const handleAdd = ()=>{
+        setAdded(Added + 1)
+        console.log(Added)
+    }
 
     const handleClick = async (item)=>{
 
-        const datas = await {
-            
+        const itemsBought = {
+            item:item.Name,
+            quantity:6,
+            Price:item.Price
         }
+        // let present = false
 
-        let present = false
+        // iteam.forEach((prod)=>{
 
-        iteam.forEach((prod)=>{
+        //     if(item._id === prod._id){
+        //         present = true
+        //     }
+        // })
 
-            if(item._id === prod._id){
-                present = true
-            }
-        })
-
-        if (present){
-            return ;
-        }
+        // if (present){
+        //     return ;
+        // }
             
-        await dispatchItem({type:"Create item", payload:item})
+        await dispatchItem({type:"Create item", payload:itemsBought})
 
         console.log(iteam)
-        iteam.map((datum)=>{
-
-            let data= {item:datum.Name, quantity:datum.quantity}
-
-            setPushe([...pushe,data])
-
-        })
 
     }
-//     function handleClick(item){
-
-//         dispatchItem({type:"SET iteam", payload:item})
-
-//         iteam.map(datum =>{
-//            const datu= {item:datum.Name, quantity:5}
-//         })
-// // push into the cart/ customer array
-//         cart.push(item)                                 
-//         cart.map((datum)=>{
-//             datum= {item:datum.Name, quantity:5}
-
-//             pushe.push(datum)
-//         })
-
-//     }
 
     let sum = iteam.map((price)=>{
         return price.Price
@@ -168,7 +152,7 @@ function Sales() {
 
                                             <Button  className='bg-transparent border-0 text-black'>{item.quantity}</Button>
                                             
-                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={()=> handleChange(item, +1)}>+</Button>
+                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={handleAdd}>+</Button>
                                         </div>
                                     </Col>
 
@@ -200,7 +184,7 @@ function Sales() {
                                 <Row key={material._id} className="my-0">
 
                                     <Col xs={4}>
-                                        <p className="mat-name">{material.Name} x {}</p>
+                                        <p className="mat-name">{material.item} x {}</p>
                                     </Col>
 
                                     <Col xs={3}>
