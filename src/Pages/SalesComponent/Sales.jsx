@@ -20,6 +20,7 @@ function Sales() {
     const [tog, setTog] = useState(true)
     const [pushe, setPushe] = useState([])
     const [Added, setAdded] = useState(0)
+    const [num, setNum] = useState(1)
     const {iteam, dispatchItem} = IteamHook()
     const {Product, dispatch} = useProductContext()
 
@@ -42,37 +43,13 @@ function Sales() {
      
     },[dispatch])
 
-    function handleChange(item,dis){
-        if (dis === +1){
-            item.quantity += 1 
-        }else{
-            item.quantity -=1
-        }
-    }
-    const handleAdd = ()=>{
-        setAdded(Added + 1)
-        console.log(Added)
-    }
-
     const handleClick = async (item)=>{
 
         const itemsBought = {
             item:item.Name,
-            quantity:6,
+            quantity:num[0],
             Price:item.Price
         }
-        // let present = false
-
-        // iteam.forEach((prod)=>{
-
-        //     if(item._id === prod._id){
-        //         present = true
-        //     }
-        // })
-
-        // if (present){
-        //     return ;
-        // }
             
         await dispatchItem({type:"Create item", payload:itemsBought})
 
@@ -130,15 +107,15 @@ function Sales() {
                 <Row style={{borderBlock:"3px solid #2e180e",fontWeight:"600"}} className="py-3 text-center">
                     <Col xl={3} xs={3}>Product</Col>
                     <Col xl={3} xs={2}>Price</Col>
-                    <Col xl={4} xs={5}>Quantity</Col>
-                    <Col xl={2} xs={1}>Add</Col>
+                    <Col xl={3} xs={4}>Quantity</Col>
+                    <Col xl={3} xs={2}>Add</Col>
                 </Row>
                                 
                     {
                         Product && Product.filter((item)=>{
                             return prod.toLowerCase() === "" ? item : item.Name.toLowerCase().includes(prod)
-                        }).map(item=>{
 
+                        }).map(item=>{
                             return(
                                 <Row key={item._id} className="py-4 tb-row" style={{borderBottom:"3px solid #2e180e"}}>
 
@@ -146,17 +123,13 @@ function Sales() {
 
                                     <Col xl={3} xs={2} className="text-center">{item.Price}</Col>
 
-                                    <Col xl={4} xs={5}>
-                                        <div className='justify-content-around d-flex'>
-                                            <Button style={{backgroundColor:"rgb(122, 102, 96)"}} className='w-25 border-0' onClick={()=> handleChange(item,-1)}>-</Button>
+                                    <Col xl={3} xs={4}>
 
-                                            <Button  className='bg-transparent border-0 text-black'>{item.quantity}</Button>
-                                            
-                                            <Button style={{backgroundColor:"rgb(46, 24, 14)"}} className='w-25 border-0' onClick={handleAdd}>+</Button>
-                                        </div>
+                                        <Form.Control value={num} type="number" onChange={(e)=> setNum([e.target.value])} className="text-black text-center"/>
+
                                     </Col>
 
-                                    <Col xl={2} xs={2} className="text-center">
+                                    <Col xl={3} xs={2} className="text-center">
                                         <Button className='mx-0 border-0' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={()=> handleClick(item)}>Add</Button>
                                     </Col>
 
@@ -179,9 +152,9 @@ function Sales() {
                     </Row>
 
                     {
-                        iteam.map((material)=>{
+                        iteam.map((material,index)=>{
                             return(
-                                <Row key={material._id} className="my-0">
+                                <Row key={index } className="my-0">
 
                                     <Col xs={4}>
                                         <p className="mat-name">{material.item} x {}</p>
