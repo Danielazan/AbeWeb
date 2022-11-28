@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import axios from 'axios'
+import {TiArrowBack} from "react-icons/ti"
 import IteamHook from "Hook/IteamHook"
 
 
@@ -13,7 +14,6 @@ function SalesForm(props) {
     const [phone, setPhone] = useState("")
     const [driver, setDriver] = useState("")
     const [site, setSite] = useState("")
-    const [amt, setAmt] = useState("")
 
     const {iteam} = IteamHook()
 
@@ -28,7 +28,7 @@ function SalesForm(props) {
             LastName:last,
             PhoneNumber:phone,
             SiteLocation:site,
-            TotalAmountPaid:amt,
+            TotalAmountPaid:props.price,
             itemsBought:iteam,
         }
 
@@ -39,14 +39,15 @@ function SalesForm(props) {
 
             })
             
-        props.SetP()
         
     }
+
 
   return (
     <React.Fragment>
          <Container className={props.tog ? "Dis" : "changeDis"} fluid>
-                <h1 className='mt-5'>Customer Details</h1>
+         <h5 onClick={props.hide} className='mt-5'><TiArrowBack size="1.5em"/>Go Back</h5>
+                <h1 >Customer Details</h1>
                 <Row>
                 <Col xs={12} lg={3}></Col>
                 <Col xs={12} lg={6}>
@@ -86,7 +87,7 @@ function SalesForm(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label className='form-label'>Total Amount</Form.Label>
 
-                            <Form.Control type="number" value={amt} onChange={(e)=> setAmt(e.target.value)}  placeholder="Enter The Total Amount"/>
+                            <Form.Control type="number" value={props.price} readOnly placeholder="Enter The Total Amount"/>
                         </Form.Group>
                        
 

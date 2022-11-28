@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-import {Button,Offcanvas,ListGroup} from "react-bootstrap"
+import {Button,Offcanvas,ListGroup, Form} from "react-bootstrap"
 
 import { MdSettingsSuggest,MdRoofing } from "react-icons/md"
 
@@ -15,14 +15,11 @@ import {useProductContext} from "Hook/useProduct"
 
 function SideBar2() {
     const [show, setShow] = useState(false);
-
     const [data, setData] = useState([])
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const [colname, setColname] = useState("")
     const {Collection, dispatch2}= useCollectionContext()
-
     const {Product, dispatch} = useProductContext()
 
     useEffect(() => {
@@ -58,8 +55,10 @@ function SideBar2() {
   }
 
   function createProduct(){
-    let collectionName="tiles"
-    axios.post("https://abe-api.onrender.com/api/products",JSON.stringify(collectionName))
+    let data={
+      collectionName:colname
+    }
+    axios.post("https://abe-api.onrender.com/api/products",data)
       .then(res=>{
         console.log(res)
 
@@ -82,6 +81,8 @@ function SideBar2() {
           <ListGroup  className="SideList mt-4" variant='flush'> 
             <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e"}}>
               <Button className='border-0' onClick={createProduct} style={{backgroundColor:"#fda07e",color:"#210440"}}> <AiFillFolderAdd size={"1.5em"}/> Collection</Button>
+
+              <Form.Control style={{borderColor:"#fda07e",color:"#fda07e"}} className='mt-3 bg-transparent' onChange={(e)=> setColname(e.target.value)} value={colname}/>
             </ListGroup.Item>
 
               {
