@@ -15,7 +15,6 @@ import {useProductContext} from "Hook/useProduct"
 
 function SideBar2() {
     const [show, setShow] = useState(false);
-    const [data, setData] = useState([])
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [colname, setColname] = useState("")

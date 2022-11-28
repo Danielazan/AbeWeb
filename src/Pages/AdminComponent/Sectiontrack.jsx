@@ -8,7 +8,7 @@ function Sectiontrack() {
 
   const [name, setName] = useState("")
   
-  const [collection, setCollection] = useState("roofing")
+  const [collection, setCollection] = useState("tiling")
 
   const [price, setPrice] = useState("")
 
@@ -111,8 +111,8 @@ function Sectiontrack() {
           </Form>
 
           <div className="d-flex ms-xl-3 mb-4">
-            <Button className='w-50 py-3 py-lg-2 rounded-2 me-2' variant='info' onClick={handlePost}>Post</Button>
-            <Button className='w-50  py-3 py-lg-2 rounded-2' variant='danger'>Delete</Button>
+            <Button className='w-100 py-3 py-lg-2 rounded-2 me-2' variant='primary' onClick={handlePost}>Post</Button>
+           
           </div>
 
        </section>

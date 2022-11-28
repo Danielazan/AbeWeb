@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {Form,Col,Row,Container,Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import Style from "./Style/Style.css"
+import "./Style/Style.css"
 import UserHook from "Hook/UserHook"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';

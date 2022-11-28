@@ -14,6 +14,9 @@ function SalesForm(props) {
     const [phone, setPhone] = useState("")
     const [driver, setDriver] = useState("")
     const [site, setSite] = useState("")
+    const [invoice, setInvoice] = useState("")
+    const [payment, setPayment] = useState("")
+    const [sales, setSales] = useState("")
 
     const {iteam} = IteamHook()
 
@@ -28,6 +31,9 @@ function SalesForm(props) {
             LastName:last,
             PhoneNumber:phone,
             SiteLocation:site,
+            InvoiceNumber:invoice,
+            PaymentMethod:payment,
+            RecievedBy:sales,
             TotalAmountPaid:props.price,
             itemsBought:iteam,
         }
@@ -85,12 +91,30 @@ function SalesForm(props) {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label className='form-label'>Invoice Number</Form.Label>
+
+                            <Form.Control type="text" value={invoice} onChange={(e)=> setInvoice(e.target.value)}  placeholder="Enter Invoice Number"/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label className='form-label'>Payment Method</Form.Label>
+
+                            <Form.Control type="text" value={payment} onChange={(e)=> setPayment(e.target.value)}  placeholder="Enter Payment Method"/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label className='form-label'>Sales Person</Form.Label>
+
+                            <Form.Control type="text" value={sales} onChange={(e)=> setSales(e.target.value)}  placeholder="Enter Your Name"/>
+                        </Form.Group>
+
+
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label className='form-label'>Total Amount</Form.Label>
 
                             <Form.Control type="number" value={props.price} readOnly placeholder="Enter The Total Amount"/>
                         </Form.Group>
                        
-
                         <Button style={{backgroundColor:"rgb(26, 20, 100)"}} className='w-100 mt-5 border-0 py-3 rounded-pill mb-5' onClick={submitCustomer}>Submit</Button>
                     </Form>
                 </Container>

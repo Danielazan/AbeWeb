@@ -3,7 +3,7 @@ import Navbar from 'Components/Navbar'
 import { Container,Row,Col } from 'react-bootstrap'
 import Sidebar from './Sidebar'
 import Main from './Main'
-import Style from "Pages/AdminComponent/Style/Style.css"
+import "Pages/AdminComponent/Style/Style.css"
 import Sectiontrack from './Sectiontrack'
 
 function Admin() {
