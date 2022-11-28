@@ -3,6 +3,7 @@ import React,{useEffect,useState} from 'react'
 	import axios from 'axios';
 	import {useProductContext} from "Hook/useProduct"
 	import {MdEdit,MdDelete} from "react-icons/md"
+	import pic from "Assets/Images/pic15.svg"
 	
 	function Main() {
 	
@@ -10,6 +11,7 @@ import React,{useEffect,useState} from 'react'
 
 		const [materials, setmaterials] = useState([])
 		const [customer, setCustomer] = useState([])
+		const [loading, setLoading] = useState()
 		const [visibility, setVisibility] = useState(false)
 	
 
@@ -45,15 +47,23 @@ import React,{useEffect,useState} from 'react'
 		}
 
 		function handleMaterialCustomer(name){
+
+			setLoading(true)
+
 			let data={
 				materialName:name
 			}
+
 			axios.patch("https://abe-api.onrender.com/api/materialCustomer",data)
 				.then(res=>{
 					setCustomer(res.data.customers)
 
 					console.log(customer)
+
+					setLoading(false)
+
 				})
+				
 			setVisibility(true)
 		}
 	
@@ -112,10 +122,12 @@ import React,{useEffect,useState} from 'react'
 	            </Table>
 	       </section>
 
-		   
+
+		   {loading ? <center><img src={pic} height="100px" alt="Loading..."/> </center> : null}
+			
 			{
 				<div className={visibility ? "vis" : "notvis"}>
-					{/* <h2>Product : {customer[0].itemsBought.item}</h2> */}
+					<h2 className='mt-4'>Product Table</h2>
 
 					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 					<thead>
@@ -129,9 +141,9 @@ import React,{useEffect,useState} from 'react'
 	                </thead>
 					<tbody>
 						{
-							customer.map((person)=>{
+							customer.map((person,index)=>{
 								return(
-									<tr key={person._id}>
+									<tr key={index}>
 										<td>{person.FirstName} {person.LastName}</td>
 										<td style={{textAlign:"center"}}>{person.PhoneNumber}</td>
 										<td style={{textAlign:"center"}}>{person.TotalAmountPaid}</td>

@@ -10,14 +10,12 @@ import SalesForm from './SalesForm'
 import {TbCurrencyNaira} from "react-icons/tb"
 import IteamHook from "Hook/IteamHook"
 import {useProductContext} from "Hook/useProduct"
-import CustomerHook from "Hook/CustomerHook"
 
 function Sales() {
 
     const [prod, setProd] = useState("")
     const [price, setPrice] = useState(0)
     const [loading, setLoading] = useState(true)
-    const [cart, setCart] = useState([])
     const [tog, setTog] = useState(true)
     const [num, setNum] = useState(1)
     const {iteam, dispatchItem} = IteamHook()
@@ -45,6 +43,7 @@ function Sales() {
     const handleClick = async (item)=>{
 
         const itemsBought = {
+            _id:item._id,
             item:item.Name,
             quantity:Number(num),
             Price:item.Price
@@ -58,20 +57,10 @@ function Sales() {
 
     }
 
-    // let sum = iteam.map((price)=>{
-    //     return {price:price.Price,quan:price.quantity}
-    // })
-
-    // var total = sum.reduce((acc,item)=>{
-    //     return acc = acc + item 
-    // },0)
-
-   
-    function handleRemove(_id){
+    function handleRemove(id){
         
-        let arr = iteam.filter((item)=> item._id !== _id)
-        setCart(arr)
-        
+        let arr = iteam.filter((item)=> item._id !== id)
+        dispatchItem({type:"DELETE", payload:arr})
     }
 
     function handlePrice(){
@@ -92,7 +81,12 @@ function Sales() {
     
 
     function call(){
-        setTog(!tog)
+        setTog(false)
+    }
+
+    
+    function hide(){
+       setTog(true)
     }
 
     
@@ -115,7 +109,7 @@ function Sales() {
                 <Col xs={12} xl={7} className="check">
 
 
-                <SalesForm tog={tog} price={price}/>
+                <SalesForm tog={tog} hide={hide} price={price}/>
 
                 <div className={tog ? "changeDis" : "Dis" } >
 
@@ -170,7 +164,8 @@ function Sales() {
                     {
                         iteam.map((material,index)=>{
                             return(
-                                <Row key={index } className="my-0">
+                                <div key={material._id} >
+                                <Row className="my-0">
 
                                     <Col xs={4}>
                                         <p className="mat-name">{material.item} x {material.quantity}</p>
@@ -188,6 +183,7 @@ function Sales() {
                                         <Button title='Remove'  className='border-0' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={()=>handleRemove(material._id)}><IoIosRemoveCircle/></Button>
                                     </Col>
                                 </Row>
+                                </div>
                             )
                         })
                     }
