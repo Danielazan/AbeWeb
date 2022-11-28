@@ -127,7 +127,7 @@ import React,{useEffect,useState} from 'react'
 			
 			{
 				<div className={visibility ? "vis" : "notvis"}>
-					<h2 className='mt-4'>Product Table</h2>
+					<h2 className='mt-4'>Customer Details Table</h2>
 
 					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 					<thead>
