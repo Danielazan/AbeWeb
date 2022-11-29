@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from 'react'
-	import {Table} from "react-bootstrap";
+	import {Table,Button, Form} from "react-bootstrap";
 	import axios from 'axios';
 	import {useProductContext} from "Hook/useProduct"
 	import {MdEdit,MdDelete} from "react-icons/md"
+	import {IoIosAddCircle} from "react-icons/io"
 	import pic from "Assets/Images/pic15.svg"
 	
 	function Main() {
@@ -12,6 +13,8 @@ import React,{useEffect,useState} from 'react'
 		const [materials, setmaterials] = useState([])
 		const [customer, setCustomer] = useState([])
 		const [loading, setLoading] = useState()
+		const [badge, setBadge] = useState(false)
+		const [qty, setQty] = useState("")
 		const [visibility, setVisibility] = useState(false)
 	
 
@@ -78,6 +81,10 @@ import React,{useEffect,useState} from 'react'
 	        dispatch({type:"SET Product", payload:json})
 	
 	    }
+
+		function submitBatch(){
+			console.log(50)
+		}
 	    
 	  return (
 	    <React.Fragment>
@@ -96,6 +103,7 @@ import React,{useEffect,useState} from 'react'
 	                        <th style={{textAlign:"center"}}>Collection Name</th>
 	                        <th style={{textAlign:"center"}}>Price</th>
 	                        <th style={{textAlign:"center"}}>Amount Sold</th>
+							<th style={{textAlign:"center"}}>New Batch</th>
 							<th></th>
 	                    </tr>
 	                </thead>
@@ -104,16 +112,34 @@ import React,{useEffect,useState} from 'react'
 	                        Product && Product.map(item=>{
 	                            return(
 	                                <tr key={item._id}>
-	                                    <td><button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name)} className='name-btn'>{item.Name}</button></td>
+
+	                                    <td>
+											<button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name)} className='name-btn'>{item.Name}</button>
+										</td>
+
 	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
+
 	                                    <td style={{textAlign:"center"}}>{item.Price}</td>
+
 	                                    <td style={{textAlign:"center"}}>{item.AmonutSold}</td>
+
+										<td>
+											<Button onClick={()=> setBadge(!badge)} className='border-0 w-100' style={{backgroundColor:"#fda07e",color:"#210440"}}><IoIosAddCircle size="1.5em"/> Batch</Button>
+
+											<div className={badge ? "vis" : "notvis"}>
+												<Form.Control type='number' className='format bg-transparent mt-4' value={qty} onChange={(e)=> setQty(e.target.value)} style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Quantity Added"/>
+
+												<Button className='border-0 my-2 w-50' onClick={submitBatch} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add</Button>
+											</div>
+										</td>
+
 										<td>
 											<div className="d-flex justify-content-around flex-lg-row flex-column">
 												<MdEdit size={"2em"} style={{color:"rgb(49, 210, 242)"}}/>
 												<MdDelete className='mt-3 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
 											</div>
 										</td>
+
 	                                </tr>
 	                            )
 	                        })

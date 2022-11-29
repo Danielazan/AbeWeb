@@ -18,6 +18,7 @@ function SideBar2() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [colname, setColname] = useState("")
+    const [colform, setColform] = useState(false)
     const {Collection, dispatch2}= useCollectionContext()
     const {Product, dispatch} = useProductContext()
 
@@ -79,9 +80,13 @@ function SideBar2() {
         
           <ListGroup  className="SideList mt-4" variant='flush'> 
             <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e"}}>
-              <Button className='border-0' onClick={createProduct} style={{backgroundColor:"#fda07e",color:"#210440"}}> <AiFillFolderAdd size={"1.5em"}/> Collection</Button>
+              <Button className='border-0' onClick={()=>setColform(!colform)} style={{backgroundColor:"#fda07e",color:"#210440"}}> <AiFillFolderAdd size={"1.5em"}/> Collection</Button>
 
-              <Form.Control style={{borderColor:"#fda07e",color:"#fda07e"}} className='mt-3 bg-transparent' onChange={(e)=> setColname(e.target.value)} value={colname}/>
+              <div className={colform ? "vis" : "notvis"}>
+                <Form.Control style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Collection Name" className='mt-3 bg-transparent format' onChange={(e)=> setColname(e.target.value)} value={colname}/>
+
+                <Button className='border-0 mt-3 w-100' onClick={createProduct} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add Collection</Button>
+              </div>
             </ListGroup.Item>
 
               {
