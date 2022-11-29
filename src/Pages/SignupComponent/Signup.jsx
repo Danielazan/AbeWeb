@@ -1,7 +1,7 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col} from "react-bootstrap"
-import Style from "./Style/Style.css"
+import "./Style/Style.css"
 import Sign from "./Sign"
 import Banner from './Banner'
 

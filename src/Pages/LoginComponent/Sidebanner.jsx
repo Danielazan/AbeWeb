@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
-import { Container,Row,Col,Offcanvas} from 'react-bootstrap'
+import { Container,Row,Col} from 'react-bootstrap'
 import {AiFillStar} from "react-icons/ai"
-import {CgMenuMotion} from "react-icons/cg"
  
 function Sidebanner() {
 

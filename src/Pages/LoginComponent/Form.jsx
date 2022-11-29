@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import Style from "./Style/Style.css"
+import "./Style/Style.css"
 import axios from "axios"
 import UserHook from "Hook/UserHook"
 import { useNavigate } from 'react-router-dom';

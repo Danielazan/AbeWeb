@@ -9,6 +9,7 @@ import Admin from 'Pages/AdminComponent/Admin';
 import About from "Pages/AdminComponent/Admin"
 import Sales from "Pages/SalesComponent/Sales"
 import Verify from "Pages/VerificationComponent/Verify"
+import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 
 import UserHook from "Hook/UserHook"
 
@@ -31,6 +32,8 @@ function App() {
             <Route path='/Admin' element={User ? <Admin/> : <Navigate to='/Login' />}/>
 
             <Route path="/about" element={<About/>}/>
+
+            <Route path="/Enquiry" element={<Enquiry/>}/>
 
             <Route path="/Sales" element={User ? <Sales/> : <Navigate to='/Login' />}/>
           </Routes>

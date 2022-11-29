@@ -1,7 +1,7 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Button,Row,Col} from "react-bootstrap"
-import Style from "Pages/HomeComponent/Style/Style.css"
+import "Pages/HomeComponent/Style/Style.css"
 import Navbar from "Components/Navbar"
 
 
