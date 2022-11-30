@@ -67,8 +67,6 @@ function SideBar2() {
   function getUsers(){
     axios.get("https://abe-api.onrender.com/api/users")
       .then(res=>{
-        console.log(res)
-
         setUsers(res.data)
       })
   }
@@ -104,7 +102,7 @@ function SideBar2() {
                     Collection && Collection.map(item =>{
                       return(
                         <ListGroup.Item 
-                            style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0  list" 
+                            style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} className="my-2 py-3 p-0  list" 
                             action 
                             key={item._id}
                             onClick={()=>handleGet(item.collectionName)}
@@ -127,14 +125,22 @@ function SideBar2() {
             <Accordion.Header>Access Users</Accordion.Header>
             <Accordion.Body style={{backgroundColor:"#210440",color:"#fda07e"}}>
 
-            <ListGroup style={{backgroundColor:"#210440",color:"#fda07e"}} flush>
+            <ListGroup style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"red"}} variant='flush'>
               {
                 users && users.map((user)=>{
                   return(
                     <ListGroup.Item 
-                    style={{backgroundColor:"#210440",color:"#fda07e"}} className="my-2 py-3 p-0 ">
+                    style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} className="my-2 py-3 p-0 ">
 
-                      <HiUsers size="1em"/>{user.email}
+                      {user.email}
+
+                      <div className='mt-2 d-flex justify-content-around'>
+
+                        <Button className='bg-info' style={{backgroundColor:"rgb(49, 210, 242)"}}>Add</Button>
+
+                        <Button className='border-0' style={{backgroundColor:"rgb(220, 53, 69)"}}>Remove</Button>
+
+                      </div>
 
                     </ListGroup.Item>
                   )
