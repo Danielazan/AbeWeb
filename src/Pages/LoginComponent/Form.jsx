@@ -15,7 +15,7 @@ function From() {
 
     const [isLoading, setisLoading] = useState(false)
 
-    const [Error, setError] = useState("null")
+    const [Error, setError] = useState(null)
 
     const {dispatch}=UserHook()
 
@@ -42,21 +42,17 @@ function From() {
          headers:{
            "Content-Type":"application/json"
          }
+        }).catch(datum =>{
+            setisLoading(false)
+            console.log(datum.response.data.error)
+
+            setError(datum.response.data.error)
         })
 
+        
+
+        const hen = await response.status
         const json =await response.data
-
-        // setError(json.error)
-
-        if(!response){
-
-            setisLoading(false)
-
-            setError("Error")
-
-            console.log(json)
-
-        }
 
         if (response){
             localStorage.setItem("User", JSON.stringify(json))
@@ -71,6 +67,7 @@ function From() {
 
         dispatch({type:"Login", payload:json})
         
+        await  console.log(hen)
     }
   return (
     <React.Fragment>
@@ -112,9 +109,11 @@ function From() {
                         >
                         Sign In
                         </Button>
-                        {/* {Error && <p>{Error}</p>} */}
-
-                        <p style={{backgroundColor:"rgb(248, 215, 218)",color:"rgb(132, 32, 41)",border:"2px solid rgb(245, 194, 199)"}} className='py-2 rounded-2 ps-2 mt-3'>{Error}</p>
+                        {Error &&
+                        <p style={{backgroundColor:"rgb(248, 215, 218)",color:"rgb(132, 32, 41)",border:"2px solid rgb(245, 194, 199)"}} 
+                        className='py-2 rounded-2 ps-2 mt-3'>
+                        {Error}
+                        </p>}
                     </Form>
                     <Container className='d-flex justify-content-around my-4'>
                         <p className='form-p'>Don't have an account?</p>

@@ -10,7 +10,7 @@ import Navbar2 from "Components/Navbar2"
 function Sign() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState(null)
   //const {signUp,error,isloading}=SignUpHook()
 
   const [isLoading, setisLoading] = useState(false)
