@@ -95,8 +95,17 @@ import React,{useEffect,useState} from 'react'
 	
 	    }
 
-		function submitBatch(){
-			console.log(50)
+		function submitBatch(id){
+			console.log(id)
+		
+			let data={
+				NewBatch:qty
+			}
+			axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
+				.then(res=>{
+					console.log(res)
+				})
+
 		}
 	    
 	  return (
@@ -154,7 +163,7 @@ import React,{useEffect,useState} from 'react'
 											<div className={badge ? "vis" : "notvis"}>
 												<Form.Control type='number' className='format bg-transparent mt-4' value={qty} onChange={(e)=> setQty(e.target.value)} style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Quantity Added"/>
 
-												<Button className='border-0 my-2 w-50' onClick={submitBatch} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add</Button>
+												<Button className='border-0 my-2 w-50' onClick={()=>submitBatch(item._id)} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add</Button>
 											</div>
 										</td>
 
