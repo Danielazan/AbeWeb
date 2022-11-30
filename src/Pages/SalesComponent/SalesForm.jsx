@@ -44,8 +44,23 @@ function SalesForm(props) {
               console.log(res.data)
 
             })
-            
+        setFirst("")
+
+        setLast("")
+
+        setPhone("")
+
+        setDriver("")
+
+        setSite("")
+
+        setInvoice("")
+
+        setPayment("")
         
+        setSales("")
+        
+        props.clear()
     }
 
 

@@ -20,6 +20,11 @@ const itemReducer = (state, action)=>{
             iteam:action.payload
         }
 
+        case "CLEAR":
+        return{
+            iteam:action.payload
+        }
+
         default:
             return state
     }

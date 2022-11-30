@@ -17,11 +17,11 @@ function Banner() {
 
                     <Col xs={12} lg={6} >
                         <div className='mains'>
-                            <h1>Your Favorite Place for Free Bootstrap Themes</h1>
+                            <h1>Healthy Home Begins With Healthy Roof</h1>
 
                             <center><hr className='banner-line my-4'/></center>
                             <p>
-                            Start Bootstrap can help you build better websites using the Bootstrap framework! Just download a theme and start customizing, no strings attached!
+                                Authentic Roofing Tiles Intercontinental Limited provides you with quality materials needed for roofing, water collector system, e.t.c
                             </p>
 
                             <Button className='rounded-pill banner-btn border-0 px-5 py-4 my-3'>Find Out More</Button>
@@ -43,7 +43,7 @@ function Banner() {
                         <center><hr className='banner-need-line my-4'/></center>
 
                         <p>
-                        Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!
+                            We have a wide variety of roofing tiles ranging from the classic, Roman, Bond, Shingle, Milano and so on
                         </p>
 
                         <Button className='rounded-pill banner-need-btn border-0 px-5 py-3 mb-5 mt-3'>Get Started!</Button>
