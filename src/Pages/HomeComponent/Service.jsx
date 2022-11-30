@@ -13,7 +13,7 @@ function Service() {
 
             <Container>
                 <Row>
-                    <Col xs={12} lg={3} className="my-4 my-lg-5 pb-lg-5">
+                    <Col xs={12} lg={4} className="my-4 my-lg-5 pb-lg-5">
 
                         <BsGem className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
@@ -23,7 +23,7 @@ function Service() {
                        
                     </Col>
 
-                    <Col xs={12} lg={3} className="my-4 my-lg-5 pb-lg-5">
+                    <Col xs={12} lg={4} className="my-4 my-lg-5 pb-lg-5">
 
                         <BsLaptop className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
@@ -33,23 +33,13 @@ function Service() {
 
                     </Col>
 
-                    <Col xs={12} lg={3} className="my-4 my-lg-5 pb-lg-5">
+                    <Col xs={12} lg={4} className="my-4 my-lg-5 pb-lg-5">
 
                         <BsGlobe className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
-                        <h4 className='text-black'>Ready to Publish</h4>
+                        <h4 className='text-black'>Available Nationwide</h4>
 
-                        <p className='text-black'>You can use this design as is, or you can make changes!</p>
-
-                    </Col>
-
-                    <Col xs={12} lg={3} className="my-4 my-lg-5 pb-lg-5">
-
-                        <BsHeart className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
-
-                        <h4 className='text-black'>Made with Love</h4>
-
-                        <p className='text-black'>Is it really open source if it's not made with love?</p>
+                        <p className='text-black'>You can purchase our products and get them wherever in the nation.</p>
 
                     </Col>
 

@@ -34,10 +34,9 @@ function Imagegrid() {
 
         <Container fluid className='down pb-5'>
 
-            <div className='pt-5'>
-                <h1 className='text-white pt-5'>Free Download at Start Bootstrap!</h1>
+            <div className='py-5'>
 
-                <Button className='rounded-pill banner-need-btn border-0 px-5 py-4 mb-5 mt-5'>download now!</Button>
+                <h1 className='text-white py-5'>Use Authentic Roofing Products Now !!!</h1>
 
             </div>
 

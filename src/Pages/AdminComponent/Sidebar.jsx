@@ -15,7 +15,7 @@ function SideBar2() {
     const [colform, setColform] = useState(false)
     const [users, setUsers] = useState([])
     const [vis, setVis] = useState(false)
-    const [pass, setPass] = useState("")
+    const [pass, setPass] = useState(false)
     const [supply, setSupply] = useState([])
     const {Collection, dispatch2}= useCollectionContext()
     const {Product, dispatch} = useProductContext()
@@ -78,17 +78,27 @@ function SideBar2() {
 
   function addSalesPerson(mail){
 
-    let data={
-      email:mail,
-      password:"6WhtPkuMEFUpq25",
+    if(pass ===true){
+      let data={
+        email:mail,
+
+        headers:{
+          "Content-Type":"application/json"
+        }
+        // password:"6WhtPkuMEFUpq25",
+      }
+  
+      axios.post("https://abe-api.onrender.com/api/user",data)
+        .then(res=>{
+          console.log(res)
+        })
+  
+        console.log(mail)
     }
-
-    axios.post("https://abe-api.onrender.com/api/user",data)
-      .then(res=>{
-        console.log(res)
-      })
-
-      console.log(mail)
+    
+    else{
+      alert("Not poss")
+    }
 
   }
 
@@ -159,6 +169,7 @@ function SideBar2() {
                   return(
 
                     <ListGroup.Item 
+                    key={user._id}
                     style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} className="my-2 py-3 p-0 ">
 
                       {user.email}
@@ -172,9 +183,18 @@ function SideBar2() {
                       </div>
 
                       <div className={vis ? "vis" : "notvis"}>
-                        <Form.Control className='format bg-transparent mt-3' value={pass} onChange={(e)=>setPass(e.target.value)} placeholder='Password' type='text' style={{borderColor:"#fda07e",color:"#fda07e"}}/>
+
+                        <Form.Check
+                        inline
+                        label="Check to add"
+                        name="group1"
+                        className='mt-2'
+                        value={pass}
+                        onChange={()=>setPass(true)}
+                      />
 
                         <Button className='mt-2 w-100' onClick={()=>addSalesPerson(user.email)}>Submit</Button>
+
                       </div>
 
                     </ListGroup.Item>
@@ -193,7 +213,7 @@ function SideBar2() {
                   {
                     supply && supply.map((dist)=>{
                       return(
-                        <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} >
+                        <ListGroup.Item key={dist._id} style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} >
                           {dist.FirstName} {dist.LastName}
                         </ListGroup.Item>
                       )

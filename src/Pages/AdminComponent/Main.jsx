@@ -36,6 +36,7 @@ import React,{useEffect,useState} from 'react'
 	        })
 
 	    }
+		
 
 		function handleDelete(item){
 
@@ -160,7 +161,7 @@ import React,{useEffect,useState} from 'react'
 											</div>
 										</td>
 
-	                                    <td style={{textAlign:"center"}}>{item.quantity}</td>
+	                                    <td style={{textAlign:"center"}}>{item.Quantitiy}</td>
 
 										{/* Quantity Change */}
 

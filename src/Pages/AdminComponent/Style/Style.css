@@ -21,6 +21,17 @@
     border-left: 1px solid x#ffffff;
 }
 
+.denied{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(2, 77, 83, 0.725) 0%, rgb(2, 77, 83)100%), url(Assets/Images/pic16.jpg);
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
 .main-h2{
     border-bottom: 1px solid #fda07e;
 }
