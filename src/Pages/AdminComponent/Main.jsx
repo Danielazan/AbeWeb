@@ -9,12 +9,13 @@ import React,{useEffect,useState} from 'react'
 	function Main() {
 	
 		const {Product, dispatch} = useProductContext()
-
 		const [materials, setmaterials] = useState([])
 		const [customer, setCustomer] = useState([])
 		const [loading, setLoading] = useState()
 		const [badge, setBadge] = useState(false)
 		const [qty, setQty] = useState("")
+		const [price, setPrice] = useState(false)
+		const [newprice, setNewprice] = useState("")
 		const [visibility, setVisibility] = useState(false)
 	
 
@@ -47,6 +48,17 @@ import React,{useEffect,useState} from 'react'
 
 				})
 			
+		}
+
+		function handleEdit(id){
+		
+			let data={
+				Price:newprice
+			}
+			axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
+				.then(res=>{
+					console.log(res)
+				})
 		}
 
 		function handleMaterialCustomer(name){
@@ -102,7 +114,7 @@ import React,{useEffect,useState} from 'react'
 	                        <th style={{textAlign:"center"}}>Name</th>
 	                        <th style={{textAlign:"center"}}>Collection Name</th>
 	                        <th style={{textAlign:"center"}}>Price</th>
-	                        <th style={{textAlign:"center"}}>Amount Sold</th>
+	                        <th style={{textAlign:"center"}}>Quantity Sold</th>
 							<th style={{textAlign:"center"}}>New Batch</th>
 							<th></th>
 	                    </tr>
@@ -119,9 +131,21 @@ import React,{useEffect,useState} from 'react'
 
 	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
 
-	                                    <td style={{textAlign:"center"}}>{item.Price}</td>
+										{/* Price Change */}
 
-	                                    <td style={{textAlign:"center"}}>{item.AmonutSold}</td>
+	                                    <td style={{textAlign:"center"}}>
+											{item.Price}
+
+											<div className={price ? "vis" : "notvis"}>
+												<Form.Control type='number' value={newprice} onChange={(e)=> setNewprice(e.target.value)} className='format bg-transparent mt-2' style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Set Price"/>
+
+												<Button className='border-0 my-2 w-50' onClick={()=>handleEdit(item._id)} style={{backgroundColor:"#fda07e",color:"#210440"}}>Change</Button>
+											</div>
+										</td>
+
+	                                    <td style={{textAlign:"center"}}>{item.quantity}</td>
+
+										{/* Quantity Change */}
 
 										<td>
 											<Button onClick={()=> setBadge(!badge)} className='border-0 w-100' style={{backgroundColor:"#fda07e",color:"#210440"}}><IoIosAddCircle size="1.5em"/> Batch</Button>
@@ -135,8 +159,8 @@ import React,{useEffect,useState} from 'react'
 
 										<td>
 											<div className="d-flex justify-content-around flex-lg-row flex-column">
-												<MdEdit size={"2em"} style={{color:"rgb(49, 210, 242)"}}/>
-												<MdDelete className='mt-3 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
+												<MdEdit size={"2em"} onClick={()=>setPrice(!price)} style={{color:"rgb(49, 210, 242)"}}/>
+												<MdDelete className='mt-3 ms-4 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
 											</div>
 										</td>
 

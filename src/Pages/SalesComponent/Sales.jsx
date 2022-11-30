@@ -63,6 +63,12 @@ function Sales() {
         dispatchItem({type:"DELETE", payload:arr})
     }
 
+    function clearCart(){
+
+        dispatchItem({type:"CLEAR", payload:[]})
+    }
+
+
     function handlePrice(){
         let ans =0
 
@@ -109,7 +115,7 @@ function Sales() {
                 <Col xs={12} xl={7} className="check">
 
 
-                <SalesForm tog={tog} hide={hide} price={price}/>
+                <SalesForm tog={tog} hide={hide} clear={clearCart} price={price}/>
 
                 <div className={tog ? "changeDis" : "Dis" } >
 

@@ -17,9 +17,9 @@ function Service() {
 
                         <BsGem className='mb-3' style={{color:'rgb(244, 98, 58)'}} size={"3em"}/>
 
-                        <h4 className='text-black'>Sturdy Themes</h4>
+                        <h4 className='text-black'>Sturdy Materials</h4>
 
-                        <p className='text-black'>Our themes are updated regularly to keep them bug free!</p>
+                        <p className='text-black'>Our products are the best of the best assuring you of a high quality</p>
                        
                     </Col>
 
@@ -29,7 +29,7 @@ function Service() {
 
                         <h4 className='text-black'>Up to Date</h4>
 
-                        <p className='text-black'>All dependencies are kept current to keep things fresh.</p>
+                        <p className='text-black'>We bring you the latest materials in the market keeping you up to date.</p>
 
                     </Col>
 
