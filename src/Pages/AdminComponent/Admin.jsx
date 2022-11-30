@@ -9,11 +9,16 @@ import UserHook from "Hook/UserHook"
 
 function Admin() {
   const {User , dispatchU}=UserHook()
-  console.log(User.user.isAdmin)
+  // console.log(User.user.isAdmin)
   
   // if (!User.user.isAdmin){
   //   return (
-  //     <h1> Access Denied, You Are Not An Administrator </h1>
+  //     <div>
+  //     <Navbar/>
+  //       <div className='denied'>
+  //         <h1> Access Denied, You Are Not An Administrator </h1>
+  //       </div>
+  //     </div>
   //   )
   // }
   return (

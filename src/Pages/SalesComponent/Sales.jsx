@@ -16,10 +16,12 @@ function Sales() {
 
     const [prod, setProd] = useState("")
     const [price, setPrice] = useState(0)
+    const [soldprice, setSoldprice] = useState(0)
     const [loading, setLoading] = useState(true)
     const [tog, setTog] = useState(true)
     const [num, setNum] = useState(1)
     const {iteam, dispatchItem} = IteamHook()
+    const [spr, setSpr] = useState([])
     const {Product, dispatch} = useProductContext()
     const {User , dispatchU}=UserHook()
 
@@ -186,7 +188,7 @@ function Sales() {
                                     </Col>
 
                                     <Col xs={3}>
-                                        <Form.Control readOnly value={material.Price} className="text-black"/>
+                                        <Form.Control value={spr} onChange={(e)=> setSpr([e.target.value,...spr])} type='number' className="text-black"/>
                                     </Col>
 
                                     <Col xs={2}>
@@ -202,6 +204,8 @@ function Sales() {
                         <Col xs={4}><p className='heavy'>Total</p></Col>
 
                         <Col xs={3} className='heavy'><TbCurrencyNaira/>{price}</Col>
+
+                        <Col xs={3} className='heavy'><TbCurrencyNaira/>{soldprice}</Col>
                     </Row>
                  
                     
