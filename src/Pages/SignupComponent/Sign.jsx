@@ -15,7 +15,7 @@ function Sign() {
 
   const [isLoading, setisLoading] = useState(false)
   const [error, seterror] = useState(null)
-  const {dispatch}=UserHook()
+  const {dispatchU}=UserHook()
 
   const navigate = useNavigate();
 
@@ -62,7 +62,7 @@ function Sign() {
 
         }
 
-        dispatch({type:"Verify Email", payload:json})
+        dispatchU({type:"Verify Email", payload:json})
 
         
 

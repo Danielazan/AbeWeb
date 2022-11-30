@@ -5,9 +5,17 @@ import Sidebar from './Sidebar'
 import Main from './Main'
 import "Pages/AdminComponent/Style/Style.css"
 import Sectiontrack from './Sectiontrack'
+import UserHook from "Hook/UserHook"
 
 function Admin() {
+  const {User , dispatchU}=UserHook()
+  console.log(User.user.isAdmin)
   
+  // if (!User.user.isAdmin){
+  //   return (
+  //     <h1> you are not an admin </h1>
+  //   )
+  // }
   return (
     <React.Fragment>
         <Navbar/>

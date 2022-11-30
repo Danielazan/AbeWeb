@@ -10,6 +10,7 @@ import SalesForm from './SalesForm'
 import {TbCurrencyNaira} from "react-icons/tb"
 import IteamHook from "Hook/IteamHook"
 import {useProductContext} from "Hook/useProduct"
+import UserHook from "Hook/UserHook"
 
 function Sales() {
 
@@ -20,6 +21,7 @@ function Sales() {
     const [num, setNum] = useState(1)
     const {iteam, dispatchItem} = IteamHook()
     const {Product, dispatch} = useProductContext()
+    const {User , dispatchU}=UserHook()
 
     function searchValue(e){
 
@@ -36,6 +38,8 @@ function Sales() {
             dispatch({type:"SET Product", payload:json})
 
             setLoading(false)
+
+            console.log(User.user.isAdmin)
         })
      
     },[dispatch])
