@@ -67,7 +67,6 @@ function From() {
 
         dispatch({type:"Login", payload:json})
         
-        await  console.log(hen)
     }
   return (
     <React.Fragment>

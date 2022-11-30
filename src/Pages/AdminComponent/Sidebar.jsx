@@ -1,17 +1,11 @@
 import React, {useState, useEffect} from 'react'
-
 import {Button,Offcanvas,ListGroup, Form, Accordion} from "react-bootstrap"
-
 import { MdAdminPanelSettings,MdRoofing } from "react-icons/md"
-
 import {AiFillFolderAdd} from "react-icons/ai"
-
+import {HiUsers} from "react-icons/hi"
 import axios from 'axios'
-
 import {useCollectionContext} from "Hook/CollectionHook"
-
 import {useProductContext} from "Hook/useProduct"
-
 
 function SideBar2() {
     const [show, setShow] = useState(false);
@@ -19,17 +13,21 @@ function SideBar2() {
     const handleShow = () => setShow(true);
     const [colname, setColname] = useState("")
     const [colform, setColform] = useState(false)
+    const [users, setUsers] = useState([])
     const {Collection, dispatch2}= useCollectionContext()
     const {Product, dispatch} = useProductContext()
 
     useEffect(() => {
       getp()
+
+      getUsers()
     }, [dispatch])
 
     
     const handleGet = async (name)=>{
 
       const url = `https://abe-api.onrender.com/api/products/${name}`
+
       const response =await axios.get(url)
 
       const json = await response.data.materialss
@@ -39,6 +37,7 @@ function SideBar2() {
     }
 
     const getp= async ()=>{
+
       const url ="https://abe-api.onrender.com/api/products"
       
       const response = await axios.get(url)
@@ -52,7 +51,7 @@ function SideBar2() {
     
       })
 
-  }
+    }
 
   function createProduct(){
     let data={
@@ -62,6 +61,15 @@ function SideBar2() {
       .then(res=>{
         console.log(res)
 
+      })
+  }
+
+  function getUsers(){
+    axios.get("https://abe-api.onrender.com/api/users")
+      .then(res=>{
+        console.log(res)
+
+        setUsers(res.data)
       })
   }
   
@@ -77,9 +85,9 @@ function SideBar2() {
         </Offcanvas.Header>
         <Offcanvas.Body   style={{backgroundColor:"#210440"}} >
 
-        <Accordion style={{backgroundColor:"#210440",color:"#fda07e"}} className='w-100 mt-5'>
+        <Accordion className='w-100 mt-5' flush>
         <Accordion.Item eventKey="0">
-        <Accordion.Header style={{backgroundColor:"#210440",color:"#fda07e"}}>Collection</Accordion.Header>
+        <Accordion.Header>Collection</Accordion.Header>
         <Accordion.Body style={{backgroundColor:"#210440",color:"#fda07e"}}>
         <ListGroup style={{backgroundColor:"#210440",color:"#fda07e"}} className="SideList mt-4" variant='flush'> 
             <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e"}}>
@@ -100,13 +108,13 @@ function SideBar2() {
                             action 
                             key={item._id}
                             onClick={()=>handleGet(item.collectionName)}
-                  >
-                    <MdRoofing 
-                    className='me-2' 
-                    size={"1.5em"}/>
+                            >
+                          <MdRoofing 
+                          className='me-2' 
+                          size={"1.5em"}/>
 
-                    {item.collectionName}
-                  </ListGroup.Item>
+                          {item.collectionName}
+                        </ListGroup.Item>
                       )
                     
                     })
@@ -114,17 +122,31 @@ function SideBar2() {
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>
+
           <Accordion.Item eventKey="1">
-            <Accordion.Header>Accordion </Accordion.Header>
-            <Accordion.Body>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              culpa qui officia deserunt mollit anim id est laborum.
+            <Accordion.Header>Access Users</Accordion.Header>
+            <Accordion.Body style={{backgroundColor:"#210440",color:"#fda07e"}}>
+
+            <ListGroup style={{backgroundColor:"#210440",color:"#fda07e"}} flush>
+              {
+                users && users.map((user)=>{
+                  return(
+                    <ListGroup.Item 
+                    style={{backgroundColor:"#210440",color:"#fda07e"}} className="my-2 py-3 p-0 ">
+
+                      <HiUsers size="1em"/>{user.email}
+
+                    </ListGroup.Item>
+                  )
+                })
+              }
+            </ListGroup>
+            
             </Accordion.Body>
           </Accordion.Item>
+
         </Accordion>
           
-        
         </Offcanvas.Body>
       </Offcanvas>
     </React.Fragment>
