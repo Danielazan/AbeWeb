@@ -16,12 +16,12 @@ function Sales() {
 
     const [prod, setProd] = useState("")
     const [price, setPrice] = useState(0)
-    const [soldprice, setSoldprice] = useState(0)
     const [loading, setLoading] = useState(true)
     const [tog, setTog] = useState(true)
     const [num, setNum] = useState(1)
+    const [sa, setSa] = useState(0)
+    const [sold, setSold] = useState(0)
     const {iteam, dispatchItem} = IteamHook()
-    const [spr, setSpr] = useState([])
     const {Product, dispatch} = useProductContext()
     const {User , dispatchU}=UserHook()
 
@@ -41,7 +41,7 @@ function Sales() {
 
             setLoading(false)
 
-            console.log(User.user.isAdmin)
+            // console.log(User.user.isAdmin)
         })
      
     },[dispatch])
@@ -52,12 +52,15 @@ function Sales() {
             _id:item._id,
             item:item.Name,
             quantity:Number(num),
-            Price:item.Price
+            Price:item.Price,
+            sold:Number(sa)
         }
             
         await dispatchItem({type:"Create item", payload:itemsBought})
 
         setNum(1)
+
+        setSa(0)
 
         console.log(iteam)
 
@@ -86,9 +89,24 @@ function Sales() {
         setPrice(ans)
     }
 
+    
+    function handlesold(){
+        let ans =0
+
+        iteam.map((item)=>{
+
+            ans += item.sold * item.quantity
+        })
+
+        setSold(ans)
+    }
+
     useEffect(() => {
       
       handlePrice()
+
+      handlesold()
+
     })
     
 
@@ -101,6 +119,7 @@ function Sales() {
        setTog(true)
     }
 
+    
     
   return (
     <React.Fragment>
@@ -121,15 +140,16 @@ function Sales() {
                 <Col xs={12} xl={7} className="check">
 
 
-                <SalesForm tog={tog} hide={hide} clear={clearCart} price={price}/>
+                <SalesForm tog={tog} hide={hide} clear={clearCart} price={sold}/>
 
                 <div className={tog ? "changeDis" : "Dis" } >
 
                 <Row style={{borderBlock:"3px solid #2e180e",fontWeight:"600"}} className="py-3 text-center">
                     <Col xl={3} xs={3}>Product</Col>
-                    <Col xl={3} xs={2}>Price</Col>
-                    <Col xl={3} xs={4}>Quantity</Col>
-                    <Col xl={3} xs={2}>Add</Col>
+                    <Col xl={2} xs={3}>Price</Col>
+                    <Col xl={3} xs={2}>Quantity</Col>
+                    <Col xl={2} xs={2}>Sold At</Col>
+                    <Col xl={2} xs={2}>Add</Col>
                 </Row>
                                 
                     {
@@ -142,16 +162,20 @@ function Sales() {
 
                                     <Col xl={3} xs={3} className="ps-lg-5">{item.Name}</Col>
 
-                                    <Col xl={3} xs={2} 
+                                    <Col xl={3} xs={3} 
                                     className="text-center"><TbCurrencyNaira/>{item.Price}</Col>
 
-                                    <Col xl={3} xs={4}>
+                                    <Col xl={2} xs={2}>
 
                                         <Form.Control value={num} type="number" onChange={(e)=> setNum(e.target.value)} className="text-black text-center"/>
 
                                     </Col>
 
-                                    <Col xl={3} xs={2} className="text-center">
+                                    <Col xl={2} xs={2}>
+                                        <Form.Control value={sa}  type='number' onChange={(e)=> setSa(e.target.value)} className="text-black text-center"/>
+                                    </Col>
+
+                                    <Col xl={2} xs={2} className="text-center">
                                         <Button className='mx-0 border-0' style={{backgroundColor:"rgb(26, 20, 100)"}} onClick={()=> handleClick(item)}>Add</Button>
                                     </Col>
 
@@ -188,7 +212,7 @@ function Sales() {
                                     </Col>
 
                                     <Col xs={3}>
-                                        <Form.Control value={spr} onChange={(e)=> setSpr([e.target.value,...spr])} type='number' className="text-black"/>
+                                        <p className="text-black"><TbCurrencyNaira/>{material.sold}</p>
                                     </Col>
 
                                     <Col xs={2}>
@@ -205,7 +229,8 @@ function Sales() {
 
                         <Col xs={3} className='heavy'><TbCurrencyNaira/>{price}</Col>
 
-                        <Col xs={3} className='heavy'><TbCurrencyNaira/>{soldprice}</Col>
+                        <Col xs={3} className='heavy'><TbCurrencyNaira/>{sold}</Col>
+
                     </Row>
                  
                     
