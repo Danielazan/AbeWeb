@@ -89,11 +89,20 @@ li{
     color: red;
 }
 
+#acc{
+    width: 20px;
+}
+
 .name-btn{
     background-color: transparent;
     color: #fda07e;
     width: 100%;
     border: none;
+}
+
+.name-btn:hover{
+    background-color: #fda07e46;
+    transition: 0.2s ease-in;
 }
 
 .vis{

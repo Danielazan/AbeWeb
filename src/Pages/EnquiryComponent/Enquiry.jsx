@@ -49,17 +49,16 @@ function Enquiry() {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label className='form-label'>Enquiry </Form.Label>
-
-                        <Form.Control type="text" value={enq} onChange={(e)=> setEnq(e.target.value)} placeholder="Enquiries"/>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label className='form-label'>Enquiry Method</Form.Label>
 
                         <Form.Control type="text" value={meth} onChange={(e)=> setMeth(e.target.value)} placeholder="Walk In or Call"/>
                     </Form.Group>
 
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label className='form-label'>Enquiry </Form.Label>
+
+                        <Form.Control type="text" as="textarea"  rows={10} style={{resize:"none"}} value={enq} onChange={(e)=> setEnq(e.target.value)} placeholder="Enquiries"/>
+                    </Form.Group>
                     
                     <Button style={{backgroundColor:"rgb(26, 20, 100)"}} className='w-100 mt-5 border-0 py-4 rounded-pill mb-5' onClick={submitEnquiry}>Submit</Button>
                 </Form>

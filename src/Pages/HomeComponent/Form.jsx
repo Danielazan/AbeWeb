@@ -35,7 +35,7 @@ function Forms() {
                                 <Form.Control type="number" placeholder="Phone Number" className='py-3 bg-transparent' />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" className='bg-transparent' rows={8} />
+                                <Form.Control as="textarea" className='bg-transparent' style={{resize:"none"}} rows={10} />
                             </Form.Group>
 
                             <Button className='form-btn py-3 rounded-pill mb-5'>SUBMIT</Button>

@@ -127,7 +127,7 @@ import React,{useEffect,useState} from 'react'
 	                                <tr key={item._id}>
 
 	                                    <td>
-											<button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name)} className='name-btn'>{item.Name}</button>
+											<button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name)} className='name-btn px-2 rounded-1 py-2'>{item.Name}</button>
 										</td>
 
 	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
@@ -160,8 +160,8 @@ import React,{useEffect,useState} from 'react'
 
 										<td>
 											<div className="d-flex justify-content-around flex-lg-row flex-column">
-												<MdEdit size={"2em"} onClick={()=>setPrice(!price)} style={{color:"rgb(49, 210, 242)"}}/>
-												<MdDelete className='mt-3 ms-4 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
+												<MdEdit title='Edit Price' size={"2em"} onClick={()=>setPrice(!price)} style={{color:"rgb(49, 210, 242)"}}/>
+												<MdDelete title='Delete' className='mt-3 ms-4 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
 											</div>
 										</td>
 
