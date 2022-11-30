@@ -95,13 +95,18 @@ import React,{useEffect,useState} from 'react'
 	
 	    }
 
-		function submitBatch(id){
+		const submitBatch= async (id)=>{
 			console.log(id)
 		
 			let data={
 				NewBatch:qty
 			}
-			axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
+			await axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
+				.then(res=>{
+					console.log(res)
+				})
+
+				await axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
 				.then(res=>{
 					console.log(res)
 				})
