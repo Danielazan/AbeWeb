@@ -106,6 +106,8 @@ import React,{useEffect,useState} from 'react'
 					console.log(res)
 				})
 
+			setQty("")
+
 		}
 	    
 	  return (

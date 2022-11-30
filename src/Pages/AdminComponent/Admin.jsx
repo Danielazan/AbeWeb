@@ -13,7 +13,7 @@ function Admin() {
   
   // if (!User.user.isAdmin){
   //   return (
-  //     <h1> you are not an admin </h1>
+  //     <h1> Access Denied, You Are Not An Administrator </h1>
   //   )
   // }
   return (
