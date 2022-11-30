@@ -14,6 +14,8 @@ function SideBar2() {
     const [colname, setColname] = useState("")
     const [colform, setColform] = useState(false)
     const [users, setUsers] = useState([])
+    const [vis, setVis] = useState(false)
+    const [pass, setPass] = useState("")
     const {Collection, dispatch2}= useCollectionContext()
     const {Product, dispatch} = useProductContext()
 
@@ -69,6 +71,22 @@ function SideBar2() {
       .then(res=>{
         setUsers(res.data)
       })
+  }
+
+  function addSalesPerson(mail){
+
+    let data={
+      email:mail,
+      password:"6WhtPkuMEFUpq25",
+    }
+
+    axios.post("https://abe-api.onrender.com/api/user",data)
+      .then(res=>{
+        console.log(res)
+      })
+
+      console.log(mail)
+
   }
   
   return (
@@ -129,6 +147,7 @@ function SideBar2() {
               {
                 users && users.map((user)=>{
                   return(
+
                     <ListGroup.Item 
                     style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} className="my-2 py-3 p-0 ">
 
@@ -136,10 +155,16 @@ function SideBar2() {
 
                       <div className='mt-2 d-flex justify-content-around'>
 
-                        <Button className='bg-info' style={{backgroundColor:"rgb(49, 210, 242)"}}>Add</Button>
+                        <Button className='bg-info' style={{backgroundColor:"rgb(49, 210, 242)"}} onClick={()=>setVis(!vis)}>Add</Button>
 
                         <Button className='border-0' style={{backgroundColor:"rgb(220, 53, 69)"}}>Remove</Button>
 
+                      </div>
+
+                      <div className={vis ? "vis" : "notvis"}>
+                        <Form.Control className='format bg-transparent mt-3' value={pass} onChange={(e)=>setPass(e.target.value)} placeholder='Password' type='text' style={{borderColor:"#fda07e",color:"#fda07e"}}/>
+
+                        <Button className='mt-2 w-100' onClick={()=>addSalesPerson(user.email)}>Submit</Button>
                       </div>
 
                     </ListGroup.Item>
