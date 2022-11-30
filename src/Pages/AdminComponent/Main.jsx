@@ -66,6 +66,7 @@ import React,{useEffect,useState} from 'react'
 			setLoading(true)
 
 			let data={
+				
 				materialName:name
 			}
 

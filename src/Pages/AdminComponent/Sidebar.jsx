@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 
-import {Button,Offcanvas,ListGroup, Form} from "react-bootstrap"
+import {Button,Offcanvas,ListGroup, Form, Accordion} from "react-bootstrap"
 
-import { MdSettingsSuggest,MdRoofing } from "react-icons/md"
+import { MdAdminPanelSettings,MdRoofing } from "react-icons/md"
 
 import {AiFillFolderAdd} from "react-icons/ai"
 
@@ -28,13 +28,13 @@ function SideBar2() {
 
     
     const handleGet = async (name)=>{
-      //const name = "roofing"
-        const url = `https://abe-api.onrender.com/api/products/${name}`
-        const response =await axios.get(url)
 
-        const json = await response.data.materialss
+      const url = `https://abe-api.onrender.com/api/products/${name}`
+      const response =await axios.get(url)
 
-        dispatch({type:"SET Product", payload:json})
+      const json = await response.data.materialss
+
+      dispatch({type:"SET Product", payload:json})
 
     }
 
@@ -68,7 +68,7 @@ function SideBar2() {
   return (
     <React.Fragment>
       <Button variant="none" className="d-lg-none" onClick={handleShow}>
-        <MdSettingsSuggest className="text-white" size={30}/>
+        <MdAdminPanelSettings style={{color:"#fda07e"}} size={30}/>
       </Button>
 
       <Offcanvas show={show} onHide={handleClose} responsive="lg">
@@ -77,38 +77,54 @@ function SideBar2() {
         </Offcanvas.Header>
         <Offcanvas.Body   style={{backgroundColor:"#210440"}} >
 
-        
-          <ListGroup  className="SideList mt-4" variant='flush'> 
+        <Accordion style={{backgroundColor:"#210440",color:"#fda07e"}} className='w-100 mt-5'>
+        <Accordion.Item eventKey="0">
+        <Accordion.Header style={{backgroundColor:"#210440",color:"#fda07e"}}>Collection</Accordion.Header>
+        <Accordion.Body style={{backgroundColor:"#210440",color:"#fda07e"}}>
+        <ListGroup style={{backgroundColor:"#210440",color:"#fda07e"}} className="SideList mt-4" variant='flush'> 
             <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e"}}>
-              <Button className='border-0' onClick={()=>setColform(!colform)} style={{backgroundColor:"#fda07e",color:"#210440"}}> <AiFillFolderAdd size={"1.5em"}/> Collection</Button>
+                  <Button className='border-0' onClick={()=>setColform(!colform)} style={{backgroundColor:"#fda07e",color:"#210440"}}> <AiFillFolderAdd size={"1.5em"}/> Collection</Button>
 
-              <div className={colform ? "vis" : "notvis"}>
-                <Form.Control style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Collection Name" className='mt-3 bg-transparent format' onChange={(e)=> setColname(e.target.value)} value={colname}/>
+                  <div className={colform ? "vis" : "notvis"}>
+                    <Form.Control style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Collection Name" className='mt-3 bg-transparent format' onChange={(e)=> setColname(e.target.value)} value={colname}/>
 
-                <Button className='border-0 mt-3 w-100' onClick={createProduct} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add Collection</Button>
-              </div>
-            </ListGroup.Item>
+                    <Button className='border-0 mt-3 w-100' onClick={createProduct} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add Collection</Button>
+                  </div>
+                </ListGroup.Item>
 
-              {
-                Collection && Collection.map(item =>{
-                  return(
-                    <ListGroup.Item 
-                        style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0 ms-lg-3 list" 
-                        action 
-                        key={item._id}
-                        onClick={()=>handleGet(item.collectionName)}
-               >
-                <MdRoofing 
-                className='me-2' 
-                size={"1.5em"}/>
+                  {
+                    Collection && Collection.map(item =>{
+                      return(
+                        <ListGroup.Item 
+                            style={{backgroundColor:"#210440",color:"#fda07e"}} className="border-white my-2 py-3 p-0  list" 
+                            action 
+                            key={item._id}
+                            onClick={()=>handleGet(item.collectionName)}
+                  >
+                    <MdRoofing 
+                    className='me-2' 
+                    size={"1.5em"}/>
 
-                {item.collectionName}
-              </ListGroup.Item>
-                  )
-                
-                })
-              }
-          </ListGroup>
+                    {item.collectionName}
+                  </ListGroup.Item>
+                      )
+                    
+                    })
+                  }
+              </ListGroup>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>Accordion </Accordion.Header>
+            <Accordion.Body>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+              culpa qui officia deserunt mollit anim id est laborum.
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+          
+        
         </Offcanvas.Body>
       </Offcanvas>
     </React.Fragment>
