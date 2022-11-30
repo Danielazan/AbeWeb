@@ -16,6 +16,7 @@ function SideBar2() {
     const [users, setUsers] = useState([])
     const [vis, setVis] = useState(false)
     const [pass, setPass] = useState("")
+    const [supply, setSupply] = useState([])
     const {Collection, dispatch2}= useCollectionContext()
     const {Product, dispatch} = useProductContext()
 
@@ -23,6 +24,8 @@ function SideBar2() {
       getp()
 
       getUsers()
+
+      notSupplied()
     }, [dispatch])
 
     
@@ -87,6 +90,13 @@ function SideBar2() {
 
       console.log(mail)
 
+  }
+
+  function notSupplied(){
+    axios.get("https://abe-api.onrender.com/api/NotSupplied")
+      .then(res=>{
+        setSupply(res.data)
+      })
   }
   
   return (
@@ -175,6 +185,23 @@ function SideBar2() {
             
             </Accordion.Body>
           </Accordion.Item>
+
+          <Accordion.Item eventKey="2">
+            <Accordion.Header>Not Supplied</Accordion.Header>
+            <Accordion.Body style={{backgroundColor:"#210440",color:"#fda07e"}}>
+              <ListGroup style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"red"}} variant='flush'>
+                  {
+                    supply && supply.map((dist)=>{
+                      return(
+                        <ListGroup.Item style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} >
+                          {dist.FirstName} {dist.LastName}
+                        </ListGroup.Item>
+                      )
+                    })
+                  }
+              </ListGroup>
+            </Accordion.Body>
+            </Accordion.Item>
 
         </Accordion>
           
