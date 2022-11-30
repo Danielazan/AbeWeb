@@ -24,10 +24,10 @@ export const UserContext= createContext()
     }
 function UserContextProvider({children}) {
 
-    const [state,dispatch]=useReducer(reducer,{User:null})
+    const [state,dispatchU]=useReducer(reducer,{User:null})
 
   return (
-    <UserContext.Provider value={{...state,dispatch}}>
+    <UserContext.Provider value={{...state,dispatchU}}>
             {children}
     </UserContext.Provider>
   )

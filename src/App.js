@@ -15,7 +15,6 @@ import UserHook from "Hook/UserHook"
 
 function App() {
   const {User} = UserHook()
-
   
   return (
     <div fluid className="App bg-white">

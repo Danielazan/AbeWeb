@@ -17,7 +17,7 @@ function From() {
 
     const [Error, setError] = useState(null)
 
-    const {dispatch}=UserHook()
+    const {dispatchU}=UserHook()
 
     const navigate = useNavigate();
 
@@ -48,10 +48,6 @@ function From() {
 
             setError(datum.response.data.error)
         })
-
-        
-
-        const hen = await response.status
         const json =await response.data
 
         if (response){
@@ -65,7 +61,8 @@ function From() {
 
         }
 
-        dispatch({type:"Login", payload:json})
+        
+        dispatchU({type:"Login", payload:json})
         
     }
   return (
