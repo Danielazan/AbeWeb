@@ -27,45 +27,40 @@ function Sign() {
     const obj= {name,email,password}
 
     console.log(obj)
-         setisLoading(true)
+    setisLoading(true)
 
-        seterror(null)
+    const response = await axios({
+      method:"post",
+      url:url,
+      data:JSON.stringify(obj),
+      headers:{
+        "Content-Type":"application/json"
+      }
+    }).catch(datum=>{
+      console.log(datum.response.data.error)
 
-        const response = await axios({
-          method:"post",
-          url:url,
-         data:JSON.stringify(obj),
-         headers:{
-           "Content-Type":"application/json"
-         }
-        })
+      seterror(datum.response.data.error)
 
-        const json =await response.data
-          setisLoading(true)
+      setisLoading(false)
+    })
 
-        if(!response){
-            setisLoading(false)
+    const json =await response.data
+         
+    if (response){
 
-            seterror(json.error)
-        }
+      localStorage.setItem("User", JSON.stringify(json))
 
-        if (response){
-            localStorage.setItem("User", JSON.stringify(json))
+      setName("")
 
-            setName("")
+      setEmail("")
+  
+      setPassword("")
+  
+      navigate('/Verify')
 
-            setEmail("")
-        
-            setPassword("")
-        
-            navigate('/Verify')
+    }
 
-        }
-
-        dispatchU({type:"Verify Email", payload:json})
-
-        
-
+    dispatchU({type:"Verify Email", payload:json})
    
   }
 
@@ -115,7 +110,7 @@ function Sign() {
                     onClick={handleSubmit}
                     >Create Account</Button>
                 </Form>
-                  {error && <div className='error'>{error}</div>}
+                {error && <p style={{backgroundColor:"rgb(248, 215, 218)",color:"rgb(132, 32, 41)",border:"2px solid rgb(245, 194, 199)"}} className='py-2 rounded-2 ps-2 mt-3'>{error}</p>}
                 <div className="d-flex my-4 justify-content-center">
                   <p className='form-p'>Already have an account?</p>
 

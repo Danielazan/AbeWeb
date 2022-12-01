@@ -214,7 +214,7 @@ function SideBar2() {
                     supply && supply.map((dist)=>{
                       return(
                         <ListGroup.Item key={dist._id} style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} >
-                          {dist.FirstName} {dist.LastName}
+                          {dist.FirstName} {dist.LastName} <Button className='border-0 mt-2' style={{backgroundColor:"#fda07e",color:"#210440"}}>Supplied</Button>
                         </ListGroup.Item>
                       )
                     })
