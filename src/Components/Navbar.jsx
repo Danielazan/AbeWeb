@@ -20,7 +20,7 @@ function Navigate() {
   return (
     <React.Fragment>
         <Navbar fixed='top' className={`${nav ? "nav-active" : "nav"} bar `} expand="lg">
-            <Container  className='bg-transparent py-3'>
+            <Container  className='bg-transparent py-2'>
                 <Link Navigate to="/"  className={`${nav ? "brand-active" : "brand"} ms-3 `}> <h3>Authentic Roofing Tiles <br /> <span style={{fontSize:"14px"}}>Intercontinental Limited</span></h3></Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"  />
                 <Navbar.Collapse id="basic-navbar-nav" >

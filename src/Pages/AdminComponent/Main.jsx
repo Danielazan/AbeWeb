@@ -14,6 +14,7 @@ import React,{useEffect,useState} from 'react'
 		const [loading, setLoading] = useState()
 		const [badge, setBadge] = useState(false)
 		const [qty, setQty] = useState("")
+		const [available, setAvailable] = useState(0)
 		const [price, setPrice] = useState(false)
 		const [newprice, setNewprice] = useState("")
 		const [visibility, setVisibility] = useState(false)
@@ -62,7 +63,7 @@ import React,{useEffect,useState} from 'react'
 				})
 		}
 
-		function handleMaterialCustomer(name){
+		function handleMaterialCustomer(name,item){
 
 			setLoading(true)
 
@@ -76,6 +77,10 @@ import React,{useEffect,useState} from 'react'
 					setCustomer(res.data.customers)
 
 					console.log(customer)
+
+					console.log(item)
+
+					setAvailable(item)
 
 					setLoading(false)
 
@@ -144,7 +149,7 @@ import React,{useEffect,useState} from 'react'
 	                                <tr key={item._id}>
 
 	                                    <td>
-											<button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name)} className='name-btn px-2 rounded-1 py-2'>{item.Name}</button>
+											<button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name,item.TotalBatch)} className='name-btn px-2 rounded-1 py-2'>{item.Name}</button>
 										</td>
 
 	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
@@ -195,7 +200,10 @@ import React,{useEffect,useState} from 'react'
 			
 			{
 				<div className={visibility ? "vis" : "notvis"}>
-					<h2 className='mt-4'>Customer Details Table</h2>
+					<div className='d-flex justify-content-between'>
+						<h2 className='mt-4'>Customer Details Table</h2>
+						<h4 className='mt-4' style={{color:"#fda07e"}}>Available Quantity : {available}</h4>
+					</div>
 
 					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 					<thead>
