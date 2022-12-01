@@ -29,15 +29,17 @@ import React,{useEffect,useState} from 'react'
 	
 	        axios.get("https://abe-api.onrender.com/api/products/roofing")
 	            .then(res=>{
-	            setmaterials(res.data.materialss)
-	
-	            console.log(res.data.materialss)
 
-	            dispatch({type:"ROOFING",payload:materials})
+				setmaterials(res.data.materialss)
+
+				console.log(res.data.materialss)
+
+				dispatch({type:"ROOFING",payload:materials})
+
 	        })
 
 	    }
-		
+
 
 		function handleDelete(item){
 
@@ -45,6 +47,10 @@ import React,{useEffect,useState} from 'react'
 			
 				.then((res)=>{
 					console.log(res)
+
+					console.log(customer)
+
+					console.log(item)
 
 					dispatch({type:"DELETE Product",payload:res.data})
 
@@ -76,10 +82,6 @@ import React,{useEffect,useState} from 'react'
 				.then(res=>{
 					setCustomer(res.data.customers)
 
-					console.log(customer)
-
-					console.log(item)
-
 					setAvailable(item)
 
 					setLoading(false)
@@ -103,7 +105,7 @@ import React,{useEffect,useState} from 'react'
 
 		const submitBatch= async (id)=>{
 			console.log(id)
-		
+
 			let data={
 				NewBatch:qty
 			}
@@ -166,7 +168,9 @@ import React,{useEffect,useState} from 'react'
 											</div>
 										</td>
 
-	                                    <td style={{textAlign:"center"}}>{item.Quantitiy}</td>
+	                                    <td style={{textAlign:"center"}}>{item.QuantitiySold.map(ted=>{
+											return ted.totalAmount
+										})}</td>
 
 										{/* Quantity Change */}
 
