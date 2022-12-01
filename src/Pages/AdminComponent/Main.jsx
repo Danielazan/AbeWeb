@@ -48,6 +48,10 @@ import React,{useEffect,useState} from 'react'
 				.then((res)=>{
 					console.log(res)
 
+					console.log(customer)
+
+					console.log(item)
+
 					dispatch({type:"DELETE Product",payload:res.data})
 
 				})
@@ -100,6 +104,7 @@ import React,{useEffect,useState} from 'react'
 	    }
 
 		function submitBatch(id){
+			console.log(id)
 
 			let data={
 				NewBatch:qty
