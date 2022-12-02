@@ -4,6 +4,7 @@ import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import axios from 'axios'
 import {TiArrowBack} from "react-icons/ti"
 import IteamHook from "Hook/IteamHook"
+import { async } from 'q'
 
 
 
@@ -19,10 +20,8 @@ function SalesForm(props) {
     const [sales, setSales] = useState("")
 
     const {iteam} = IteamHook()
-
-    function submitCustomer(){
-
-        console.log(iteam)
+console.log(iteam)
+    const submitCustomer = async()=>{
         
         let data={
 
@@ -37,8 +36,19 @@ function SalesForm(props) {
             TotalAmountPaid:props.price,
             itemsBought:iteam,
         }
+        await iteam.map(ele =>{
+            const id = ele._id
 
-        axios.post("https://abe-api.onrender.com/api/customer",data)
+            const sky ={
+                Quantity:ele.quantity
+            }
+
+            axios.patch(`http://localhost:5000/api/Batch/${id}`,sky)
+
+            console.log(sky)
+        })
+
+        await axios.post("https://abe-api.onrender.com/api/customer",data)
             .then(res=>{
 
               console.log(res.data)
