@@ -78,14 +78,14 @@ function SideBar2() {
 
   function addSalesPerson(mail){
 
-    if(pass ===true){
+    
       let data={
         email:mail,
 
         headers:{
           "Content-Type":"application/json"
         }
-        // password:"6WhtPkuMEFUpq25",
+    
       }
   
       axios.post("https://abe-api.onrender.com/api/user",data)
@@ -94,11 +94,9 @@ function SideBar2() {
         })
   
         console.log(mail)
-    }
     
-    else{
-      alert("Not poss")
-    }
+    
+    
 
   }
 
@@ -152,7 +150,7 @@ function SideBar2() {
                           {item.collectionName}
                         </ListGroup.Item>
                       )
-                    
+                     
                     })
                   }
               </ListGroup>
