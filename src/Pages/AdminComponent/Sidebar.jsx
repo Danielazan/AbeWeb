@@ -6,6 +6,8 @@ import {HiUsers} from "react-icons/hi"
 import axios from 'axios'
 import {useCollectionContext} from "Hook/CollectionHook"
 import {useProductContext} from "Hook/useProduct"
+import { async } from 'q'
+
 
 function SideBar2() {
     const [show, setShow] = useState(false);
@@ -76,7 +78,7 @@ function SideBar2() {
       })
   }
 
-  function addSalesPerson(mail){
+  const addSalesPerson= async(mail)=>{
 
     
       let data={
@@ -88,20 +90,46 @@ function SideBar2() {
     
       }
   
-      axios.post("https://abe-api.onrender.com/api/user",data)
+      if(pass){
+       await axios.patch("https://abe-api.onrender.com/api/user",data)
         .then(res=>{
           console.log(res)
         })
+      }
   
-        console.log(mail)
+        console.log(mail)  
+
+  }
+
+  const removeSalePerson= async(mail)=>{
+    let data={
+      email:mail,
+
+      headers:{
+        "Content-Type":"application/json"
+      }
+  
+    }
+    alert("this person will no longer be a sales person")
     
-    
+     await axios.patch("https://abe-api.onrender.com/api/ReUser",data)
+      .then(res=>{
+        console.log(res)
+      })
     
 
+      console.log(mail)
   }
 
   function notSupplied(){
     axios.get("https://abe-api.onrender.com/api/NotSupplied")
+      .then(res=>{
+        setSupply(res.data)
+      })
+  }
+
+  const addSupply = async(id)=>{
+    await axios.patch(`https://abe-api.onrender.com/api/Supplied/${id}`)
       .then(res=>{
         setSupply(res.data)
       })
@@ -176,7 +204,10 @@ function SideBar2() {
 
                         <Button className='bg-info' style={{backgroundColor:"rgb(49, 210, 242)"}} onClick={()=>setVis(!vis)}>Add</Button>
 
-                        <Button className='border-0' style={{backgroundColor:"rgb(220, 53, 69)"}}>Remove</Button>
+                        <Button className='border-0' 
+                        style={{backgroundColor:"rgb(220, 53, 69)"}}
+                        onClick={()=>removeSalePerson(user.email)}
+                        >Remove</Button>
 
                       </div>
 
@@ -212,7 +243,13 @@ function SideBar2() {
                     supply && supply.map((dist)=>{
                       return(
                         <ListGroup.Item key={dist._id} style={{backgroundColor:"#210440",color:"#fda07e",borderColor:"#fda07e"}} >
-                          {dist.FirstName} {dist.LastName} <Button className='border-0 mt-2' style={{backgroundColor:"#fda07e",color:"#210440"}}>Supplied</Button>
+                          {dist.FirstName} {dist.LastName} 
+
+                          <Button 
+                          className='border-0 mt-2' 
+                          style={{backgroundColor:"#fda07e",color:"#210440"}}
+                          onClick={()=>addSupply(dist._id)}
+                          >Supplied</Button>
                         </ListGroup.Item>
                       )
                     })
