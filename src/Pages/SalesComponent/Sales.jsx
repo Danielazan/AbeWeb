@@ -119,7 +119,19 @@ function Sales() {
        setTog(true)
     }
 
+   
+    console.log(User.user.isSalesPerson)
     
+    if (!User.user.isSalesPerson && !User.user.isAdmin){
+      return (
+        <div>
+        <Navbar/>
+          <div className='denied'>
+            <h1> Access Denied, You Are Not A SalesPerson </h1>
+          </div>
+        </div>
+      )
+    }
     
   return (
     <React.Fragment>

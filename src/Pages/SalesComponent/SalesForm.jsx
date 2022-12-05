@@ -4,12 +4,10 @@ import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import axios from 'axios'
 import {TiArrowBack} from "react-icons/ti"
 import IteamHook from "Hook/IteamHook"
-import { async } from 'q'
-
+import UserHook from "Hook/UserHook"
 
 
 function SalesForm(props) {
-
     const [first, setFirst] = useState("")
     const [last, setLast] = useState("")
     const [phone, setPhone] = useState("")
@@ -20,7 +18,7 @@ function SalesForm(props) {
     const [sales, setSales] = useState("")
 
     const {iteam} = IteamHook()
-console.log(iteam)
+    console.log(iteam)
     const submitCustomer = async()=>{
         
         let data={
@@ -72,7 +70,6 @@ console.log(iteam)
         
         props.clear()
     }
-
 
   return (
     <React.Fragment>
