@@ -1,137 +1,53 @@
-import React,{useEffect,useState} from 'react'
-	import {Table,Button,Form,Badge } from "react-bootstrap";
-	import axios from 'axios';
-	import {useProductContext} from "Hook/useProduct"
-	import {MdEdit,MdDelete} from "react-icons/md"
-	import {IoIosAddCircle} from "react-icons/io"
-	import pic from "Assets/Images/pic15.svg"
-	import { useNavigate } from 'react-router-dom';
+import React,{useState} from 'react'
+import {Table,Button,Form,Row,Col, Container } from "react-bootstrap";
+import Navbar from 'Components/Navbar'
+import pic from "Assets/Images/pic15.svg"
+import {IoIosAddCircle} from "react-icons/io"
+import {MdEdit,MdDelete} from "react-icons/md"
 
-	
-	function Main() {
-	
-		const {Product, dispatch} = useProductContext()
-		const [materials, setmaterials] = useState([])
-		const [customer, setCustomer] = useState([])
-		const [loading, setLoading] = useState()
-		const [badge, setBadge] = useState(false)
-		const [qty, setQty] = useState("")
-		const [available, setAvailable] = useState(0)
-		const [price, setPrice] = useState(false)
-		const [newprice, setNewprice] = useState("")
-		const [visibility, setVisibility] = useState(false)
-		const navigate = useNavigate();
+function Main() {
+    const [Product, setProduct] = useState([])
 
-	    useEffect(() => {
-	        GetProducts()
-	    },[dispatch])
-	
+    const [loading, setloading] = useState(false)
 
-	    function getp(){
-	
-	        axios.get("https://abe-api.onrender.com/api/products/roofing")
-	            .then(res=>{
+    const [visibility, setvisibility] = useState(false)
 
-				setmaterials(res.data.materialss)
+    const [available, setavailable] = useState(0)
 
-				console.log(res.data.materialss)
+    const [newprice, setNewprice] = useState("")
 
-				dispatch({type:"ROOFING",payload:materials})
+    const [price, setPrice] = useState(false)
 
-	        })
+    const [badge, setBadge] = useState(false)
 
-	    }
+    const [qty, setQty] = useState(0)
 
+    
 
-		function handleDelete(item){
+    const MStock = async ()=>{
+        console.log("heloo")
+    }
 
-			axios.delete(`https://abe-api.onrender.com/api/material/${item._id}`)
-			
-				.then((res)=>{
-					console.log(res)
+    const handleMaterialCustomer = async ()=>{
 
-					console.log(customer)
+    }
 
-					console.log(item)
+    const handleEdit = async (id)=>{
+        console.log("ok")
+    }
 
-					dispatch({type:"DELETE Product",payload:res.data})
+    const handleDelete = async () =>{
 
-				})
-			
-		}
+    }
 
-		function handleEdit(id){
-		
-			let data={
-				Price:newprice
-			}
-			axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
-				.then(res=>{
-					console.log(res)
-				})
-		}
-
-		function handleMaterialCustomer(name,item){
-
-			setLoading(true)
-
-			let data={
-				
-				materialName:name
-			}
-
-			axios.patch("https://abe-api.onrender.com/api/materialCustomer",data)
-				.then(res=>{
-					setCustomer(res.data.customers)
-
-					setAvailable(item)
-
-					setLoading(false)
-
-				})
-				
-			setVisibility(true)
-		}
-	
-
-	    const GetProducts = async ()=>{
-	        const name = "roofing"
-	        const url = `https://abe-api.onrender.com/api/products/${name}`
-	        const response =await axios.get(url)
-	
-	        const json = await response.data.materialss
-	
-	        dispatch({type:"SET Product", payload:json})
-	
-	    }
-
-		const submitBatch= async (id)=>{
-			console.log(id)
-
-			let data={
-				NewBatch:qty
-			}
-			await axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
-				.then(res=>{
-					console.log(res)
-				})
-
-				await axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
-				.then(res=>{
-					console.log(res)
-				})
-
-			setQty("")
-
-		}
-
-		const MStock = async ()=>{
-			navigate('/Stock')
-		}
-	    
-	  return (
-	    <React.Fragment>
-	      <div style={{color:"#fda07e"}}>
+    const submitBatch = async () =>{
+        
+    }
+  return (
+    <React.Fragment>
+          <Row>
+        <Col xs={12} md={8}>
+        <div style={{color:"#fda07e"}}>
 		  		<div className='mainSpan'> 
 					<h2 className='main-h2 '>Materials</h2>
 					<Button 
@@ -145,11 +61,11 @@ import React,{useEffect,useState} from 'react'
 	            <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 	                <thead>
 	                    <tr>
-	                        <th style={{textAlign:"center"}}>Name</th>
-	                        <th style={{textAlign:"center"}}>Collection Name</th>
-	                        <th style={{textAlign:"center"}}>Price</th>
-	                        <th style={{textAlign:"center"}}>Quantity Sold</th>
-							<th style={{textAlign:"center"}}>New Batch</th>
+	                        <th style={{textAlign:"center"}}>DATE</th>
+	                        <th style={{textAlign:"center"}}>REFERNCE NUMBER</th>
+	                        <th style={{textAlign:"center"}}>STOCK IN</th>
+	                        <th style={{textAlign:"center"}}>STOCK OUT</th>
+							<th style={{textAlign:"center"}}>BALANCE</th>
 							<th></th>
 	                    </tr>
 	                </thead>
@@ -218,7 +134,7 @@ import React,{useEffect,useState} from 'react'
 						<h4 className='mt-4' style={{color:"#fda07e"}}>Available Quantity : {available}</h4>
 					</div>
 
-					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
+					{/* <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
 					<thead>
 	                    <tr>
 	                        <th style={{textAlign:"center"}}>Customer Name</th>
@@ -244,7 +160,7 @@ import React,{useEffect,useState} from 'react'
 						}
 					</tbody>
 						
-					</Table>
+					</Table> */}
 				</div>
 			}
 			
@@ -253,10 +169,14 @@ import React,{useEffect,useState} from 'react'
 	
 
 	      </div>
-	    </React.Fragment>
-	  )
-	}
-	
+        </Col>
+        <Col xs={6} md={4}>
+          xs=6 md=4
+        </Col>
+      </Row>
+    </React.Fragment>
+    
+  )
+}
 
-	export default Main
-
+export default Main

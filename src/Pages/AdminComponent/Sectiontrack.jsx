@@ -12,6 +12,8 @@ function Sectiontrack() {
   
   const [price, setPrice] = useState("")
 
+  const [Error, setError] = useState(null)
+
   const {Product, dispatch} = useProductContext()
 
   const {Collection, dispatch2}= useCollectionContext()
@@ -59,6 +61,11 @@ function Sectiontrack() {
 
           dispatch({type:"CREATE Product",payload:res.data})
           
+        })
+
+        .catch(err=>{
+          console.log(err.response.data.error)
+          setError(err.response.data.error)
         })
 
       setName("")
@@ -117,7 +124,7 @@ function Sectiontrack() {
             <Button className='w-100 border-0 py-3 py-lg-2 rounded-2 me-2' style={{backgroundColor:"#fda07e",color:"#210440"}} onClick={handlePost}>Post</Button>
            
           </div>
-
+          {Error && <p style={{color:"red"}}>{Error}</p>}
        </section>
     </React.Fragment>
   )
