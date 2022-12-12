@@ -9,3 +9,15 @@
   background-color: ivory;
   padding-top: 25vh;
 }
+
+.Stats-h2 {
+  color: rgb(26, 20, 100);
+}
+
+.tb-row:nth-child(even) {
+  background-color: rgb(255, 255, 230);
+}
+
+.tb-row {
+  border-bottom: 2px solid #2e180e;
+}
