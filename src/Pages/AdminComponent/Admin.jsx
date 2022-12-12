@@ -14,7 +14,7 @@ function Admin() {
   if (!User.user.isAdmin){
     return (
       <div>
-        import Navbar from 'Components/Navbar'
+      <Navbar/>
         <div className='denied'>
           <h1> Access Denied, You Cannot Access This Page</h1>
         </div>
