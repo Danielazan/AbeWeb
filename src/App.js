@@ -10,6 +10,7 @@ import About from "Pages/AdminComponent/Admin"
 import Sales from "Pages/SalesComponent/Sales"
 import Verify from "Pages/VerificationComponent/Verify"
 import Enquiry from 'Pages/EnquiryComponent/Enquiry';
+import Stock from "Pages/ManageStock"
 
 import UserHook from "Hook/UserHook"
 
@@ -27,6 +28,8 @@ function App() {
             <Route path='/Signup' element={ !User ? <Signup/> : <Navigate to='/' />}/>
 
             <Route path='/Verify' element={ <Verify/>}/>
+
+            <Route path='/stock' element={ <Stock/>}/>
 
             <Route path='/Admin' element={User ? <Admin/> : <Navigate to='/Login' />}/>
 

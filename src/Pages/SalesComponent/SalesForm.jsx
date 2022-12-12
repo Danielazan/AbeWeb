@@ -40,10 +40,16 @@ function SalesForm(props) {
             const sky ={
                 Quantity:ele.quantity
             }
+            const hell = {
+                MaterialName:ele.item,
+                StockOut:ele.quantity
+            }
 
-            axios.patch(`http://localhost:5000/api/Batch/${id}`,sky)
+            axios.patch(`https://abe-api.onrender.com/api/Batch/${id}`,sky)
 
-            console.log(sky)
+            axios.post(`https://abe-api.onrender.com/api/upCreate/${id}`,hell)
+
+            console.log(hell)
         })
 
         await axios.post("https://abe-api.onrender.com/api/customer",data)
