@@ -1,16 +1,16 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "react-bootstrap";
-import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
-import Home from "Pages/HomeComponent/Home";
-import Login from "Pages/LoginComponent/Login";
-import Signup from "Pages/SignupComponent/Signup";
-import Admin from "Pages/AdminComponent/Admin";
-import About from "Pages/AdminComponent/Admin";
-import Sales from "Pages/SalesComponent/Sales";
-import Verify from "Pages/VerificationComponent/Verify";
-import Stats from "Pages/StatsComponent/Stats";
-import Enquiry from "Pages/EnquiryComponent/Enquiry";
+import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css"
+import {Container} from "react-bootstrap"
+import {Route,Routes,BrowserRouter, Navigate} from "react-router-dom"
+import Home from "Pages/HomeComponent/Home"
+import Login from "Pages/LoginComponent/Login"
+import Signup from "Pages/SignupComponent/Signup"
+import Admin from 'Pages/AdminComponent/Admin';
+import About from "Pages/AdminComponent/Admin"
+import Sales from "Pages/SalesComponent/Sales"
+import Verify from "Pages/VerificationComponent/Verify"
+import Enquiry from 'Pages/EnquiryComponent/Enquiry';
+import Stock from "Pages/ManageStock"
 
 import UserHook from "Hook/UserHook";
 
@@ -44,10 +44,7 @@ function App() {
             element={<Verify />}
           />
 
-          <Route
-            path='/Admin'
-            element={User ? <Admin /> : <Navigate to='/Login' />}
-          />
+            <Route path='/Verify' element={ <Verify/>}/>
 
           <Route
             path='/about'

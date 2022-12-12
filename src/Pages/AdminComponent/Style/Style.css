@@ -32,8 +32,13 @@
     color: white;
 }
 
-.main-h2{
+/* .main-h2{
     border-bottom: 1px solid #fda07e;
+} */
+.mainSpan{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .main-border{

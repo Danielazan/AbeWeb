@@ -112,16 +112,14 @@ function Sectiontrack() {
           </Form.Group>
         </Form>
 
-        <div className='d-flex ms-xl-3 mb-4'>
-          <Button
-            className='w-100 border-0 py-3 py-lg-2 rounded-2 me-2'
-            style={{ backgroundColor: "#fda07e", color: "#210440" }}
-            onClick={handlePost}
-          >
-            Post
-          </Button>
-        </div>
-      </section>
+
+          <div className="d-flex ms-xl-3 mb-4">
+            <Button className='w-100 border-0 py-3 py-lg-2 rounded-2 me-2' style={{backgroundColor:"#fda07e",color:"#210440"}} onClick={handlePost}>Post</Button>
+           
+          </div>
+          {Error && <p style={{color:"red"}}>{Error}</p>}
+       </section>
+
     </React.Fragment>
   );
 }

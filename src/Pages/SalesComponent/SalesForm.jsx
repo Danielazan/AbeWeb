@@ -34,21 +34,21 @@ function SalesForm(props) {
     await iteam.map((ele) => {
       const id = ele._id;
 
-      const sky = {
-        Quantity: ele.quantity,
-      };
+  
+            const sky ={
+                Quantity:ele.quantity
+            }
+            const hell = {
+                MaterialName:ele.item,
+                StockOut:ele.quantity
+            }
 
-      axios.patch(`http://localhost:5000/api/Batch/${id}`, sky);
+            axios.patch(`https://abe-api.onrender.com/api/Batch/${id}`,sky)
 
-      console.log(sky);
-    });
+            axios.post(`https://abe-api.onrender.com/api/upCreate/${id}`,hell)
 
-    await axios
-      .post("https://abe-api.onrender.com/api/customer", data)
-      .then((res) => {
-        console.log(res.data);
-      });
-    setFirst("");
+            console.log(hell)
+        })
 
     setLast("");
 
