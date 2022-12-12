@@ -11,16 +11,16 @@ function Admin() {
   const { User, dispatchU } = UserHook();
   console.log(User.user.isAdmin);
 
-  // if (!User.user.isAdmin){
-  //   return (
-  //     <div>
-  //       <Navbar/>
-  //       <div className='denied'>
-  //         <h1> Access Denied, You Cannot Access This Page</h1>
-  //       </div>
-  //     </div>
-  //   )
-  // }
+  if (!User.user.isAdmin){
+    return (
+      <div>
+        <Navbar/>
+        <div className='denied'>
+          <h1> Access Denied, You Cannot Access This Page</h1>
+        </div>
+      </div>
+    )
+  }
   return (
     <React.Fragment>
       <Navbar />
