@@ -19,6 +19,7 @@ function SalesForm(props) {
 
   const { iteam } = IteamHook();
   console.log(iteam);
+
   const submitCustomer = async () => {
     let data = {
       DriverName: driver,
@@ -32,6 +33,11 @@ function SalesForm(props) {
       TotalAmountPaid: props.price,
       itemsBought: iteam,
     };
+
+    axios.post("https://abe-api.onrender.com/api/customer", data).then((res) => {
+      console.log(res.data);
+    });
+
     await iteam.map((ele) => {
       const id = ele._id;
 

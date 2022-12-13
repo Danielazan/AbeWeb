@@ -3,11 +3,15 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import "./Style/Style.css";
 import Navbar from "Components/NavbarSales";
 import axios from "axios";
+import StatsTable from "./StatsTable";
 
 function Stats() {
   const [materials, setmaterials] = useState([]);
   const [rfno, setRfno] = useState("");
-  const [balance, setBalance] = useState("")
+  const [stock, setStock] = useState("");
+  const [prod, setProd] = useState("");
+  const [iden, setIden] = useState("");
+  const [stats, setStats] = useState([])
 
   useEffect(() => {
     getp();
@@ -16,9 +20,39 @@ function Stats() {
   function getp() {
     axios.get("https://abe-api.onrender.com/api/material").then((res) => {
       setmaterials(res.data);
-
-      console.log(res.data);
     });
+  }
+
+  // Getting Stats For Table
+
+  function getStats(id, name) {
+    
+    setProd(name);
+    setIden(id);
+
+    axios.get(`https://abe-api.onrender.com/api/batches/${name}`).then((res) => {
+      console.log(res.data);
+
+      setStats(res.data)
+    })
+  }
+
+  // Post Request For Stats
+
+  function handleForm() {
+    let data = {
+      RefNo: rfno,
+      MaterialName: prod,
+      StockIn: stock,
+    };
+    axios
+      .post(`https://abe-api.onrender.com/api/batch/${iden}`, data)
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    setRfno("");
+    setStock("");
   }
 
   return (
@@ -26,140 +60,79 @@ function Stats() {
       <Container fluid className='Stats'>
         <Navbar />
         <Container>
-          {/* Product Table */}
+          <Row>
+            <Col xs={12} xl={7}>
+              <h2 className='Stats-h2'>Products</h2>
 
-          <h2 className='Stats-h2'>Products</h2>
+              <Row
+                style={{
+                  borderBlock: "3px solid #2e180e",
+                  fontWeight: "600",
+                }}
+                className='py-3 mt-3'
+              >
+                <Col className='text-center trun' xs={3}>
+                  Name
+                </Col>
 
-          <Row
-            style={{
-              borderBlock: "3px solid #2e180e",
-              fontWeight: "600",
-            }}
-            className='py-3 mt-3'
-          >
-            <Col className='text-center trun' xs={3}>
-              Name
+                <Col className='text-center trun' xs={2}>
+                  Collection
+                </Col>
+
+                <Col className='text-center trun' xs={2}>
+                  Prev Batch
+                </Col>
+
+                <Col className='text-center trun' xs={2}>
+                  New Batch
+                </Col>
+
+                <Col className='text-center trun' xs={3}>
+                  Total Quantity
+                </Col>
+              </Row>
+
+              {materials &&
+                materials.map((item) => {
+                  return (
+                    <Row className='py-4 tb-row' key={item._id}>
+                      <Col
+                        className='text-center'
+                        xs={3}
+                        onClick={() => getStats(item._id, item.Name)}
+                      >
+                        {item.Name}
+                      </Col>
+
+                      <Col className='text-center' xs={2}>
+                        {item.collectionName}
+                      </Col>
+
+                      <Col className='text-center' xs={2}>
+                        {item.PreviousBatch}
+                      </Col>
+
+                      <Col className='text-center' xs={2}>
+                        {item.NewBatch}
+                      </Col>
+
+                      <Col className='text-center' xs={3}>
+                        {item.TotalBatch}
+                      </Col>
+                    </Row>
+                  );
+                })}
+
+              <StatsTable stats={stats}/>
             </Col>
 
-            <Col className='text-center trun' xs={2}>
-              Collection
-            </Col>
+            {/* Form */}
 
-            <Col className='text-center trun' xs={2}>
-              Prev Batch
-            </Col>
-
-            <Col className='text-center trun' xs={2}>
-              New Batch
-            </Col>
-
-            <Col className='text-center trun' xs={3}>
-              Total Quantity
-            </Col>
-          </Row>
-
-          {materials &&
-            materials.map((item) => {
-              return (
-                <Row className='py-4 tb-row' key={item._id}>
-                  <Col className='text-center' xs={3}>
-                    {item.Name}
-                  </Col>
-
-                  <Col className='text-center' xs={2}>
-                    {item.collectionName}
-                  </Col>
-
-                  <Col className='text-center' xs={2}>
-                    {item.PreviousBatch}
-                  </Col>
-
-                  <Col className='text-center' xs={2}>
-                    {item.NewBatch}
-                  </Col>
-
-                  <Col className='text-center' xs={3}>
-                    {item.TotalBatch}
-                  </Col>
-                </Row>
-              );
-            })}
-
-          {/* Stats Table */}
-
-          <div className='mt-5'>
-            <h2 className='Stats-h2'>Stats</h2>
-            <Row>
-              <Col xs={12} xl={7}>
-                <Row
-                  style={{
-                    borderBlock: "3px solid #2e180e",
-                    fontWeight: "600",
-                  }}
-                  className='py-3 mt-3'
-                >
-                  <Col className='text-center trun' xs={2}>
-                    Date
-                  </Col>
-
-                  <Col className='text-center trun' xs={2}>
-                    Ref No
-                  </Col>
-
-                  <Col className='text-center trun' xs={3}>
-                    Stock In
-                  </Col>
-
-                  <Col className='text-center trun' xs={3}>
-                    Stock Out
-                  </Col>
-
-                  <Col className='text-center trun' xs={2}>
-                    Balance
-                  </Col>
-                </Row>
-
-                <Row className='py-4 tb-row'>
-                  <Col className='text-center' xs={2}>
-                    01/11/22
-                  </Col>
-
-                  <Col className='text-center' xs={2}>
-                    001
-                  </Col>
-
-                  <Col className='text-center' xs={3}>
-                    3000
-                  </Col>
-
-                  <Col className='text-center' xs={3}></Col>
-
-                  <Col className='text-center' xs={2}></Col>
-                </Row>
-
-                <Row className='py-4 tb-row'>
-                  <Col className='text-center' xs={2}>
-                    02/11/22
-                  </Col>
-
-                  <Col className='text-center' xs={2}>
-                    0456
-                  </Col>
-
-                  <Col className='text-center' xs={3}></Col>
-
-                  <Col className='text-center' xs={3}>
-                    20
-                  </Col>
-
-                  <Col className='text-center' xs={2}>
-                    298
-                  </Col>
-                </Row>
-              </Col>
-
-              <Col xs={12} xl={5}>
-                <Form className='ms-xl-3'>
+            <Col xs={12} xl={5}>
+              <div className='mt-xl-2 mt-5 ms-xl-3'>
+                <h2 className='Stats-h2'>Set Data</h2>
+                <h5 className='Stats-h2'>Product Refrence : {prod}</h5>
+                <Form>
                   <Form.Group
                     className='mb-3'
                     controlId='exampleForm.ControlInput1'
@@ -178,30 +151,29 @@ function Stats() {
                     className='mb-3'
                     controlId='exampleForm.ControlInput1'
                   >
-                    <Form.Label className='form-label'>
-                      Balance
-                    </Form.Label>
+                    <Form.Label className='form-label'>Stock In</Form.Label>
 
                     <Form.Control
                       type='number'
-                      value={balance}
-                      onChange={(e) => setBalance(e.target.value)}
+                      value={stock}
+                      onChange={(e) => setStock(e.target.value)}
                       placeholder='Enter Balance'
                     />
 
-                    <div className="d-flex justify-content-center">
+                    <div className='d-flex justify-content-center'>
                       <Button
                         style={{ backgroundColor: "rgb(26, 20, 100)" }}
                         className='w-75 mt-5 border-0 py-4 rounded-pill mb-5'
+                        onClick={handleForm}
                       >
                         Submit
                       </Button>
                     </div>
                   </Form.Group>
                 </Form>
-              </Col>
-            </Row>
-          </div>
+              </div>
+            </Col>
+          </Row>
         </Container>
       </Container>
     </React.Fragment>
