@@ -11,6 +11,7 @@ function Stats() {
   const [stock, setStock] = useState("");
   const [prod, setProd] = useState("");
   const [iden, setIden] = useState("");
+  const [stats, setStats] = useState([])
 
   useEffect(() => {
     getp();
@@ -25,15 +26,15 @@ function Stats() {
   // Getting Stats For Table
 
   function getStats(id, name) {
-    let data = {
-      MaterialName: name,
-    };
+    
     setProd(name);
     setIden(id);
 
-    axios.get("https://abe-api.onrender.com/api/batches", data).then((res) => {
-      console.log(res);
-    });
+    axios.get(`https://abe-api.onrender.com/api/batches/${name}`).then((res) => {
+      console.log(res.data);
+
+      setStats(res.data)
+    })
   }
 
   // Post Request For Stats
@@ -122,7 +123,7 @@ function Stats() {
                   );
                 })}
 
-              <StatsTable />
+              <StatsTable stats={stats}/>
             </Col>
 
             {/* Form */}
