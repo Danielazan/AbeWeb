@@ -1,46 +1,47 @@
-import React from 'react'
-import Navbar from 'Components/Navbar'
-import { Container,Row,Col } from 'react-bootstrap'
-import Sidebar from './Sidebar'
-import Main from './Main'
-import "Pages/AdminComponent/Style/Style.css"
-import Sectiontrack from './Sectiontrack'
-import UserHook from "Hook/UserHook"
+import React from "react";
+import Navbar from "Components/Navbar";
+import { Container, Row, Col } from "react-bootstrap";
+import Sidebar from "./Sidebar";
+import Main from "./Main";
+import "Pages/AdminComponent/Style/Style.css";
+import Sectiontrack from "./Sectiontrack";
+import UserHook from "Hook/UserHook";
 
 function Admin() {
-  const {User , dispatchU}=UserHook()
-  console.log(User.user.isAdmin)
-  
+  const { User, dispatchU } = UserHook();
+  console.log(User.user.isAdmin);
+
   if (!User.user.isAdmin){
     return (
       <div>
-        import Navbar from 'Components/Navbar'
+      <Navbar/>
         <div className='denied'>
-          <h1> Access Denied, You Are Not An SalesPerson </h1>
+          <h1> Access Denied, You Cannot Access This Page</h1>
         </div>
       </div>
     )
   }
   return (
     <React.Fragment>
-        <Navbar/>
+      <Navbar />
 
-        <Container fluid className='admin pt-5'>
-            <Row className='pt-5'>
-                <Col xs={12} lg={2}><Sidebar/></Col>
+      <Container fluid className='admin pt-5'>
+        <Row className='pt-5'>
+          <Col xs={12} lg={2}>
+            <Sidebar />
+          </Col>
 
-                <Col xs={12} lg={7}>
+          <Col xs={12} lg={7}>
+            <Main />
+          </Col>
 
-                  <Main/>
-                  
-                </Col>
-
-                <Col className='widget-p' xs={12} lg={3}><Sectiontrack/></Col>
-            </Row>
-        </Container>
+          <Col className='widget-p' xs={12} lg={3}>
+            <Sectiontrack />
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
-  )
+  );
 }
 
-export default Admin
-
+export default Admin;

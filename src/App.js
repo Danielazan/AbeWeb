@@ -11,34 +11,49 @@ import Sales from "Pages/SalesComponent/Sales"
 import Verify from "Pages/VerificationComponent/Verify"
 import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 import Stock from "Pages/ManageStock"
+import Stats from 'Pages/StatsComponent/Stats';
 
-import UserHook from "Hook/UserHook"
+import UserHook from "Hook/UserHook";
 
 function App() {
-  const {User} = UserHook()
-  
+  const { User } = UserHook();
+
   return (
-    <div fluid className="App bg-white">
+    <div fluid className='App bg-white'>
       <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home/>}/>
+        <Routes>
+          <Route path='/' element={<Home />} />
 
-            <Route path='/Login' element={!User ? <Login/> : <Navigate to='/' />}/>
-            
-            <Route path='/Signup' element={ !User ? <Signup/> : <Navigate to='/' />}/>
+          <Route
+            path='/Login'
+            element={!User ? <Login /> : <Navigate to='/' />}
+          />
 
-            <Route path='/Verify' element={ <Verify/>}/>
+          <Route
+            path='/Signup'
+            element={!User ? <Signup /> : <Navigate to='/' />}
+          />
 
-            <Route path='/stock' element={ <Stock/>}/>
+          <Route path='/Verify' element={<Verify />} />
 
-            <Route path='/Admin' element={User ? <Admin/> : <Navigate to='/Login' />}/>
+          <Route path='/stock' element={<Stock />} />
 
-            <Route path="/about" element={<About/>}/>
+          <Route
+            path='/Admin'
+            element={User ? <Admin /> : <Navigate to='/Login' />}
+          />
 
-            <Route path="/Enquiry" element={<Enquiry/>}/>
+          <Route path='/about' element={<About />} />
 
-            <Route path="/Sales" element={User ? <Sales/> : <Navigate to='/Login' />}/>
-          </Routes>
+          <Route path='/Stats' element={<Stats />} />
+
+          <Route path='/Enquiry' element={<Enquiry />} />
+
+          <Route
+            path='/Sales'
+            element={User ? <Sales /> : <Navigate to='/Login' />}
+          />
+        </Routes>
       </BrowserRouter>
     </div>
   );

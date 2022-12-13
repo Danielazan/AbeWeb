@@ -1,262 +1,329 @@
-import React,{useEffect,useState} from 'react'
-	import {Table,Button,Form,Badge } from "react-bootstrap";
-	import axios from 'axios';
-	import {useProductContext} from "Hook/useProduct"
-	import {MdEdit,MdDelete} from "react-icons/md"
-	import {IoIosAddCircle} from "react-icons/io"
-	import pic from "Assets/Images/pic15.svg"
-	import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Table, Button, Form } from "react-bootstrap";
+import axios from "axios";
+import { useProductContext } from "Hook/useProduct";
+import { MdEdit, MdDelete } from "react-icons/md";
+import { IoIosAddCircle } from "react-icons/io";
+import pic from "Assets/Images/pic15.svg";
+import { Link } from "react-router-dom";
 
-	
-	function Main() {
-	
-		const {Product, dispatch} = useProductContext()
-		const [materials, setmaterials] = useState([])
-		const [customer, setCustomer] = useState([])
-		const [loading, setLoading] = useState()
-		const [badge, setBadge] = useState(false)
-		const [qty, setQty] = useState("")
-		const [available, setAvailable] = useState(0)
-		const [price, setPrice] = useState(false)
-		const [newprice, setNewprice] = useState("")
-		const [visibility, setVisibility] = useState(false)
-		const navigate = useNavigate();
+function Main() {
+  const { Product, dispatch } = useProductContext();
+  const [materials, setmaterials] = useState([]);
+  const [customer, setCustomer] = useState([]);
+  const [loading, setLoading] = useState();
+  const [badge, setBadge] = useState(false);
+  const [qty, setQty] = useState("");
+  const [available, setAvailable] = useState(0);
+  const [price, setPrice] = useState(false);
+  const [newprice, setNewprice] = useState("");
+  const [visibility, setVisibility] = useState(false);
 
-	    useEffect(() => {
-	        GetProducts()
-	    },[dispatch])
-	
+  useEffect(() => {
+    GetProducts();
+  }, [dispatch]);
 
-	    function getp(){
-	
-	        axios.get("https://abe-api.onrender.com/api/products/roofing")
-	            .then(res=>{
+  function getp() {
+    axios
+      .get("https://abe-api.onrender.com/api/products/roofing")
+      .then((res) => {
+        setmaterials(res.data.materialss);
 
-				setmaterials(res.data.materialss)
+        console.log(res.data.materialss);
 
-				console.log(res.data.materialss)
+        dispatch({ type: "ROOFING", payload: materials });
+      });
+  }
 
-				dispatch({type:"ROOFING",payload:materials})
+  function handleDelete(item) {
+    axios
+      .delete(`https://abe-api.onrender.com/api/material/${item._id}`)
 
-	        })
+      .then((res) => {
+        console.log(res);
 
-	    }
+        console.log(customer);
 
+        console.log(item);
 
-		function handleDelete(item){
+        dispatch({ type: "DELETE Product", payload: res.data });
+      });
+  }
 
-			axios.delete(`https://abe-api.onrender.com/api/material/${item._id}`)
-			
-				.then((res)=>{
-					console.log(res)
+  function handleEdit(id) {
+    let data = {
+      Price: newprice,
+    };
+    axios
+      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
+      .then((res) => {
+        console.log(res);
+      });
+  }
 
-					console.log(customer)
+  function handleMaterialCustomer(name, item) {
+    setLoading(true);
 
-					console.log(item)
+    let data = {
+      materialName: name,
+    };
 
-					dispatch({type:"DELETE Product",payload:res.data})
+    axios
+      .patch("https://abe-api.onrender.com/api/materialCustomer", data)
+      .then((res) => {
+        setCustomer(res.data.customers);
 
-				})
-			
-		}
+        setAvailable(item);
 
-		function handleEdit(id){
-		
-			let data={
-				Price:newprice
-			}
-			axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
-				.then(res=>{
-					console.log(res)
-				})
-		}
+        setLoading(false);
+      });
 
-		function handleMaterialCustomer(name,item){
+    setVisibility(true);
+  }
 
-			setLoading(true)
+  const GetProducts = async () => {
+    const name = "roofing";
+    const url = `https://abe-api.onrender.com/api/products/${name}`;
+    const response = await axios.get(url);
 
-			let data={
-				
-				materialName:name
-			}
+    const json = await response.data.materialss;
 
-			axios.patch("https://abe-api.onrender.com/api/materialCustomer",data)
-				.then(res=>{
-					setCustomer(res.data.customers)
+    dispatch({ type: "SET Product", payload: json });
+  };
 
-					setAvailable(item)
+  const submitBatch = async (id) => {
+    console.log(id);
 
-					setLoading(false)
+    let data = {
+      NewBatch: qty,
+    };
+    await axios
+      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
+      .then((res) => {
+        console.log(res);
+      });
 
-				})
-				
-			setVisibility(true)
-		}
-	
+    await axios
+      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
+      .then((res) => {
+        console.log(res);
+      });
 
-	    const GetProducts = async ()=>{
-	        const name = "roofing"
-	        const url = `https://abe-api.onrender.com/api/products/${name}`
-	        const response =await axios.get(url)
-	
-	        const json = await response.data.materialss
-	
-	        dispatch({type:"SET Product", payload:json})
-	
-	    }
+    setQty("");
+  };
 
-		const submitBatch= async (id)=>{
-			console.log(id)
+  return (
+    <React.Fragment>
+      <div style={{ color: "#fda07e" }}>
+        <h2 className='main-h2 pb-3'>Collections</h2>
 
-			let data={
-				NewBatch:qty
-			}
-			await axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
-				.then(res=>{
-					console.log(res)
-				})
+        <Link to='/Stats' style={{ color: "#fda07e" }}>
+          Stats
+        </Link>
+        <section>
+          <h4 style={{ color: "#fda07e" }}>New Widget</h4>
 
-				await axios.patch(`https://abe-api.onrender.com/api/material/${id}`,data)
-				.then(res=>{
-					console.log(res)
-				})
+          <p style={{ color: "#fda07e" }}>Map Through News API</p>
 
-			setQty("")
+          <Table
+            bordered
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              color: "#fda07e",
+              borderColor: "#fda07e",
+            }}
+            className='main'
+            border={1}
+          >
+            <thead>
+              <tr>
+                <th style={{ textAlign: "center" }}>Name</th>
+                <th style={{ textAlign: "center" }}>Collection Name</th>
+                <th style={{ textAlign: "center" }}>Price</th>
+                <th style={{ textAlign: "center" }}>Quantity Sold</th>
+                <th style={{ textAlign: "center" }}>New Batch</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {Product &&
+                Product.map((item) => {
+                  return (
+                    <tr key={item._id}>
+                      <td>
+                        <button
+                          style={{ textAlign: "start" }}
+                          onClick={() =>
+                            handleMaterialCustomer(item.Name, item.TotalBatch)
+                          }
+                          className='name-btn px-2 rounded-1 py-2'
+                        >
+                          {item.Name}
+                        </button>
+                      </td>
 
-		}
+                      <td style={{ textAlign: "center" }}>
+                        {item.collectionName}
+                      </td>
 
-		const MStock = async ()=>{
-			navigate('/Stock')
-		}
-	    
-	  return (
-	    <React.Fragment>
-	      <div style={{color:"#fda07e"}}>
-		  		<div className='mainSpan'> 
-					<h2 className='main-h2 '>Materials</h2>
-					<Button 
-					variant="success" 
-					text="success"
-					onClick={MStock}>Stock Mangement</Button>
-				</div>
-			<hr/>
-	       
-	       <section>
-	            <Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
-	                <thead>
-	                    <tr>
-	                        <th style={{textAlign:"center"}}>Name</th>
-	                        <th style={{textAlign:"center"}}>Collection Name</th>
-	                        <th style={{textAlign:"center"}}>Price</th>
-	                        <th style={{textAlign:"center"}}>Quantity Sold</th>
-							<th style={{textAlign:"center"}}>New Batch</th>
-							<th></th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    {
-	                        Product && Product.map(item=>{
-	                            return(
-	                                <tr key={item._id}>
+                      {/* Price Change */}
 
-	                                    <td>
-											<button style={{textAlign:"start"}} onClick={()=>handleMaterialCustomer(item.Name,item.TotalBatch)} className='name-btn px-2 rounded-1 py-2'>{item.Name}</button>
-										</td>
+                      <td style={{ textAlign: "center" }}>
+                        {item.Price}
 
-	                                    <td style={{textAlign:"center"}}>{item.collectionName}</td>
+                        <div className={price ? "vis" : "notvis"}>
+                          <Form.Control
+                            type='number'
+                            value={newprice}
+                            onChange={(e) => setNewprice(e.target.value)}
+                            className='format bg-transparent mt-2'
+                            style={{ borderColor: "#fda07e", color: "#fda07e" }}
+                            placeholder='Set Price'
+                          />
 
-										{/* Price Change */}
+                          <Button
+                            className='border-0 my-2 w-50'
+                            onClick={() => handleEdit(item._id)}
+                            style={{
+                              backgroundColor: "#fda07e",
+                              color: "#210440",
+                            }}
+                          >
+                            Change
+                          </Button>
+                        </div>
+                      </td>
 
-	                                    <td style={{textAlign:"center"}}>
-											{item.Price}
+                      <td style={{ textAlign: "center" }}>
+                        {item.QuantitiySold.map((ted) => {
+                          return ted.totalAmount;
+                        })}
+                      </td>
 
-											<div className={price ? "vis" : "notvis"}>
-												<Form.Control type='number' value={newprice} onChange={(e)=> setNewprice(e.target.value)} className='format bg-transparent mt-2' style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Set Price"/>
+                      {/* Quantity Change */}
 
-												<Button className='border-0 my-2 w-50' onClick={()=>handleEdit(item._id)} style={{backgroundColor:"#fda07e",color:"#210440"}}>Change</Button>
-											</div>
-										</td>
+                      <td>
+                        <Button
+                          onClick={() => setBadge(!badge)}
+                          className='border-0 w-100'
+                          style={{
+                            backgroundColor: "#fda07e",
+                            color: "#210440",
+                          }}
+                        >
+                          <IoIosAddCircle size='1.5em' /> Batch
+                        </Button>
 
-	                                    <td style={{textAlign:"center"}}>{item.QuantitiySold.map(ted=>{
-											return ted.totalAmount
-										})}</td>
+                        <div className={badge ? "vis" : "notvis"}>
+                          <Form.Control
+                            type='number'
+                            className='format bg-transparent mt-4'
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                            style={{ borderColor: "#fda07e", color: "#fda07e" }}
+                            placeholder='Quantity Added'
+                          />
 
-										{/* Quantity Change */}
+                          <Button
+                            className='border-0 my-2 w-50'
+                            onClick={() => submitBatch(item._id)}
+                            style={{
+                              backgroundColor: "#fda07e",
+                              color: "#210440",
+                            }}
+                          >
+                            Add
+                          </Button>
+                        </div>
+                      </td>
 
-										<td>
-											<Button onClick={()=> setBadge(!badge)} className='border-0 w-100' style={{backgroundColor:"#fda07e",color:"#210440"}}><IoIosAddCircle size="1.5em"/> Batch</Button>
+                      <td>
+                        <div className='d-flex justify-content-around flex-lg-row flex-column'>
+                          <MdEdit
+                            title='Edit Price'
+                            size={"2em"}
+                            onClick={() => setPrice(!price)}
+                            style={{ color: "rgb(49, 210, 242)" }}
+                          />
+                          <MdDelete
+                            title='Delete'
+                            className='mt-3 ms-4 mt-lg-0'
+                            size={"2em"}
+                            onClick={() => handleDelete(item)}
+                            style={{ color: "rgb(220, 53, 69)" }}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </Table>
+        </section>
 
-											<div className={badge ? "vis" : "notvis"}>
-												<Form.Control type='number' className='format bg-transparent mt-4' value={qty} onChange={(e)=> setQty(e.target.value)} style={{borderColor:"#fda07e",color:"#fda07e"}} placeholder="Quantity Added"/>
+        {loading ? (
+          <center>
+            <img src={pic} height='100px' alt='Loading...' />{" "}
+          </center>
+        ) : null}
 
-												<Button className='border-0 my-2 w-50' onClick={()=>submitBatch(item._id)} style={{backgroundColor:"#fda07e",color:"#210440"}}>Add</Button>
-											</div>
-										</td>
+        {
+          <div className={visibility ? "vis" : "notvis"}>
+            <div className='d-flex justify-content-between'>
+              <h2 className='mt-4'>Customer Details Table</h2>
+              <h4 className='mt-4' style={{ color: "#fda07e" }}>
+                Available Quantity : {available}
+              </h4>
+            </div>
 
-										<td>
-											<div className="d-flex justify-content-around flex-lg-row flex-column">
-												<MdEdit title='Edit Price' size={"2em"} onClick={()=>setPrice(!price)} style={{color:"rgb(49, 210, 242)"}}/>
-												<MdDelete title='Delete' className='mt-3 ms-4 mt-lg-0' size={"2em"} onClick={()=> handleDelete(item)} style={{color:"rgb(220, 53, 69)"}}/>
-											</div>
-										</td>
+            <Table
+              bordered
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                color: "#fda07e",
+                borderColor: "#fda07e",
+              }}
+              className='main'
+              border={1}
+            >
+              <thead>
+                <tr>
+                  <th style={{ textAlign: "center" }}>Customer Name</th>
+                  <th style={{ textAlign: "center" }}>Phone No</th>
+                  <th style={{ textAlign: "center" }}>Amount Paid</th>
+                  <th style={{ textAlign: "center" }}>Site Location</th>
+                  <th style={{ textAlign: "center" }}>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {customer.map((person, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>
+                        {person.FirstName} {person.LastName}
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        {person.PhoneNumber}
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        {person.TotalAmountPaid}
+                      </td>
+                      <td>{person.SiteLocation}</td>
+                      <td style={{ textAlign: "center" }}>
+                        {person.itemsBought.quantity}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+        }
+      </div>
+    </React.Fragment>
+  );
+}
 
-	                                </tr>
-	                            )
-	                        })
-	                    }
-	                </tbody>
-	            </Table>
-	       </section>
-
-
-		   {loading ? <center><img src={pic} height="100px" alt="Loading..."/> </center> : null}
-			
-			{
-				<div className={visibility ? "vis" : "notvis"}>
-					<div className='d-flex justify-content-between'>
-						<h2 className='mt-4'>Customer Details Table</h2>
-						<h4 className='mt-4' style={{color:"#fda07e"}}>Available Quantity : {available}</h4>
-					</div>
-
-					<Table bordered style={{width:"100%",borderCollapse:"collapse",color:"#fda07e",borderColor:"#fda07e"}} className='main' border={1} >
-					<thead>
-	                    <tr>
-	                        <th style={{textAlign:"center"}}>Customer Name</th>
-	                        <th style={{textAlign:"center"}}>Phone No</th>
-	                        <th style={{textAlign:"center"}}>Amount Paid</th>
-							<th style={{textAlign:"center"}}>Site Location</th>
-	                        <th style={{textAlign:"center"}}>Quantity</th>
-	                    </tr>
-	                </thead>
-					<tbody>
-						{
-							customer.map((person,index)=>{
-								return(
-									<tr key={index}>
-										<td>{person.FirstName} {person.LastName}</td>
-										<td style={{textAlign:"center"}}>{person.PhoneNumber}</td>
-										<td style={{textAlign:"center"}}>{person.TotalAmountPaid}</td>
-										<td>{person.SiteLocation}</td>
-										<td style={{textAlign:"center"}}>{person.itemsBought.quantity}</td>
-									</tr>
-								)
-							})
-						}
-					</tbody>
-						
-					</Table>
-				</div>
-			}
-			
-	
-
-	
-
-	      </div>
-	    </React.Fragment>
-	  )
-	}
-	
-
-	export default Main
-
+export default Main;
