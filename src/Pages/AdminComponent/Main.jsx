@@ -117,14 +117,18 @@ function Main() {
       <div style={{ color: "#fda07e" }}>
         <h2 className='main-h2 pb-3'>Collections</h2>
 
-        <Link to='/Stats' style={{ color: "#fda07e" }}>
-          Stats
+        <Link to='/Stats' style={{ textDecoration: "none" }}>
+          <Button
+            className='border-0 mb-4'
+            style={{
+              backgroundColor: "#fda07e",
+              color: "#210440",
+            }}
+          >
+            Click here to view statistics of products
+          </Button>
         </Link>
         <section>
-          <h4 style={{ color: "#fda07e" }}>New Widget</h4>
-
-          <p style={{ color: "#fda07e" }}>Map Through News API</p>
-
           <Table
             bordered
             style={{

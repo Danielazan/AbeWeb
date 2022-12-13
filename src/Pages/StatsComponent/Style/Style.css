@@ -21,3 +21,9 @@
 .tb-row {
   border-bottom: 2px solid #2e180e;
 }
+
+.trun{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -152,19 +152,19 @@ function Sales() {
                   }}
                   className='py-3 text-center'
                 >
-                  <Col xl={3} xs={3}>
+                  <Col xl={3} xs={3} className='trun'>
                     Product
                   </Col>
-                  <Col xl={2} xs={3}>
+                  <Col xl={2} xs={3} className='trun'>
                     Price
                   </Col>
-                  <Col xl={3} xs={2}>
+                  <Col xl={3} xs={2} className='trun'>
                     Quantity
                   </Col>
-                  <Col xl={2} xs={2}>
+                  <Col xl={2} xs={2} className='trun'>
                     Sold At
                   </Col>
-                  <Col xl={2} xs={2}>
+                  <Col xl={2} xs={2} className='trun'>
                     Add
                   </Col>
                 </Row>
@@ -228,9 +228,15 @@ function Sales() {
                 style={{ borderBlock: "3px solid #2e180e", fontWeight: "600" }}
                 className='py-3'
               >
-                <Col xs={4}>Description</Col>
-                <Col xs={3}>Price</Col>
-                <Col xs={3}>Sold At</Col>
+                <Col xs={4} className='trun'>
+                  Description
+                </Col>
+                <Col xs={3} className='trun'>
+                  Price
+                </Col>
+                <Col xs={3} className='trun'>
+                  Sold At
+                </Col>
                 <Col xs={2}></Col>
               </Row>
 
