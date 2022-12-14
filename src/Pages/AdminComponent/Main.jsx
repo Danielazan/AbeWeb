@@ -128,6 +128,20 @@ function Main() {
             Click here to view statistics of products
           </Button>
         </Link>
+
+        <br />
+
+        <Link to='/Table' style={{ textDecoration: "none" }}>
+          <Button
+            className='border-0 mb-4'
+            style={{
+              backgroundColor: "#fda07e",
+              color: "#210440",
+            }}
+          >
+            Table
+          </Button>
+        </Link>
         <section>
           <Table
             bordered

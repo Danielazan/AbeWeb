@@ -12,6 +12,7 @@ import Verify from "Pages/VerificationComponent/Verify"
 import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 import Stock from "Pages/ManageStock"
 import Stats from 'Pages/StatsComponent/Stats';
+import Table from 'Pages/TableComponent/Table';
 
 import UserHook from "Hook/UserHook";
 
@@ -37,6 +38,8 @@ function App() {
           <Route path='/Verify' element={<Verify />} />
 
           <Route path='/stock' element={<Stock />} />
+
+          <Route path='/Table' element={<Table />} />
 
           <Route
             path='/Admin'
