@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef,forwardRef ,useImperativeHandle} from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Navbar from "Components/NavbarSales";
 import axios from "axios";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 import "./Style/Style.css";
-function Table() {
+const Table = forwardRef((reff)=> {
 
   const [customers, setCustomers] = useState([]);
+  const PDFReport = useRef(null);
 
   useEffect(() => {
     axios.get("https://abe-api.onrender.com/api/customer")
@@ -18,11 +20,21 @@ function Table() {
   
   }, [])
   
+  const handleExportWithFunction = (event) => {
+    savePDF(PDFReport.current, { paperSize: "A2" });
+  }
+
+//   useImperativeHandle(reff,() => {
+//     handleExportWithFunction  () 
+//    }
+//  )
   return (
     <React.Fragment>
       <Container fluid className='Tab'>
         <Navbar />
-        <Container >
+        <Button onClick={handleExportWithFunction}>Download Report</Button>
+        <Container  ref={PDFReport}>
+             
           <Row
             style={{
               borderBlock: "3px solid #2e180e",
@@ -81,6 +93,6 @@ function Table() {
       </Container>
     </React.Fragment>
   );
-}
+})
 
 export default Table;

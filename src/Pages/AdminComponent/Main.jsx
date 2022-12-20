@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { Table, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useProductContext } from "Hook/useProduct";
@@ -6,6 +6,8 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { IoIosAddCircle } from "react-icons/io";
 import pic from "Assets/Images/pic15.svg";
 import { Link } from "react-router-dom";
+import Report from "Pages/TableComponent/Table"
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 function Main() {
   const { Product, dispatch } = useProductContext();
@@ -18,6 +20,7 @@ function Main() {
   const [price, setPrice] = useState(false);
   const [newprice, setNewprice] = useState("");
   const [visibility, setVisibility] = useState(false);
+  
 
   useEffect(() => {
     GetProducts();
@@ -112,6 +115,18 @@ function Main() {
     setQty("");
   };
 
+  const PDFReport = useRef(null);
+
+  const childref = useRef()
+
+  const [Report, setReport] = useState(null)
+
+  const handlereport= async ()=>{
+    await setReport(<Report reff={childref}/>)
+
+    childref.current.handleExportWithFunction()    
+  }
+
   return (
     <React.Fragment>
       <div style={{ color: "#fda07e" }}>
@@ -134,6 +149,7 @@ function Main() {
         <Link to='/Table' style={{ textDecoration: "none" }}>
           <Button
             className='border-0 mb-4'
+           
             style={{
               backgroundColor: "#fda07e",
               color: "#210440",
@@ -339,7 +355,9 @@ function Main() {
             </Table>
           </div>
         }
+          
       </div>
+      
     </React.Fragment>
   );
 }

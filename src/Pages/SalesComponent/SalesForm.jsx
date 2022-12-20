@@ -34,7 +34,7 @@ function SalesForm(props) {
       itemsBought: iteam,
     };
 
-    axios.post("https://abe-api.onrender.com/api/customer", data).then((res) => {
+    await axios.post("https://abe-api.onrender.com/api/customer", data).then((res) => {
       console.log(res.data);
     });
 
