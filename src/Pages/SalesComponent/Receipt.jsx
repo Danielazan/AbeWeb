@@ -25,7 +25,7 @@ function Receipt(props) {
         <h2 className='py-4'>Sales Invoice</h2>
 
         <p className='text-black'>
-          Customer : {props.datar && props.datar.FirstName}{" "}
+          Customer : {props.datar && props.datar.FirstName}
           {props.datar && props.datar.LastName}
         </p>
         <p className='text-black'>

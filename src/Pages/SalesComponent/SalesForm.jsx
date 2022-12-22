@@ -5,6 +5,7 @@ import axios from "axios";
 import { TiArrowBack } from "react-icons/ti";
 import IteamHook from "Hook/IteamHook";
 import UserHook from "Hook/UserHook";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import Receipt from "./Receipt";
 
 function SalesForm(props) {
@@ -37,13 +38,11 @@ function SalesForm(props) {
       itemsBought: iteam,
     };
 
-    setDatar(data);
+    setDatar(data)
 
-    axios
-      .post("https://abe-api.onrender.com/api/customer", data)
-      .then((res) => {
-        console.log(res.data);
-      });
+    await axios.post("https://abe-api.onrender.com/api/customer", data).then((res) => {
+      console.log(res.data);
+    });
 
     await iteam.map((ele) => {
       const id = ele._id;
