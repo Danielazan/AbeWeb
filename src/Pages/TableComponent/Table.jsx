@@ -23,6 +23,8 @@ function Table() {
       <Container fluid className='Tab'>
         <Navbar />
         <Container >
+
+        <h1>Purchases</h1>
           <Row
             style={{
               borderBlock: "3px solid #2e180e",

@@ -5,6 +5,7 @@ import axios from "axios";
 import { TiArrowBack } from "react-icons/ti";
 import IteamHook from "Hook/IteamHook";
 import UserHook from "Hook/UserHook";
+import Receipt from "./Receipt";
 
 function SalesForm(props) {
   const [first, setFirst] = useState("");
@@ -15,6 +16,8 @@ function SalesForm(props) {
   const [invoice, setInvoice] = useState("");
   const [payment, setPayment] = useState("");
   const [sales, setSales] = useState("");
+  const [supplied, setSupplied] = useState(false);
+  const [datar, setDatar] = useState(null);
 
   const { iteam } = IteamHook();
   console.log(iteam);
@@ -29,32 +32,36 @@ function SalesForm(props) {
       InvoiceNumber: invoice,
       PaymentMethod: payment,
       RecievedBy: sales,
+      supplied:supplied,
       TotalAmountPaid: props.price,
       itemsBought: iteam,
     };
 
-    axios.post("https://abe-api.onrender.com/api/customer", data).then((res) => {
-      console.log(res.data);
-    });
+    setDatar(data);
+
+    axios
+      .post("https://abe-api.onrender.com/api/customer", data)
+      .then((res) => {
+        console.log(res.data);
+      });
 
     await iteam.map((ele) => {
       const id = ele._id;
 
-  
-            const sky ={
-                Quantity:ele.quantity
-            }
-            const hell = {
-                MaterialName:ele.item,
-                StockOut:ele.quantity
-            }
+      const sky = {
+        Quantity: ele.quantity,
+      };
+      const hell = {
+        MaterialName: ele.item,
+        StockOut: ele.quantity,
+      };
 
-            axios.patch(`https://abe-api.onrender.com/api/Batch/${id}`,sky)
+      axios.patch(`https://abe-api.onrender.com/api/Batch/${id}`, sky);
 
-            axios.post(`https://abe-api.onrender.com/api/upCreate/${id}`,hell)
+      axios.post(`https://abe-api.onrender.com/api/upCreate/${id}`, hell);
 
-            console.log(hell)
-        })
+      console.log(hell);
+    });
 
     setLast("");
 
@@ -170,6 +177,35 @@ function SalesForm(props) {
                   />
                 </Form.Group>
 
+                <Form.Group>
+                  <Form.Label className='form-label'>Supply Status</Form.Label>
+
+                  <div className='mb-3'>
+                    <Form.Check
+                      inline
+                      label='Supplied'
+                      name='supplied'
+                      type='radio'
+                      value={true}
+                      defaultChecked
+                      onClick={(e) =>
+                        setSupplied(e.target.value, console.log(supplied))
+                      }
+                    />
+
+                    <Form.Check
+                      inline
+                      label='Not Supplied'
+                      name='supplied'
+                      type='radio'
+                      value={false}
+                      onClick={(e) =>
+                        setSupplied(e.target.value, console.log(supplied))
+                      }
+                    />
+                  </div>
+                </Form.Group>
+
                 <Form.Group
                   className='mb-3'
                   controlId='exampleForm.ControlInput1'
@@ -222,6 +258,11 @@ function SalesForm(props) {
               </Form>
             </Container>
           </Col>
+
+          <div className='just'>
+            <Receipt datar={datar} />
+          </div>
+
           <Col xs={12} lg={3}></Col>
         </Row>
       </Container>
