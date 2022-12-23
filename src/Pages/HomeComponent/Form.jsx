@@ -42,7 +42,10 @@ function Forms() {
 
                             <BsPhone size={"3em"}/>
 
-                            <h5 className='my-3'>+1 (555) 123-4567</h5>
+                            <h5 className='my-3'>080-367-778-66,
+                                <br />
+                                091-340-839-67
+                            </h5>
 
                         </Form>
 

@@ -40,8 +40,34 @@
     background-color: rgb(255, 255, 230);
 }
 
+.Receipt{
+    background-color: white;
+    padding: 2rem;
+    border: 2px solid black;
+    width: 60%;
+}
+
+.rec-row{
+    border-block: 2px solid black;
+}
+
+.just{
+    display: flex;
+    justify-content: center;
+}
+
+.Receipt h2{
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
 @media screen and (max-width:980px) {
     .check{
         border-inline:none
+    }
+
+    .Receipt{
+    
+        width: 100%;
     }
 }
