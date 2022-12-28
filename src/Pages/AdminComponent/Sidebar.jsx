@@ -6,7 +6,7 @@ import { HiUsers } from "react-icons/hi";
 import axios from "axios";
 import { useCollectionContext } from "Hook/CollectionHook";
 import { useProductContext } from "Hook/useProduct";
-import { async } from "q";
+
 
 function SideBar2() {
   const [show, setShow] = useState(false);
@@ -119,8 +119,10 @@ function SideBar2() {
     await axios
       .patch(`https://abe-api.onrender.com/api/Supplied/${id}`)
       .then((res) => {
-        setSupply(res.data);
+        // setSupply(res.data);
+        console.log(res.data)
       });
+    //console.log(id)
   };
 
   return (

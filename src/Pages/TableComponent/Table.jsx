@@ -35,8 +35,7 @@ const Table = forwardRef((reff) => {
     <React.Fragment>
       <Container fluid className='Tab'>
         <Navbar />
-        <Container ref={PDFReport}>
-          <Container className='d-flex justify-content-between'>
+        <Container className='d-flex justify-content-between'>
             <h1>Purchases</h1>
             <Button
               className='border-0'
@@ -46,7 +45,7 @@ const Table = forwardRef((reff) => {
               Download Report
             </Button>
           </Container>
-
+        <Container ref={PDFReport}>
           <Row
             style={{
               borderBlock: "3px solid #2e180e",

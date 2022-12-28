@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useRef } from "react";
-import { Table, Button, Form } from "react-bootstrap";
+import { Table, Button, Form,Container } from "react-bootstrap";
 import axios from "axios";
 import { useProductContext } from "Hook/useProduct";
 import { MdEdit, MdDelete } from "react-icons/md";
@@ -132,32 +132,35 @@ function Main() {
       <div style={{ color: "#fda07e" }}>
         <h2 className='main-h2 pb-3'>Collections</h2>
 
-        <Link to='/Stats' style={{ textDecoration: "none" }}>
-          <Button
-            className='border-0 mb-4'
-            style={{
-              backgroundColor: "#fda07e",
-              color: "#210440",
-            }}
-          >
-            Click here to view statistics of products
-          </Button>
-        </Link>
+          <Container  className='d-flex justify-content-between'>
+                  <Link to='/Stats' style={{ textDecoration: "none" }}>
+                  <Button
+                    className='border-0 mb-4'
+                    style={{
+                      backgroundColor: "#fda07e",
+                      color: "#210440",
+                    }}
+                  >
+                    Click here to view statistics of products
+                  </Button>
+                </Link>
 
-        <br />
+                
 
-        <Link to='/Table' style={{ textDecoration: "none" }}>
-          <Button
-            className='border-0 mb-4'
-           
-            style={{
-              backgroundColor: "#fda07e",
-              color: "#210440",
-            }}
-          >
-            Table
-          </Button>
-        </Link>
+                <Link to='/Table' style={{ textDecoration: "none"}}>
+                  <Button
+                    className='border-0 mb-4'
+                  
+                    style={{
+                      backgroundColor: "rgb(26, 20, 100)",
+                      color: "white"
+                    }}
+                  >
+                    View Sales Report
+                  </Button>
+                </Link>
+          </Container>
+        
         <section>
           <Table
             bordered
