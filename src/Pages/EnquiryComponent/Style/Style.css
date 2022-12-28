@@ -7,5 +7,19 @@
 .Enquiry{
     min-height: 100vh;
     background-color:ivory;
-    padding-top: 20vh;
+    padding-top: 100px;
+}
+
+.nan{
+   backdrop-filter: blur(12px);
+   min-height: 100vh;
+}
+
+.custom-row:hover{
+    background-color: rgb(253, 253, 222);
+    cursor: pointer;
+}
+
+.diff{
+    border-right: 2px solid rgb(26, 20, 100);
 }

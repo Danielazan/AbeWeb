@@ -132,35 +132,47 @@ function Main() {
       <div style={{ color: "#fda07e" }}>
         <h2 className='main-h2 pb-3'>Collections</h2>
 
-          <Container  className='d-flex justify-content-between'>
-                  <Link to='/Stats' style={{ textDecoration: "none" }}>
-                  <Button
-                    className='border-0 mb-4'
-                    style={{
-                      backgroundColor: "#fda07e",
-                      color: "#210440",
-                    }}
-                  >
-                    Click here to view statistics of products
-                  </Button>
-                </Link>
+        <Container className='d-flex flex-lg-row flex-column justify-content-between'>
+          <Link to='/Stats' style={{ textDecoration: "none" }}>
+            <Button
+              className='border-0 mb-4'
+              style={{
+                backgroundColor: "#fda07e",
+                color: "#210440",
+                fontWeight: "700",
+              }}
+            >
+              Click here to view statistics of products
+            </Button>
+          </Link>
 
-                
+          <Link to='/EnquiryTable' style={{ textDecoration: "none" }}>
+            <Button
+              className='border-0 mb-4'
+              style={{
+                backgroundColor: "#fda07e",
+                color: "#210440",
+                fontWeight: "700",
+              }}
+            >
+              Customer Enquiries
+            </Button>
+          </Link>
 
-                <Link to='/Table' style={{ textDecoration: "none"}}>
-                  <Button
-                    className='border-0 mb-4'
-                  
-                    style={{
-                      backgroundColor: "rgb(26, 20, 100)",
-                      color: "white"
-                    }}
-                  >
-                    View Sales Report
-                  </Button>
-                </Link>
-          </Container>
-        
+          <Link to='/Table' style={{ textDecoration: "none" }}>
+            <Button
+              className='border-0 mb-4'
+              style={{
+                backgroundColor: "#fda07e",
+                color: "#210440",
+                fontWeight: "700",
+              }}
+            >
+              View Sales Report
+            </Button>
+          </Link>
+        </Container>
+
         <section>
           <Table
             bordered
@@ -358,9 +370,7 @@ function Main() {
             </Table>
           </div>
         }
-          
       </div>
-      
     </React.Fragment>
   );
 }
