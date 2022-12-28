@@ -10,6 +10,7 @@ import About from "Pages/AdminComponent/Admin"
 import Sales from "Pages/SalesComponent/Sales"
 import Verify from "Pages/VerificationComponent/Verify"
 import Enquiry from 'Pages/EnquiryComponent/Enquiry';
+import EnquiryTable from 'Pages/EnquiryComponent/EnquiryTable';
 import Stock from "Pages/ManageStock"
 import Stats from 'Pages/StatsComponent/Stats';
 import Table from 'Pages/TableComponent/Table';
@@ -51,6 +52,8 @@ function App() {
           <Route path='/Stats' element={<Stats />} />
 
           <Route path='/Enquiry' element={<Enquiry />} />
+
+          <Route path='/EnquiryTable' element={<EnquiryTable />} />
 
           <Route
             path='/Sales'
