@@ -7,12 +7,15 @@ import {RiCloseLine} from "react-icons/ri"
 import {GiClick} from "react-icons/gi"
 import {IoMdContact} from "react-icons/io"
 import axios from "axios";
+import { BsWhatsapp } from "react-icons/bs";
+import ReactWhatsapp from 'react-whatsapp';
 
 function EnquiryTable() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [customers, setCustomers] = useState([])
   const [customerInfo, setCustomerInfo] = useState(null)
   const [show, setShow] = useState(false)
+  const [customerInfos, setcustomerInfos] = useState("+2348104231935")
 
   useEffect(() => {
     
@@ -24,6 +27,7 @@ function EnquiryTable() {
   }, [])
   
   const customerData = (phone,method,enquiry,name)=> {
+    setcustomerInfos("+234" +phone)
 
     let data={no:phone,meth:method,en:enquiry,person:name}
 
@@ -164,6 +168,14 @@ function EnquiryTable() {
                 <p style={{ color: "rgb(26, 20, 100)" }} className='mt-5 ps-5'>
                   Enquiries: {customerInfo && customerInfo.en}
                 </p>
+
+                  <Container className=' d-flex justify-content-between' >
+                  <h4 style={{ color: "rgb(26, 20, 100)" }}>send Whatsapp Message</h4>
+                    <ReactWhatsapp number={customerInfos} message="Hello World!!! +{customerInfo.no}">
+                      <BsWhatsapp/>
+                    </ReactWhatsapp>
+                  </Container>
+                  
               </div>
             </Col>
           </Row>
@@ -173,4 +185,4 @@ function EnquiryTable() {
   );
 }
 
-export default EnquiryTable;
+export default EnquiryTable; 

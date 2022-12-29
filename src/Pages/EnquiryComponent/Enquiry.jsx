@@ -3,7 +3,8 @@ import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import "./Style/Style.css"
 import Navbar from 'Components/NavbarSales'
 import axios from 'axios'
-import ReactWhatsapp from 'react-whatsapp';
+
+
 
 
 function Enquiry() {
@@ -67,10 +68,7 @@ function Enquiry() {
             </Col>
             <Col xs={1} xl={3}></Col>
         </Row>
-        <Row>
-        <h2>Send whatsapp message</h2>
-        <ReactWhatsapp number="+2348104241934" message="Hello World!!!" />
-        </Row>
+        
         </Container>
     </React.Fragment>
   )

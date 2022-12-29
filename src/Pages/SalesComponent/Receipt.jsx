@@ -1,8 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
+import { Br, Cut, Line, Printer, Text,  render } from 'react-thermal-printer';
 
 function Receipt(props) {
+
   console.log(props.datar);
   return (
     <React.Fragment>
