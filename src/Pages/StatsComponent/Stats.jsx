@@ -7,8 +7,8 @@ import StatsTable from "./StatsTable";
 
 function Stats() {
   const [materials, setmaterials] = useState([]);
-  const [rfno, setRfno] = useState("");
-  const [stock, setStock] = useState("");
+  const [rfno, setRfno] = useState();
+  const [stock, setStock] = useState();
   const [prod, setProd] = useState("");
   const [iden, setIden] = useState("");
   const [stats, setStats] = useState([])
