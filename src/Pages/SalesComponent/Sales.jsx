@@ -10,6 +10,7 @@ import SalesForm from "./SalesForm";
 import { TbCurrencyNaira } from "react-icons/tb";
 import IteamHook from "Hook/IteamHook";
 import { useProductContext } from "Hook/useProduct";
+import base from "base.js"
 import UserHook from "Hook/UserHook";
 
 function Sales() {
@@ -29,7 +30,7 @@ function Sales() {
   }
 
   useEffect(() => {
-    axios.get(`https://abe-api.onrender.com/api/material`).then((res) => {
+    axios.get(`${base.url}/api/material`).then((res) => {
       const json = res.data;
 
       dispatch({ type: "SET Product", payload: json });
