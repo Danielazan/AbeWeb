@@ -3,8 +3,7 @@ import {Container,Row,Col,Button,Form} from "react-bootstrap"
 import "./Style/Style.css"
 import Navbar from 'Components/NavbarSales'
 import axios from 'axios'
-
-
+import base from "base.js";
 
 
 function Enquiry() {
@@ -23,10 +22,9 @@ function Enquiry() {
             WalkInOrCall:meth
         }
 
-        axios.post("https://abe-api.onrender.com/api/enquiry",data)
-            .then(res=>{
-                console.log(res)
-            })
+        axios.post(`${base.url}/api/enquiry`, data).then((res) => {
+          console.log(res);
+        });
 
     }
   return (

@@ -9,6 +9,8 @@ import {IoMdContact} from "react-icons/io"
 import axios from "axios";
 import { BsWhatsapp } from "react-icons/bs";
 import ReactWhatsapp from 'react-whatsapp';
+import base from "base.js";
+
 
 function EnquiryTable() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -19,10 +21,9 @@ function EnquiryTable() {
 
   useEffect(() => {
     
-    axios.get("https://abe-api.onrender.com/api/enquiry")
-    .then(res=>{
-      setCustomers(res.data)
-    })
+    axios.get(`${base.url}/api/enquiry`).then((res) => {
+      setCustomers(res.data);
+    });
     
   }, [])
   

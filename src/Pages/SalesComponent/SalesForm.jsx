@@ -6,6 +6,7 @@ import { TiArrowBack } from "react-icons/ti";
 import IteamHook from "Hook/IteamHook";
 import UserHook from "Hook/UserHook";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import base from "base.js";
 import Receipt from "./Receipt";
 
 function SalesForm(props) {
@@ -40,7 +41,7 @@ function SalesForm(props) {
 
     setDatar(data)
 
-    await axios.post("https://abe-api.onrender.com/api/customer", data).then((res) => {
+    await axios.post(`${base.url}/api/customer`, data).then((res) => {
       console.log(res.data);
     });
 
@@ -55,9 +56,9 @@ function SalesForm(props) {
         StockOut: ele.quantity,
       };
 
-      axios.patch(`https://abe-api.onrender.com/api/Batch/${id}`, sky);
+      axios.patch(`${base.url}/api/Batch/${id}`, sky);
 
-      axios.post(`https://abe-api.onrender.com/api/upCreate/${id}`, hell);
+      axios.post(`${base.url}/api/upCreate/${id}`, hell);
 
       console.log(hell);
     });

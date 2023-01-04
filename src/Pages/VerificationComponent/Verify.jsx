@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Style/Style.css";
 import UserHook from "Hook/UserHook";
 import axios from "axios";
+import base from "base.js";
 import { useNavigate } from "react-router-dom";
 
 function Verify() {
@@ -17,7 +18,7 @@ function Verify() {
   const handleverify = async (e) => {
     e.preventDefault();
 
-    const url = "https://abe-api.onrender.com/api/verifyOtp";
+    const url = `${base.url}/api/verifyOtp`;
     const userId = User.id;
     const obj = { userId, otp };
 

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useProductContext } from "Hook/useProduct";
 import { useCollectionContext } from "Hook/CollectionHook";
+import base from "base.js";
+
 
 function Sectiontrack() {
   const [name, setName] = useState("");
@@ -22,7 +24,7 @@ function Sectiontrack() {
   }
 
   const getp = async () => {
-    const url = "https://abe-api.onrender.com/api/products";
+    const url = `${base.url}/api/products`;
 
     const response = await axios.get(url);
 
@@ -45,7 +47,7 @@ function Sectiontrack() {
     };
     console.log(data);
     axios
-      .post("https://abe-api.onrender.com/api/material", data)
+      .post(`${base.url}/api/material`, data)
 
       .then((res) => {
         console.log(res);

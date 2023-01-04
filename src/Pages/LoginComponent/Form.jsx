@@ -7,6 +7,7 @@ import axios from "axios"
 import pic from "Assets/Images/pic17.svg"
 import UserHook from "Hook/UserHook"
 import { useNavigate } from 'react-router-dom';
+import base from "base.js";
 
 
 function From() {
@@ -28,7 +29,7 @@ function From() {
 
         e.preventDefault()
 
-        const url ="https://abe-api.onrender.com/api/login"
+        const url = `${base.url}api/login`;
 
         const obj= {email,password}
 

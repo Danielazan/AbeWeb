@@ -1,12 +1,13 @@
-import React, { useEffect, useState,useRef } from "react";
-import { Table, Button, Form,Container } from "react-bootstrap";
+import React, { useEffect, useState, useRef } from "react";
+import { Table, Button, Form, Container } from "react-bootstrap";
 import axios from "axios";
 import { useProductContext } from "Hook/useProduct";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoIosAddCircle } from "react-icons/io";
 import pic from "Assets/Images/pic15.svg";
 import { Link } from "react-router-dom";
-import Report from "Pages/TableComponent/Table"
+import Report from "Pages/TableComponent/Table";
+import base from "base.js";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 function Main() {
@@ -20,7 +21,6 @@ function Main() {
   const [price, setPrice] = useState(false);
   const [newprice, setNewprice] = useState("");
   const [visibility, setVisibility] = useState(false);
-  
 
   useEffect(() => {
     GetProducts();
@@ -28,7 +28,7 @@ function Main() {
 
   function getp() {
     axios
-      .get("https://abe-api.onrender.com/api/products/roofing")
+      .get(`${base.url}/products/roofing`)
       .then((res) => {
         setmaterials(res.data.materialss);
 
@@ -40,7 +40,7 @@ function Main() {
 
   function handleDelete(item) {
     axios
-      .delete(`https://abe-api.onrender.com/api/material/${item._id}`)
+      .delete(`${base.url}/api/material/${item._id}`)
 
       .then((res) => {
         console.log(res);
@@ -58,7 +58,7 @@ function Main() {
       Price: newprice,
     };
     axios
-      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
+      .patch(`${base.url}/api/material/${id}`, data)
       .then((res) => {
         console.log(res);
       });
@@ -71,22 +71,20 @@ function Main() {
       materialName: name,
     };
 
-    axios
-      .patch("https://abe-api.onrender.com/api/materialCustomer", data)
-      .then((res) => {
-        setCustomer(res.data.customers);
+    axios.patch(`${base.url}/api/materialCustomer`, data).then((res) => {
+      setCustomer(res.data.customers);
 
-        setAvailable(item);
+      setAvailable(item);
 
-        setLoading(false);
-      });
+      setLoading(false);
+    });
 
     setVisibility(true);
   }
 
   const GetProducts = async () => {
     const name = "roofing";
-    const url = `https://abe-api.onrender.com/api/products/${name}`;
+    const url = `${base.url}/api/products/${name}`;
     const response = await axios.get(url);
 
     const json = await response.data.materialss;
@@ -100,32 +98,28 @@ function Main() {
     let data = {
       NewBatch: qty,
     };
-    await axios
-      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
-      .then((res) => {
-        console.log(res);
-      });
+    await axios.patch(`${base.url}/api/material/${id}`, data).then((res) => {
+      console.log(res);
+    });
 
-    await axios
-      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
-      .then((res) => {
-        console.log(res);
-      });
+    await axios.patch(`${base.url}/api/material/${id}`, data).then((res) => {
+      console.log(res);
+    });
 
     setQty("");
   };
 
   const PDFReport = useRef(null);
 
-  const childref = useRef()
+  const childref = useRef();
 
-  const [Report, setReport] = useState(null)
+  const [Report, setReport] = useState(null);
 
-  const handlereport= async ()=>{
-    await setReport(<Report reff={childref}/>)
+  const handlereport = async () => {
+    await setReport(<Report reff={childref} />);
 
-    childref.current.handleExportWithFunction()    
-  }
+    childref.current.handleExportWithFunction();
+  };
 
   return (
     <React.Fragment>
@@ -288,16 +282,17 @@ function Main() {
                       </td>
 
                       <td>
-                        <div className='d-flex justify-content-around flex-lg-row flex-column'>
+                        <div className='d-flex flex-column flex-lg-row'>
                           <MdEdit
                             title='Edit Price'
                             size={"2em"}
                             onClick={() => setPrice(!price)}
                             style={{ color: "rgb(49, 210, 242)" }}
                           />
+
                           <MdDelete
                             title='Delete'
-                            className='mt-3 ms-4 mt-lg-0'
+                            className='mt-3 ms-lg-4 mt-lg-0'
                             size={"2em"}
                             onClick={() => handleDelete(item)}
                             style={{ color: "rgb(220, 53, 69)" }}
