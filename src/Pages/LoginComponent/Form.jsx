@@ -29,7 +29,7 @@ function From() {
 
         e.preventDefault()
 
-        const url = `${base.url}api/login`;
+        const url = `${base.url}/api/login`;
 
         const obj= {email,password}
 
