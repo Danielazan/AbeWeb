@@ -22,6 +22,7 @@
     "react-thermal-printer": "^0.11.0",
     "react-to-print": "^2.14.10",
     "react-whatsapp": "^0.3.0",
+    "thermalprinter": "^0.3.10",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },

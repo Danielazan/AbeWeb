@@ -41,13 +41,17 @@ function Stats() {
 
   // Post Request For Stats
 
-  function handleForm() {
+const handleForm= async ()=> {
     let data = {
       RefNo: rfno,
       MaterialName: prod,
       StockIn: stock,
     };
-    axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
+    await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
+      console.log(res.data);
+    });
+
+    await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
       console.log(res.data);
     });
 
