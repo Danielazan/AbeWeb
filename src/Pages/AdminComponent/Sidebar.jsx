@@ -32,7 +32,7 @@ function SideBar2() {
   }, [dispatch]);
 
   const handleGet = async (name) => {
-    const url = `https://abe-api.onrender.com/api/products/${name}`;
+    const url = `${base.url}/api/products/${name}`;
 
     const response = await axios.get(url);
 
