@@ -9,6 +9,8 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Navbar from "Components/NavbarSales";
 import axios from "axios";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import base from "base.js";
+
 
 import "./Style/Style.css";
 const Table = forwardRef((reff) => {
@@ -16,7 +18,7 @@ const Table = forwardRef((reff) => {
   const PDFReport = useRef(null);
 
   useEffect(() => {
-    axios.get("https://abe-api.onrender.com/api/customer").then((res) => {
+    axios.get(`${base.url}/api/customer`).then((res) => {
       console.log(res.data);
 
       setCustomers(res.data);

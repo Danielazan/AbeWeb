@@ -6,6 +6,8 @@ import { HiUsers } from "react-icons/hi";
 import axios from "axios";
 import { useCollectionContext } from "Hook/CollectionHook";
 import { useProductContext } from "Hook/useProduct";
+import base from "base.js";
+
 
 
 function SideBar2() {
@@ -40,7 +42,7 @@ function SideBar2() {
   };
 
   const getp = async () => {
-    const url = "https://abe-api.onrender.com/api/products";
+    const url = `${base.url}/api/products`;
 
     const response = await axios.get(url);
 
@@ -57,15 +59,13 @@ function SideBar2() {
     let data = {
       collectionName: colname,
     };
-    axios
-      .post("https://abe-api.onrender.com/api/products", data)
-      .then((res) => {
-        console.log(res);
-      });
+    axios.post(`${base.url}/api/products`, data).then((res) => {
+      console.log(res);
+    });
   }
 
   function getUsers() {
-    axios.get("https://abe-api.onrender.com/api/users").then((res) => {
+    axios.get(`${base.url}/api/users`).then((res) => {
       setUsers(res.data);
     });
   }
@@ -80,11 +80,9 @@ function SideBar2() {
     };
 
     if (pass) {
-      await axios
-        .patch("https://abe-api.onrender.com/api/user", data)
-        .then((res) => {
-          console.log(res);
-        });
+      await axios.patch(`${base.url}/api/user`, data).then((res) => {
+        console.log(res);
+      });
     }
 
     console.log(mail);
@@ -100,28 +98,24 @@ function SideBar2() {
     };
     alert("this person will no longer be a sales person");
 
-    await axios
-      .patch("https://abe-api.onrender.com/api/ReUser", data)
-      .then((res) => {
-        console.log(res);
-      });
+    await axios.patch(`${base.url}/api/ReUser`, data).then((res) => {
+      console.log(res);
+    });
 
     console.log(mail);
   };
 
   function notSupplied() {
-    axios.get("https://abe-api.onrender.com/api/NotSupplied").then((res) => {
+    axios.get(`${base.url}/api/NotSupplied`).then((res) => {
       setSupply(res.data);
     });
   }
 
   const addSupply = async (id) => {
-    await axios
-      .patch(`https://abe-api.onrender.com/api/Supplied/${id}`)
-      .then((res) => {
-        // setSupply(res.data);
-        console.log(res.data)
-      });
+    await axios.patch(`${base.url}/api/Supplied/${id}`).then((res) => {
+      // setSupply(res.data);
+      console.log(res.data);
+    });
     //console.log(id)
   };
 

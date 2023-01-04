@@ -7,6 +7,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import pic from "Assets/Images/pic15.svg";
 import { Link } from "react-router-dom";
 import Report from "Pages/TableComponent/Table";
+import base from "base.js";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 function Main() {
@@ -27,7 +28,7 @@ function Main() {
 
   function getp() {
     axios
-      .get("https://abe-api.onrender.com/api/products/roofing")
+      .get(`${base.url}/products/roofing`)
       .then((res) => {
         setmaterials(res.data.materialss);
 
@@ -39,7 +40,7 @@ function Main() {
 
   function handleDelete(item) {
     axios
-      .delete(`https://abe-api.onrender.com/api/material/${item._id}`)
+      .delete(`${base.url}/api/material/${item._id}`)
 
       .then((res) => {
         console.log(res);
@@ -57,7 +58,7 @@ function Main() {
       Price: newprice,
     };
     axios
-      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
+      .patch(`${base.url}/api/material/${id}`, data)
       .then((res) => {
         console.log(res);
       });
@@ -70,22 +71,20 @@ function Main() {
       materialName: name,
     };
 
-    axios
-      .patch("https://abe-api.onrender.com/api/materialCustomer", data)
-      .then((res) => {
-        setCustomer(res.data.customers);
+    axios.patch(`${base.url}/api/materialCustomer`, data).then((res) => {
+      setCustomer(res.data.customers);
 
-        setAvailable(item);
+      setAvailable(item);
 
-        setLoading(false);
-      });
+      setLoading(false);
+    });
 
     setVisibility(true);
   }
 
   const GetProducts = async () => {
     const name = "roofing";
-    const url = `https://abe-api.onrender.com/api/products/${name}`;
+    const url = `${base.url}/api/products/${name}`;
     const response = await axios.get(url);
 
     const json = await response.data.materialss;
@@ -99,17 +98,13 @@ function Main() {
     let data = {
       NewBatch: qty,
     };
-    await axios
-      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
-      .then((res) => {
-        console.log(res);
-      });
+    await axios.patch(`${base.url}/api/material/${id}`, data).then((res) => {
+      console.log(res);
+    });
 
-    await axios
-      .patch(`https://abe-api.onrender.com/api/material/${id}`, data)
-      .then((res) => {
-        console.log(res);
-      });
+    await axios.patch(`${base.url}/api/material/${id}`, data).then((res) => {
+      console.log(res);
+    });
 
     setQty("");
   };

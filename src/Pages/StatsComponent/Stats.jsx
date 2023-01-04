@@ -4,6 +4,8 @@ import "./Style/Style.css";
 import Navbar from "Components/NavbarSales";
 import axios from "axios";
 import StatsTable from "./StatsTable";
+import base from "base.js";
+
 
 function Stats() {
   const [materials, setmaterials] = useState([]);
@@ -18,7 +20,7 @@ function Stats() {
   }, []);
 
   function getp() {
-    axios.get("https://abe-api.onrender.com/api/material").then((res) => {
+    axios.get(`${base.url}/api/material`).then((res) => {
       setmaterials(res.data);
     });
   }
@@ -30,11 +32,11 @@ function Stats() {
     setProd(name);
     setIden(id);
 
-    axios.get(`https://abe-api.onrender.com/api/batches/${name}`).then((res) => {
+    axios.get(`${base.url}/api/batches/${name}`).then((res) => {
       console.log(res.data);
 
-      setStats(res.data)
-    })
+      setStats(res.data);
+    });
   }
 
   // Post Request For Stats
@@ -45,11 +47,9 @@ function Stats() {
       MaterialName: prod,
       StockIn: stock,
     };
-    axios
-      .post(`https://abe-api.onrender.com/api/batch/${iden}`, data)
-      .then((res) => {
-        console.log(res.data);
-      });
+    axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
+      console.log(res.data);
+    });
 
     setRfno("");
     setStock("");

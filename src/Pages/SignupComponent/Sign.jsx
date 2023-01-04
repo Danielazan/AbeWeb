@@ -6,6 +6,8 @@ import UserHook from "Hook/UserHook"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 import Navbar2 from "Components/Navbar2"
+import base from "base.js";
+
 
 function Sign() {
   const [name, setName] = useState("")
@@ -22,7 +24,7 @@ function Sign() {
   const handleSubmit=async (e)=>{
     e.preventDefault()
 
-    const url ="https://abe-api.onrender.com/api/signup"
+    const url = `${base.url}/api/signup`;
 
     const obj= {name,email,password}
 
