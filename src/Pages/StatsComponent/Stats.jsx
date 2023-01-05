@@ -45,15 +45,13 @@ const handleForm= async ()=> {
     let data = {
       RefNo: rfno,
       MaterialName: prod,
-      StockIn: stock,
+      StockIn: Number(stock),
     };
     await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
       console.log(res.data);
     });
 
-    await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
-      console.log(res.data);
-    });
+   
 
     setRfno("");
     setStock("");
