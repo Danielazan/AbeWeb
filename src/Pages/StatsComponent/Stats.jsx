@@ -47,6 +47,15 @@ const handleForm= async ()=> {
       MaterialName: prod,
       StockIn: Number(stock),
     };
+
+    const datum = await {
+      Stock : Number(stock),
+      M_Name:prod
+
+    }
+
+    await axios.patch(`${base.url}/api/batches/${prod}`, datum)
+    await axios.post(`${base.url}/api/Tbatch/${iden}`,datum )
     await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
       console.log(res.data);
     });
