@@ -54,7 +54,7 @@ const handleForm= async ()=> {
 
     }
 
-    await axios.patch(`${base.url}/api/batches/${prod}`, datum)
+    await axios.patch(`${base.url}/api/batches/${iden}`, datum)
     await axios.post(`${base.url}/api/Tbatch/${iden}`,datum )
     await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
       console.log(res.data);
