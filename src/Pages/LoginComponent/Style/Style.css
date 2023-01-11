@@ -25,7 +25,8 @@
 
 .side-ban{
     height: 100vh;
-    background:url(Assets/Images/pic11.jpg);
+    /* background:url(Assets/Images/pic19.png); */
+    background: linear-gradient(to bottom, rgba(2, 23, 50, 0.445) 0%, rgb(2, 23, 50) 100%),url(Assets/Images/pic19.png) ;
     background-repeat: no-repeat;
     background-size: cover;
 }
