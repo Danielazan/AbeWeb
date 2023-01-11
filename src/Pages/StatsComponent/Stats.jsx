@@ -4,6 +4,7 @@ import "./Style/Style.css";
 import Navbar from "Components/NavbarSales";
 import axios from "axios";
 import StatsTable from "./StatsTable";
+import pic from "Assets/Images/pic17.svg"
 import base from "base.js";
 
 
@@ -14,6 +15,8 @@ function Stats() {
   const [prod, setProd] = useState("");
   const [iden, setIden] = useState("");
   const [stats, setStats] = useState([])
+  const [isLoading, setisLoading]= useState(false)
+  const [Error, setError] = useState(null)
 
   useEffect(() => {
     getp();
@@ -42,28 +45,62 @@ function Stats() {
   // Post Request For Stats
 
 const handleForm= async ()=> {
-    let data = {
-      RefNo: rfno,
-      MaterialName: prod,
-      StockIn: Number(stock),
-    };
-
-    const datum = await {
-      Stock : Number(stock),
-      M_Name:prod
-
+    try{
+      if (stock === ""){
+        setError("please fill all fields with the correct details")
+    
+        throw new Error('please fill all fields with the correct details');  
+        
+      }
+    console.log(stock)
+      setisLoading(true)
+        let data = {
+          RefNo: rfno,
+          MaterialName: prod,
+          StockIn: Number(stock),
+        };
+    
+        const datum = await {
+          Stock : Number(stock),
+          M_Name:prod
+    
+        }
+    
+        await axios.patch(`${base.url}/api/batches/${iden}`, datum)
+        .catch(datum =>{
+          setisLoading(false)
+          console.log(datum.response.data.error)
+    
+          setError(datum.response.data.error)
+      })
+        await axios.post(`${base.url}/api/Tbatch/${iden}`,datum )
+        .catch(datum =>{
+          setisLoading(false)
+          console.log(datum.response.data.error)
+    
+          setError(datum.response.data.error)
+      })
+        await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
+          console.log(res.data);
+        }).catch(datum =>{
+          setisLoading(false)
+          console.log(datum.response.data.error)
+    
+          setError(datum.response.data.error)
+      });
+    
+       
+    
+        setRfno("");
+        setStock("");
+    
+        setisLoading(false)
+    
+        window.location.reload(true)
     }
-
-    await axios.patch(`${base.url}/api/batches/${iden}`, datum)
-    await axios.post(`${base.url}/api/Tbatch/${iden}`,datum )
-    await axios.post(`${base.url}/api/batch/${iden}`, data).then((res) => {
-      console.log(res.data);
-    });
-
-   
-
-    setRfno("");
-    setStock("");
+    catch (error){
+      return error ? setError("please fill all fields with the correct details") : null 
+    }
   }
 
   return (
@@ -155,6 +192,7 @@ const handleForm= async ()=> {
                       value={rfno}
                       onChange={(e) => setRfno(e.target.value)}
                       placeholder='Enter Ref Number'
+                      required
                     />
                   </Form.Group>
 
@@ -165,20 +203,39 @@ const handleForm= async ()=> {
                     <Form.Label className='form-label'>Stock In</Form.Label>
 
                     <Form.Control
+                       required
                       type='number'
                       value={stock}
                       onChange={(e) => setStock(e.target.value)}
                       placeholder='Enter Balance'
+                      
                     />
 
                     <div className='d-flex justify-content-center'>
+                    
+                      <img className={` ${isLoading ? "d-block" : "d-none" }  border-0 py-4 `} src={pic} alt='Logging In...' height='100px' />
+                    
                       <Button
+                        disabled={isLoading}
                         style={{ backgroundColor: "rgb(26, 20, 100)" }}
                         className='w-75 mt-5 border-0 py-4 rounded-pill mb-5'
                         onClick={handleForm}
                       >
                         Submit
                       </Button>
+
+                      {Error && (
+                          <p
+                            style={{
+                              backgroundColor: "rgb(248, 215, 218)",
+                              color: "rgb(132, 32, 41)",
+                              border: "2px solid rgb(245, 194, 199)",
+                            }}
+                            className='py-2 rounded-2 ps-2 mt-3'
+                          >
+                            {Error}
+                          </p>
+                        )}
                     </div>
                   </Form.Group>
                 </Form>
