@@ -185,7 +185,6 @@ function Main() {
                 <th style={{ textAlign: "center" }}>Collection Name</th>
                 <th style={{ textAlign: "center" }}>Price</th>
                 <th style={{ textAlign: "center" }}>Quantity Sold</th>
-                <th style={{ textAlign: "center" }}>New Batch</th>
                 <th></th>
               </tr>
             </thead>
@@ -246,7 +245,7 @@ function Main() {
 
                       {/* Quantity Change */}
 
-                      <td>
+                      {/* <td>
                         <Button
                           onClick={() => setBadge(!badge)}
                           className='border-0 w-100'
@@ -279,7 +278,7 @@ function Main() {
                             Add
                           </Button>
                         </div>
-                      </td>
+                      </td> */}
 
                       <td>
                         <div className='d-flex flex-column flex-lg-row'>

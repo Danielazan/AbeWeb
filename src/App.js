@@ -13,6 +13,7 @@ import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 import EnquiryTable from 'Pages/EnquiryComponent/EnquiryTable';
 import Stock from "Pages/ManageStock"
 import Stats from 'Pages/StatsComponent/Stats';
+import Order from 'Pages/SalesComponent/Order';
 import Table from 'Pages/TableComponent/Table';
 
 import UserHook from "Hook/UserHook";
@@ -41,6 +42,8 @@ function App() {
           <Route path='/stock' element={<Stock />} />
 
           <Route path='/Table' element={<Table />} />
+
+          <Route path='/Order' element={<Order />} />
 
           <Route
             path='/Admin'

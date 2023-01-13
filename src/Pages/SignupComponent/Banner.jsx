@@ -14,7 +14,7 @@ function Banner() {
                   <h1>Start Turning Your Ideas To Reality.</h1>
 
                   <p className='mt-5'>
-                  Create a free account and get full access to all features for 30-days. No credit card needed. Trusted by over 4,000 professionals.
+                  Create a free account and become a worker. No credit card needed.
                   </p>
 
                   <Container className='d-flex'>   

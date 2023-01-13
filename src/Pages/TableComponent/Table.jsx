@@ -86,24 +86,26 @@ const Table = forwardRef((reff) => {
                     {custom.FirstName} {custom.LastName}
                   </Col>
 
-                  <Col xs={2} className='text-center trun'>
+                  <Col xs={2} className='text-center'>
                     {custom.PhoneNumber}
                   </Col>
 
                   <Col xs={3}>
                     {custom.itemsBought.map((item) => (
-                      <ul>
-                        <li style={{ listStyleType: "disc" }}>
-                          {item.item} x {item.quantity}
-                        </li>
-                      </ul>
+                      <div className="d-flex justify-content-center">
+                        <ul>
+                          <li style={{ listStyleType: "disc" }}>
+                            {item.item} x {item.quantity}
+                          </li>
+                        </ul>
+                      </div>
                     ))}
                   </Col>
 
                   <Col xs={1} className='text-center'>
                     {custom.TotalAmountPaid}
                   </Col>
-                  <Col xs={2} className='text-center trun'>
+                  <Col xs={2} className='text-center'>
                     {custom.InvoiceNumber}
                   </Col>
                   <Col xs={1} className='text-center'>

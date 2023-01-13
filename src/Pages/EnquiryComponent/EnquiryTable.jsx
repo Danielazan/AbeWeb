@@ -170,8 +170,8 @@ function EnquiryTable() {
                   Enquiries: {customerInfo && customerInfo.en}
                 </p>
 
-                  <Container className=' d-flex justify-content-between' >
-                  <h4 style={{ color: "rgb(26, 20, 100)" }}>send Whatsapp Message</h4>
+                  <Container className='ps-5 d-flex justify-content-between' >
+                  <h4 style={{ color: "rgb(26, 20, 100)" }}>Send Whatsapp Message</h4>
                     <ReactWhatsapp number={customerInfos} message="Hello World!!! +{customerInfo.no}">
                       <BsWhatsapp/>
                     </ReactWhatsapp>
