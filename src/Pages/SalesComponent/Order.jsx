@@ -64,7 +64,7 @@ function Order(props) {
             </section>
           </div>
 
-          <Container className='Order-main mt-3 rounded-1'>
+          <Container className='Order-main mt-3 p-4 rounded-1'>
             <Row>
               <Col xs={12} lg={6}>
                 <div>
@@ -73,7 +73,7 @@ function Order(props) {
                       backgroundColor: "rgb(2, 23, 50)",
                       color: "white",
                     }}
-                    className='p-2'
+                    className='p-2 rounded-1'
                   >
                     VENDOR
                   </h5>
@@ -146,7 +146,7 @@ function Order(props) {
                       backgroundColor: "rgb(2, 23, 50)",
                       color: "white",
                     }}
-                    className='p-2'
+                    className='p-2 rounded-1'
                   >
                     CUSTOMER
                   </h5>
@@ -224,7 +224,7 @@ function Order(props) {
               Shopping Terms
             </h2>
 
-            <Table striped bordered hover>
+            <Table striped bordered hover className="Order-table">
               <thead>
                 <tr>
                   <th className='text-center'>S/N</th>

@@ -6,6 +6,7 @@
 
 .admin{
     min-height: 100vh;
+    padding-top: 100px;
 }
 
 .menu{
@@ -15,7 +16,7 @@
 
 .widget{
     position: fixed;
-    top: 100px;
+    top: 200px;
     left: 1;
     z-index: 3;
     border-left: 1px solid x#ffffff;
@@ -81,10 +82,24 @@ li{
 .main{
     overflow-y: scroll;
     height: 50vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.main-2{
+    overflow-y: scroll;
+    min-height: fit-content;
+    max-height: 50vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.main-2-row:nth-child(even){
+    background-color: rgb(243, 243, 243);
+    color: rgb(1, 152, 122);
+    border-block: 1px solid rgb(168, 168, 168);
 }
 
 .card-body{
-    background-color:rgba(65, 77, 87, 0.552);
+    background-color:rgba(255, 255, 255, 0.552);
 }
 
 .card-line{
@@ -94,30 +109,38 @@ li{
 }
 
 .admin{
-    background-color: #210440;
+    background-color: #ffffff;
 }
 
 .format::placeholder{
-    color: #fda07e;
-}
-
-.format{
-    color: red;
+    color: rgb(1, 152, 122);
 }
 
 #acc{
     width: 20px;
 }
 
+.data-row{
+    color: black;
+}
+
+.data-row:nth-child(even){
+    background-color:rgb(243, 243, 243);
+    color: rgb(1, 152, 122);
+    border-block: 1px solid rgb(168, 168, 168);
+
+}
+
 .name-btn{
     background-color: transparent;
-    color: #fda07e;
+    color:rgb(1, 152, 122);
     width: 100%;
+    font-weight: 600;
     border: none;
 }
 
 .name-btn:hover{
-    background-color: #fda07e46;
+    background-color: rgba(1, 152, 122, 0.362);
     transition: 0.2s ease-in;
 }
 
@@ -144,7 +167,7 @@ li{
         top: 0;
         left: 0;
         z-index: 1;
-        border-left: 1px solid rgb(146, 158, 164);
+        margin-top: 50px;
     }
 }
 

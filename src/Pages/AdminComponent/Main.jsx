@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Table, Button, Form, Container } from "react-bootstrap";
+import { Table, Button, Form, Container,ButtonGroup } from "react-bootstrap";
 import axios from "axios";
 import { useProductContext } from "Hook/useProduct";
 import { MdEdit, MdDelete } from "react-icons/md";
@@ -123,68 +123,86 @@ function Main() {
 
   return (
     <React.Fragment>
-      <div style={{ color: "#fda07e" }}>
+      <div style={{ color: "rgb(1, 152, 122)" }}>
         <h2 className='main-h2 pb-3'>Collections</h2>
 
-        <Container className='d-flex flex-lg-row flex-column justify-content-between'>
-          <Link to='/Stats' style={{ textDecoration: "none" }}>
+        <Container className='my-3'>
+          <ButtonGroup aria-label='Basic example'>
             <Button
-              className='border-0 mb-4'
               style={{
-                backgroundColor: "#fda07e",
-                color: "#210440",
+                backgroundColor: "rgb(1, 152, 122)",
+                color: "white",
                 fontWeight: "700",
               }}
+              className='border-0'
             >
-              Click here to view statistics of products
+              <Link
+                to='/Stats'
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Click here to view statistics of products
+              </Link>
             </Button>
-          </Link>
 
-          <Link to='/EnquiryTable' style={{ textDecoration: "none" }}>
             <Button
-              className='border-0 mb-4'
               style={{
-                backgroundColor: "#fda07e",
-                color: "#210440",
+                backgroundColor: "rgb(1, 152, 122)",
+                color: "white",
                 fontWeight: "700",
               }}
+              className='border-0'
             >
-              Customer Enquiries
+              <Link
+                to='/EnquiryTable'
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Customer Enquiries
+              </Link>
             </Button>
-          </Link>
 
-          <Link to='/Table' style={{ textDecoration: "none" }}>
             <Button
-              className='border-0 mb-4'
               style={{
-                backgroundColor: "#fda07e",
-                color: "#210440",
+                backgroundColor: "rgb(1, 152, 122)",
+                color: "white",
                 fontWeight: "700",
               }}
+              className='border-0'
             >
-              View Sales Report
+              <Link
+                to='/Table'
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                View Sales Report
+              </Link>
             </Button>
-          </Link>
+          </ButtonGroup>
         </Container>
 
         <section>
-          <Table
-            bordered
+          <table
             style={{
               width: "100%",
               borderCollapse: "collapse",
-              color: "#fda07e",
-              borderColor: "#fda07e",
+              borderColor: "none",
             }}
             className='main'
-            border={1}
           >
             <thead>
-              <tr>
-                <th style={{ textAlign: "center" }}>Name</th>
-                <th style={{ textAlign: "center" }}>Collection Name</th>
-                <th style={{ textAlign: "center" }}>Price</th>
-                <th style={{ textAlign: "center" }}>Quantity Sold</th>
+              <tr
+                style={{ backgroundColor: "rgb(1, 152, 122)", color: "white"}}
+              >
+                <th style={{ textAlign: "center" }} className='py-2'>
+                  Name
+                </th>
+                <th style={{ textAlign: "center" }} className='py-2'>
+                  Collection Name
+                </th>
+                <th style={{ textAlign: "center" }} className='py-2'>
+                  Price
+                </th>
+                <th style={{ textAlign: "center" }} className='py-2'>
+                  Quantity Sold
+                </th>
                 <th></th>
               </tr>
             </thead>
@@ -192,14 +210,14 @@ function Main() {
               {Product &&
                 Product.map((item) => {
                   return (
-                    <tr key={item._id}>
+                    <tr key={item._id} className='data-row'>
                       <td>
                         <button
                           style={{ textAlign: "start" }}
                           onClick={() =>
                             handleMaterialCustomer(item.Name, item.TotalBatch)
                           }
-                          className='name-btn px-2 rounded-1 py-2'
+                          className='name-btn ms-lg-2 px-2 rounded-1 py-2'
                         >
                           {item.Name}
                         </button>
@@ -220,16 +238,20 @@ function Main() {
                             value={newprice}
                             onChange={(e) => setNewprice(e.target.value)}
                             className='format bg-transparent mt-2'
-                            style={{ borderColor: "#fda07e", color: "#fda07e" }}
+                            style={{
+                              borderColor: "rgb(1, 152, 122)",
+                              color: "rgb(1, 152, 122)",
+                            }}
                             placeholder='Set Price'
                           />
 
                           <Button
-                            className='border-0 my-2 w-50'
+                            className='border-0 my-2 w-100'
                             onClick={() => handleEdit(item._id)}
                             style={{
-                              backgroundColor: "#fda07e",
-                              color: "#210440",
+                              backgroundColor: "rgb(1, 152, 122)",
+                              color: "white",
+                              fontWeight: "600",
                             }}
                           >
                             Change
@@ -281,12 +303,12 @@ function Main() {
                       </td> */}
 
                       <td>
-                        <div className='d-flex flex-column flex-lg-row'>
+                        <div className='d-flex justify-content-around flex-column flex-lg-row'>
                           <MdEdit
                             title='Edit Price'
                             size={"2em"}
                             onClick={() => setPrice(!price)}
-                            style={{ color: "rgb(49, 210, 242)" }}
+                            style={{ color: "rgb(1, 152, 122)" }}
                           />
 
                           <MdDelete
@@ -302,7 +324,7 @@ function Main() {
                   );
                 })}
             </tbody>
-          </Table>
+          </table>
         </section>
 
         {loading ? (
@@ -315,36 +337,48 @@ function Main() {
           <div className={visibility ? "vis" : "notvis"}>
             <div className='d-flex justify-content-between'>
               <h2 className='mt-4'>Customer Details Table</h2>
-              <h4 className='mt-4' style={{ color: "#fda07e" }}>
+              <h4 className='mt-4' style={{ color: " rgb(1, 152, 122)" }}>
                 Available Quantity : {available}
               </h4>
             </div>
 
-            <Table
-              bordered
+            <table
               style={{
                 width: "100%",
                 borderCollapse: "collapse",
-                color: "#fda07e",
-                borderColor: "#fda07e",
+                color: "black",
               }}
-              className='main'
-              border={1}
+              className='main2'
             >
               <thead>
-                <tr>
-                  <th style={{ textAlign: "center" }}>Customer Name</th>
-                  <th style={{ textAlign: "center" }}>Phone No</th>
-                  <th style={{ textAlign: "center" }}>Amount Paid</th>
-                  <th style={{ textAlign: "center" }}>Site Location</th>
-                  <th style={{ textAlign: "center" }}>Quantity</th>
+                <tr
+                  style={{
+                    backgroundColor: "rgb(1, 152, 122)",
+                    color: "white",
+                  }}
+                >
+                  <th style={{ textAlign: "center" }} className='py-2'>
+                    Customer Name
+                  </th>
+                  <th style={{ textAlign: "center" }} className='py-2'>
+                    Phone No
+                  </th>
+                  <th style={{ textAlign: "center" }} className='py-2'>
+                    Amount Paid
+                  </th>
+                  <th style={{ textAlign: "center" }} className='py-2'>
+                    Site Location
+                  </th>
+                  <th style={{ textAlign: "center" }} className='py-2'>
+                    Quantity
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {customer.map((person, index) => {
                   return (
-                    <tr key={index}>
-                      <td>
+                    <tr key={index} className="main-2-row">
+                      <td className='ps-lg-3 py-4' style={{fontWeight:'600'}}>
                         {person.FirstName} {person.LastName}
                       </td>
                       <td style={{ textAlign: "center" }}>
@@ -361,7 +395,7 @@ function Main() {
                   );
                 })}
               </tbody>
-            </Table>
+            </table>
           </div>
         }
       </div>

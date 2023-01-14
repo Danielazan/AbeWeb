@@ -19,16 +19,16 @@ function Navigate() {
     <React.Fragment>
       <Navbar
         fixed='top'
-        className={`${nav ? "nav-active" : "nav3"} bar `}
+        className={`${nav ? "nav-admin" : "naval"} bar `}
         expand='lg'
-        variant={nav ? "light" : "dark"}
       >
-        <Container className='bg-transparent py-2'>
+        <Container className='py-2'>
           <Link
             Navigate
             to='/'
-            className={`${nav ? "brand-active" : "brand"} ms-3 `}
+            className={`${nav ? "brand-admin" : "brand"} ms-3 `}
           >
+            {" "}
             <h3>
               Authentic Roofing Tiles <br />{" "}
               <span style={{ fontSize: "14px" }}>Intercontinental Limited</span>
@@ -41,14 +41,14 @@ function Navigate() {
                 <Link
                   Navigate
                   to='/Admin'
-                  className={nav ? "link-active" : "link"}
+                  className={nav ? "link-admin" : "link"}
                 >
                   Admin
                 </Link>
               </Nav.Link>
 
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
-                <Link Navigate to='/' className={nav ? "link-active" : "link"}>
+                <Link Navigate to='/' className={nav ? "link-admin" : "link"}>
                   Home
                 </Link>
               </Nav.Link>
@@ -57,7 +57,7 @@ function Navigate() {
                 <Link
                   Navigate
                   to='/Order'
-                  className={nav ? "link-active" : "link"}
+                  className={nav ? "link-admin" : "link"}
                 >
                   Sales
                 </Link>
@@ -67,7 +67,7 @@ function Navigate() {
                 <Link
                   Navigate
                   to='/Enquiry'
-                  className={nav ? "link-active" : "link"}
+                  className={nav ? "link-admin" : "link"}
                 >
                   Enquiry
                 </Link>
@@ -77,7 +77,7 @@ function Navigate() {
                 <Link
                   Navigate
                   to='/Login'
-                  className={nav ? "link-active" : "link"}
+                  className={nav ? "link-admin" : "link"}
                 >
                   Login
                 </Link>
@@ -87,7 +87,7 @@ function Navigate() {
                 <Link
                   Navigate
                   to='/Signup'
-                  className={nav ? "link-active" : "link"}
+                  className={nav ? "link-admin" : "link"}
                 >
                   Signup
                 </Link>
