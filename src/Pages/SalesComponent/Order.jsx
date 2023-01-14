@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Button, Form, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./Style/Style.css";
 import Navbar from "Components/NavbarDark";
 
@@ -37,6 +38,15 @@ function Order(props) {
                 <br />
                 091-340-839-67
               </h6>
+
+              <Link
+                to='/Sales'
+                style={{ textDecoration: "none", color: "red" }}
+              >
+                <Button style={{ backgroundColor: "rgb(2, 23, 50)" }} className="border-0">
+                  Make Purchases
+                </Button>
+              </Link>
             </section>
 
             <section className='mt-5 mt-lg-0'>
@@ -224,7 +234,7 @@ function Order(props) {
               Shopping Terms
             </h2>
 
-            <Table striped bordered hover className="Order-table">
+            <Table striped bordered hover className='Order-table'>
               <thead>
                 <tr>
                   <th className='text-center'>S/N</th>

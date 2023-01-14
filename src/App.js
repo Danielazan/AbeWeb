@@ -43,7 +43,10 @@ function App() {
 
           <Route path='/Table' element={<Table />} />
 
-          <Route path='/Order' element={<Order />} />
+          <Route
+            path='/Order'
+            element={User ? <Order /> : <Navigate to='/Login' />}
+          />
 
           <Route
             path='/Admin'
@@ -54,7 +57,10 @@ function App() {
 
           <Route path='/Stats' element={<Stats />} />
 
-          <Route path='/Enquiry' element={<Enquiry />} />
+          <Route
+            path='/Enquiry'
+            element={User ? <Enquiry/> : <Navigate to='/Login' />}
+          />
 
           <Route path='/EnquiryTable' element={<EnquiryTable />} />
 

@@ -210,8 +210,8 @@ function Main() {
               {Product &&
                 Product.map((item) => {
                   return (
-                    <tr key={item._id} className='data-row'>
-                      <td>
+                    <tr key={item._id} className='data-row '>
+                      <td className="py-3">
                         <button
                           style={{ textAlign: "start" }}
                           onClick={() =>
@@ -303,7 +303,7 @@ function Main() {
                       </td> */}
 
                       <td>
-                        <div className='d-flex justify-content-around flex-column flex-lg-row'>
+                        <div className='d-flex justify-content-around flex-column flex-lg-row py-3'>
                           <MdEdit
                             title='Edit Price'
                             size={"2em"}

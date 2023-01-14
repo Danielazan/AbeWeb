@@ -15,14 +15,16 @@ function SalesForm(props) {
   const [phone, setPhone] = useState("");
   const [driver, setDriver] = useState("");
   const [site, setSite] = useState("");
-  const [invoice, setInvoice] = useState("");
   const [payment, setPayment] = useState("");
   const [sales, setSales] = useState("");
   const [supplied, setSupplied] = useState(false);
   const [datar, setDatar] = useState(null);
+  
 
   const { iteam } = IteamHook();
   console.log(iteam);
+
+    
 
   const submitCustomer = async () => {
     let data = {
@@ -31,7 +33,7 @@ function SalesForm(props) {
       LastName: last,
       PhoneNumber: phone,
       SiteLocation: site,
-      InvoiceNumber: invoice,
+      InvoiceNumber: props.invoice,
       PaymentMethod: payment,
       RecievedBy: sales,
       supplied:supplied,
@@ -70,8 +72,6 @@ function SalesForm(props) {
     setDriver("");
 
     setSite("");
-
-    setInvoice("");
 
     setPayment("");
 
@@ -172,8 +172,8 @@ function SalesForm(props) {
 
                   <Form.Control
                     type='text'
-                    value={invoice}
-                    onChange={(e) => setInvoice(e.target.value)}
+                    value={props.invoice}
+                    readOnly
                     placeholder='Enter Invoice Number'
                   />
                 </Form.Group>
