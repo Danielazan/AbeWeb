@@ -21,6 +21,7 @@ function Sales() {
   const [num, setNum] = useState(1);
   const [sa, setSa] = useState(0);
   const [sold, setSold] = useState(0);
+  const [invoice, setInvoice] = useState(null);
   const { iteam, dispatchItem } = IteamHook();
   const { Product, dispatch } = useProductContext();
   const { User, dispatchU } = UserHook();
@@ -94,8 +95,16 @@ function Sales() {
     handlesold();
   });
 
+  const generateInvoiceNumber = () => {
+    let randomNumber = Math.floor(Math.random() * 999999999) + 100000000;
+    let invoiceNum = "301" + randomNumber;
+    setInvoice(invoiceNum);
+  };
+
   function call() {
     setTog(false);
+
+    generateInvoiceNumber()
   }
 
   function hide() {
@@ -143,7 +152,7 @@ function Sales() {
 
           <Row className='mt-5'>
             <Col xs={12} xl={7} className='check'>
-              <SalesForm tog={tog} hide={hide} clear={clearCart} price={sold} />
+              <SalesForm tog={tog} invoice={invoice} hide={hide} clear={clearCart} price={sold} />
 
               <div className={tog ? "changeDis" : "Dis"}>
                 <Row

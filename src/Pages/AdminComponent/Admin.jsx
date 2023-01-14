@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "Components/Navbar";
+import Navbar from "Components/NavbarAdmin";
 import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
@@ -25,7 +25,7 @@ function Admin() {
     <React.Fragment>
       <Navbar />
 
-      <Container fluid className='admin pt-5'>
+      <Container fluid className='admin'>
         <Row className='pt-5'>
           <Col xs={12} lg={2}>
             <Sidebar />

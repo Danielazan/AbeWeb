@@ -3,14 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { TiArrowBack } from "react-icons/ti";
-import { FaReceipt } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import IteamHook from "Hook/IteamHook";
 import UserHook from "Hook/UserHook";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import base from "base.js";
 import Receipt from "./Receipt";
-import Order from "./Order";
 
 function SalesForm(props) {
   const [first, setFirst] = useState("");
@@ -18,14 +15,16 @@ function SalesForm(props) {
   const [phone, setPhone] = useState("");
   const [driver, setDriver] = useState("");
   const [site, setSite] = useState("");
-  const [invoice, setInvoice] = useState("");
   const [payment, setPayment] = useState("");
   const [sales, setSales] = useState("");
   const [supplied, setSupplied] = useState(false);
   const [datar, setDatar] = useState(null);
+  
 
   const { iteam } = IteamHook();
   console.log(iteam);
+
+    
 
   const submitCustomer = async () => {
     let data = {
@@ -34,7 +33,7 @@ function SalesForm(props) {
       LastName: last,
       PhoneNumber: phone,
       SiteLocation: site,
-      InvoiceNumber: invoice,
+      InvoiceNumber: props.invoice,
       PaymentMethod: payment,
       RecievedBy: sales,
       supplied:supplied,
@@ -74,8 +73,6 @@ function SalesForm(props) {
 
     setSite("");
 
-    setInvoice("");
-
     setPayment("");
 
     setSales("");
@@ -91,16 +88,6 @@ function SalesForm(props) {
           Go Back
         </h5>
 
-        <Link
-          to='/Order'
-          style={{ textDecoration: "none" }}
-          className='text-dark'
-        >
-          <h5>
-            <FaReceipt size='1.5em' />
-            Receipt
-          </h5>
-        </Link>
         <h1>Customer Details</h1>
         <Row>
           <Col xs={12} lg={3}></Col>
@@ -185,8 +172,8 @@ function SalesForm(props) {
 
                   <Form.Control
                     type='text'
-                    value={invoice}
-                    onChange={(e) => setInvoice(e.target.value)}
+                    value={props.invoice}
+                    readOnly
                     placeholder='Enter Invoice Number'
                   />
                 </Form.Group>
@@ -275,10 +262,6 @@ function SalesForm(props) {
 
           <div className='just'>
             <Receipt datar={datar} />
-          </div>
-
-          <div className="d-none">
-            <Order datar={datar} />
           </div>
 
           <Col xs={12} lg={3}></Col>

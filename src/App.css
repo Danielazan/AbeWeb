@@ -28,6 +28,43 @@
   transition: 1s ease;
 }
 
+.nav-admin{
+  background-color: rgb(1, 152, 122);
+  color: white;
+}
+
+.link-admin{
+  color: white;
+}
+
+.link-admin{
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.brand-admin{
+  font-weight: 700;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.brand-admin:hover{
+  font-weight: 700;
+  text-decoration: none;
+  color: rgb(0, 58, 46);
+}
+  
+.link-admin:hover{
+  color: rgb(0, 58, 46);
+  opacity: 1;
+  transition: 0.2s ease;
+}
+
+.naval{
+  background-color: rgb(1, 152, 122);
+}
+
 .mar{
   margin-left: 40%;
 }

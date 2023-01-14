@@ -65,24 +65,32 @@ function Sectiontrack() {
       <section className='widget'>
         <Form className='ms-3 '>
           <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
-            <Form.Label style={{ color: "#fda07e" }}>Name</Form.Label>
+            <Form.Label style={{ color: "rgb(1, 152, 122)" }}>Name</Form.Label>
             <Form.Control
               type='text'
               placeholder='Name Of Product'
               value={name}
               onChange={(e) => setName(e.target.value)}
               className='format bg-transparent py-3 px-3'
-              style={{ borderColor: "#fda07e", color: "#fda07e" }}
+              style={{
+                borderColor: "rgb(1, 152, 122)",
+                color: "rgb(1, 152, 122)",
+              }}
             />
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
-            <Form.Label style={{ color: "#fda07e" }}>Collection</Form.Label>
+            <Form.Label style={{ color: "rgb(1, 152, 122)" }}>
+              Collection
+            </Form.Label>
 
             <Form.Select
               size=''
               className='format bg-transparent py-3 px-3'
-              style={{ borderColor: "#fda07e", color: "#fda07e" }}
+              style={{
+                borderColor: "rgb(1, 152, 122)",
+                color: "rgb(1, 152, 122)",
+              }}
               onChange={handleCol}
             >
               {Collection &&
@@ -91,7 +99,10 @@ function Sectiontrack() {
                     <option
                       key={opt._id}
                       value={opt.collectionName}
-                      style={{ backgroundColor: "#210440", color: "#fda07e" }}
+                      style={{
+                        backgroundColor: "white",
+                        color: "rgb(1, 152, 122)",
+                      }}
                     >
                       {opt.collectionName}
                     </option>
@@ -101,11 +112,14 @@ function Sectiontrack() {
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
-            <Form.Label style={{ color: "#fda07e" }}>Price</Form.Label>
+            <Form.Label style={{ color: "rgb(1, 152, 122)" }}>Price</Form.Label>
             <Form.Control
               type='number'
               rows={3}
-              style={{ borderColor: "#fda07e", color: "#fda07e" }}
+              style={{
+                borderColor: "rgb(1, 152, 122)",
+                color: "rgb(1, 152, 122)",
+              }}
               placeholder='Price Of Item'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -114,14 +128,21 @@ function Sectiontrack() {
           </Form.Group>
         </Form>
 
-
-          <div className="d-flex ms-xl-3 mb-4">
-            <Button className='w-100 border-0 py-3 py-lg-2 rounded-2 me-2' style={{backgroundColor:"#fda07e",color:"#210440"}} onClick={handlePost}>Post</Button>
-           
-          </div>
-          {Error && <p style={{color:"red"}}>{Error}</p>}
-       </section>
-
+        <div className='d-flex ms-xl-3 mb-4'>
+          <Button
+            className='w-100 border-0 py-3 py-lg-2 rounded-2 me-2'
+            style={{
+              backgroundColor: "rgb(1, 152, 122)",
+              color: "white",
+              fontWeight:"600"
+            }}
+            onClick={handlePost}
+          >
+            Post
+          </Button>
+        </div>
+        {Error && <p style={{ color: "red" }}>{Error}</p>}
+      </section>
     </React.Fragment>
   );
 }

@@ -8,8 +8,6 @@ import { useCollectionContext } from "Hook/CollectionHook";
 import { useProductContext } from "Hook/useProduct";
 import base from "base.js";
 
-
-
 function SideBar2() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -122,32 +120,48 @@ function SideBar2() {
   return (
     <React.Fragment>
       <Button variant='none' className='d-lg-none' onClick={handleShow}>
-        <MdAdminPanelSettings style={{ color: "#fda07e" }} size={30} />
+        <MdAdminPanelSettings style={{ color: "rgb(1, 152, 122)" }} size={30} />
       </Button>
 
       <Offcanvas show={show} onHide={handleClose} responsive='lg'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Settings</Offcanvas.Title>
+          <Offcanvas.Title>
+            <h5 className="ms-3" style={{ color: "rgb(1, 152, 122)" }}>Admin Settings</h5>
+          </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body style={{ backgroundColor: "#210440" }}>
+        <Offcanvas.Body style={{ backgroundColor: "white" }}>
           <Accordion className='w-100 mt-5' flush>
             <Accordion.Item eventKey='0'>
-              <Accordion.Header>Collection</Accordion.Header>
+              <Accordion.Header>
+                <h5 style={{ color: "rgb(1, 152, 122)" }}>Collection</h5>
+              </Accordion.Header>
               <Accordion.Body
-                style={{ backgroundColor: "#210440", color: "#fda07e" }}
+                style={{
+                  backgroundColor: "white",
+                  color: "rgb(1, 152, 122)",
+                }}
               >
                 <ListGroup
-                  style={{ backgroundColor: "#210440", color: "#fda07e" }}
+                  style={{
+                    backgroundColor: "white",
+                    color: "rgb(1, 152, 122)",
+                  }}
                   className='SideList mt-4'
                   variant='flush'
                 >
                   <ListGroup.Item
-                    style={{ backgroundColor: "#210440", color: "#fda07e" }}
+                    style={{
+                      backgroundColor: "white",
+                      color: "rgb(1, 152, 122)",
+                    }}
                   >
                     <Button
                       className='border-0'
                       onClick={() => setColform(!colform)}
-                      style={{ backgroundColor: "#fda07e", color: "#210440" }}
+                      style={{
+                        backgroundColor: "white",
+                        color: "rgb(1, 152, 122)",
+                      }}
                     >
                       {" "}
                       <AiFillFolderAdd size={"1.5em"} /> Collection
@@ -155,7 +169,10 @@ function SideBar2() {
 
                     <div className={colform ? "vis" : "notvis"}>
                       <Form.Control
-                        style={{ borderColor: "#fda07e", color: "#fda07e" }}
+                        style={{
+                          borderColor: "rgb(1, 152, 122)",
+                          color: "rgb(1, 152, 122)",
+                        }}
                         placeholder='Collection Name'
                         className='mt-3 bg-transparent format'
                         onChange={(e) => setColname(e.target.value)}
@@ -165,7 +182,10 @@ function SideBar2() {
                       <Button
                         className='border-0 mt-3 w-100'
                         onClick={createProduct}
-                        style={{ backgroundColor: "#fda07e", color: "#210440" }}
+                        style={{
+                          backgroundColor: "rgb(1, 152, 122)",
+                          color: "white",
+                        }}
                       >
                         Add Collection
                       </Button>
@@ -177,9 +197,9 @@ function SideBar2() {
                       return (
                         <ListGroup.Item
                           style={{
-                            backgroundColor: "#210440",
-                            color: "#fda07e",
-                            borderColor: "#fda07e",
+                            backgroundColor: "white",
+                            color: "rgb(1, 152, 122)",
+                            borderColor: "rgb(1, 152, 122)",
                           }}
                           className='my-2 py-3 p-0  list'
                           action
@@ -195,16 +215,20 @@ function SideBar2() {
                 </ListGroup>
               </Accordion.Body>
             </Accordion.Item>
-
             <Accordion.Item eventKey='1'>
-              <Accordion.Header>Access Users</Accordion.Header>
+              <Accordion.Header>
+                <h5 style={{ color: "rgb(1, 152, 122)" }}>Manage Staff</h5>
+              </Accordion.Header>
               <Accordion.Body
-                style={{ backgroundColor: "#210440", color: "#fda07e" }}
+                style={{
+                  backgroundColor: "white",
+                  color: "rgb(1, 152, 122)",
+                }}
               >
                 <ListGroup
                   style={{
-                    backgroundColor: "#210440",
-                    color: "#fda07e",
+                    backgroundColor: "white",
+                    color: "rgb(1, 152, 122)",
                     borderColor: "red",
                   }}
                   variant='flush'
@@ -215,9 +239,9 @@ function SideBar2() {
                         <ListGroup.Item
                           key={user._id}
                           style={{
-                            backgroundColor: "#210440",
-                            color: "#fda07e",
-                            borderColor: "#fda07e",
+                            backgroundColor: "white",
+                            color: "rgb(1, 152, 122)",
+                            borderColor: "rgb(1, 152, 122)",
                           }}
                           className='my-2 py-3 p-0 '
                         >
@@ -225,9 +249,9 @@ function SideBar2() {
 
                           <div className='mt-2 d-flex justify-content-around'>
                             <Button
-                              className='bg-info'
-                              style={{ backgroundColor: "rgb(49, 210, 242)" }}
+                              style={{ backgroundColor: "rgb(1, 152, 122)" }}
                               onClick={() => setVis(!vis)}
+                              className='border-0'
                             >
                               Add
                             </Button>
@@ -264,17 +288,18 @@ function SideBar2() {
                 </ListGroup>
               </Accordion.Body>
             </Accordion.Item>
-
             <Accordion.Item eventKey='2'>
-              <Accordion.Header>Not Supplied</Accordion.Header>
+              <Accordion.Header>
+                <h5 style={{ color: "rgb(1, 152, 122)" }}>Not Supplied</h5>
+              </Accordion.Header>
               <Accordion.Body
-                style={{ backgroundColor: "#210440", color: "#fda07e" }}
+                style={{ backgroundColor: "white", color: "rgb(1, 152, 122)" }}
               >
                 <ListGroup
                   style={{
-                    backgroundColor: "#210440",
-                    color: "#fda07e",
-                    borderColor: "red",
+                    backgroundColor: "white",
+                    color: "rgb(1, 152, 122)",
+                    borderColor: "rgb(1, 152, 122)",
                   }}
                   variant='flush'
                 >
@@ -284,17 +309,20 @@ function SideBar2() {
                         <ListGroup.Item
                           key={dist._id}
                           style={{
-                            backgroundColor: "#210440",
-                            color: "#fda07e",
-                            borderColor: "#fda07e",
+                            backgroundColor: "white",
+                            color: "rgb(1, 152, 122)",
+                            borderColor: "rgb(1, 152, 122)",
                           }}
+                          className='d-flex flex-lg-column justify-content-between'
                         >
-                          {dist.FirstName} {dist.LastName}
+                          <h6>
+                            {dist.FirstName} {dist.LastName}
+                          </h6>
                           <Button
                             className='border-0 mt-2'
                             style={{
-                              backgroundColor: "#fda07e",
-                              color: "#210440",
+                              backgroundColor: "rgb(1, 152, 122)",
+                              color: "white",
                             }}
                             onClick={() => addSupply(dist._id)}
                           >
