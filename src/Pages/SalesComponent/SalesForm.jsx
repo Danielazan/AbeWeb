@@ -91,7 +91,7 @@ function SalesForm(props) {
           Go Back
         </h5>
 
-        {/* <Link
+        <Link
           to='/Order'
           style={{ textDecoration: "none" }}
           className='text-dark'
@@ -100,7 +100,7 @@ function SalesForm(props) {
             <FaReceipt size='1.5em' />
             Receipt
           </h5>
-        </Link> */}
+        </Link>
         <h1>Customer Details</h1>
         <Row>
           <Col xs={12} lg={3}></Col>
@@ -277,7 +277,9 @@ function SalesForm(props) {
             <Receipt datar={datar} />
           </div>
 
-          <Order datar={datar} />
+          <div className="d-none">
+            <Order datar={datar} />
+          </div>
 
           <Col xs={12} lg={3}></Col>
         </Row>

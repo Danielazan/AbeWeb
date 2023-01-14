@@ -111,7 +111,7 @@ function Order(props) {
                       controlId='exampleForm.ControlInput1'
                     >
                       <Form.Label className='form-label'>
-                        Phone Number{" "}
+                        Phone Number
                       </Form.Label>
 
                       <Form.Control
