@@ -138,7 +138,7 @@ function Sectiontrack() {
             }}
             onClick={handlePost}
           >
-            Post
+            ADD
           </Button>
         </div>
         {Error && <p style={{ color: "red" }}>{Error}</p>}

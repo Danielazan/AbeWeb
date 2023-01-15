@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Button, Form, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Style/Style.css";
+import axios from "axios";
+import base from "base.js";
+import {IoIosAddCircle} from "react-icons/io"
+import { TbCurrencyNaira } from "react-icons/tb";
 import Navbar from "Components/NavbarDark";
+import { useProductContext } from "Hook/useProduct";
+
 
 function Order(props) {
   const [name, setName] = useState("");
@@ -13,6 +19,22 @@ function Order(props) {
   const [caddy, setcAddy] = useState("");
   const [cphone, setcPhone] = useState("");
   const [cmail, setcMail] = useState("");
+  const [prod, setProd] = useState("");
+  const [result, setResult] = useState(false)
+  const { Product, dispatch } = useProductContext();
+
+  useEffect(() => {
+    axios.get(`${base.url}/api/material`).then((res) => {
+      const json = res.data;
+
+      dispatch({ type: "SET Product", payload: json });
+
+      console.log(Product)
+
+    });
+  }, [dispatch]);
+
+
   return (
     <React.Fragment>
       <Container fluid className='Order'>
@@ -22,7 +44,7 @@ function Order(props) {
           <div className='d-lg-flex justify-content-between'>
             <section>
               <h3>
-                Authentic Roofing Tiles <br />{" "}
+                Authentic Roofing Tiles <br />
                 <span style={{ fontSize: "14px" }}>
                   Intercontinental Limited
                 </span>
@@ -43,8 +65,11 @@ function Order(props) {
                 to='/Sales'
                 style={{ textDecoration: "none", color: "red" }}
               >
-                <Button style={{ backgroundColor: "rgb(2, 23, 50)" }} className="border-0">
-                  Make Purchases
+                <Button
+                  style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                  className='border-0'
+                >
+                  Actual Purchases
                 </Button>
               </Link>
             </section>
@@ -76,6 +101,7 @@ function Order(props) {
 
           <Container className='Order-main mt-3 p-4 rounded-1'>
             <Row>
+              {/* Vendor Form */}
               <Col xs={12} lg={6}>
                 <div>
                   <h5
@@ -148,7 +174,7 @@ function Order(props) {
                   </Form>
                 </div>
               </Col>
-
+              {/* Customer Form */}
               <Col xs={12} lg={6}>
                 <div>
                   <h5
@@ -222,17 +248,53 @@ function Order(props) {
               </Col>
             </Row>
           </Container>
+          {/* Search Results For Products */}
+          <div className='mt-5'>
+            {Product &&
+              Product.filter((item) => {
+                return prod.toLowerCase() === ""
+                  ? item
+                  : item.Name.toLowerCase().includes(prod);
+              }).map((item) => (
+                <div
+                  key={item._id}
+                  className={`${
+                    prod.toLowerCase() === "" ? "d-none" : "d-block"
+                  } rounded-1 result p-2 my-2`}
+                >
+                  <div className='d-flex justify-content-between'>
+                    <h5 style={{ color: "white" }}>{item.Name} </h5>
+                    <h6 style={{ color: "white" }}>
+                      {" "}
+                      <TbCurrencyNaira size={"1.5em"} />
+                      {item.Price}
+                    </h6>
+                    <IoIosAddCircle size={"1.5em"} style={{ color: "white" }} />
+                  </div>
+                </div>
+              ))}
+          </div>
 
           <section>
-            <h2
+            <div
+              className='rounded-1 d-flex justify-content-between mt-5 mb-1 p-3'
               style={{
                 backgroundColor: "rgb(2, 23, 50)",
                 color: "white",
               }}
-              className='mt-5 p-2'
             >
-              Shopping Terms
-            </h2>
+              <h2 className='p-2'>Shopping Terms</h2>
+
+              <div className='d-flex align-items-end justify-content-between'>
+                <Form.Control
+                  type='search'
+                  value={prod}
+                  onChange={(e) => setProd(e.target.value)}
+                  className='w-100 rounded-3 bg-white'
+                  placeholder='Search For Product'
+                />
+              </div>
+            </div>
 
             <Table striped bordered hover className='Order-table'>
               <thead>
