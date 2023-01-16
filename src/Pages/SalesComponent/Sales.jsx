@@ -37,8 +37,6 @@ function Sales() {
       dispatch({ type: "SET Product", payload: json });
 
       setLoading(false);
-
-      // console.log(User.user.isAdmin)
     });
   }, [dispatch]);
 
