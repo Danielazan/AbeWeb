@@ -1,15 +1,15 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Button, Form, Table } from "react-bootstrap";
+import { Container, Button, Form, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Style/Style.css";
 import axios from "axios";
 import base from "base.js";
-import {IoIosAddCircle} from "react-icons/io"
+import { IoIosAddCircle } from "react-icons/io";
 import { TbCurrencyNaira } from "react-icons/tb";
 import Navbar from "Components/NavbarDark";
 import { useProductContext } from "Hook/useProduct";
-
+import Sales from "./Sales";
 
 function Order(props) {
   const [name, setName] = useState("");
@@ -20,7 +20,7 @@ function Order(props) {
   const [cphone, setcPhone] = useState("");
   const [cmail, setcMail] = useState("");
   const [prod, setProd] = useState("");
-  const [result, setResult] = useState(false)
+  const [cartItems, setCartItems] = useState([]);
   const { Product, dispatch } = useProductContext();
 
   useEffect(() => {
@@ -29,11 +29,21 @@ function Order(props) {
 
       dispatch({ type: "SET Product", payload: json });
 
-      console.log(Product)
-
+      console.log(Product);
     });
   }, [dispatch]);
 
+  const handleOrder = (id,name, price) => {
+    let data = {
+      id:id,
+      name: name,
+      price: price,
+    };
+
+    setCartItems([...cartItems, data]);
+
+    console.log(cartItems);
+  };
 
   return (
     <React.Fragment>
@@ -99,154 +109,79 @@ function Order(props) {
             </section>
           </div>
 
+          <div className="d-none">
+            <Sales cartItems={cartItems} />
+          </div>
+
           <Container className='Order-main mt-3 p-4 rounded-1'>
-            <Row>
-              {/* Vendor Form */}
-              <Col xs={12} lg={6}>
-                <div>
-                  <h5
-                    style={{
-                      backgroundColor: "rgb(2, 23, 50)",
-                      color: "white",
-                    }}
-                    className='p-2 rounded-1'
-                  >
-                    VENDOR
-                  </h5>
-                  <Form>
-                    <Form.Group
-                      className='mt-3'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>Name </Form.Label>
+            {/* Customer Form */}
+            <div>
+              <h5
+                style={{
+                  backgroundColor: "rgb(2, 23, 50)",
+                  color: "white",
+                }}
+                className='p-2 rounded-1'
+              >
+                CUSTOMER
+              </h5>
+              <Form>
+                <Form.Group
+                  className='mt-3'
+                  controlId='exampleForm.ControlInput1'
+                >
+                  <Form.Label className='form-label'>Name </Form.Label>
 
-                      <Form.Control
-                        type='text'
-                        placeholder='Enter Your Name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    </Form.Group>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter Your Name'
+                    value={props.datar && props.datar.FirstName}
+                  />
+                </Form.Group>
 
-                    <Form.Group
-                      className='mt-3'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>Address </Form.Label>
+                <Form.Group
+                  className='mt-3'
+                  controlId='exampleForm.ControlInput1'
+                >
+                  <Form.Label className='form-label'>Address </Form.Label>
 
-                      <Form.Control
-                        type='text'
-                        placeholder='Enter Your Address'
-                        value={addy}
-                        onChange={(e) => setAddy(e.target.value)}
-                      />
-                    </Form.Group>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter Your Address'
+                    value={caddy}
+                    onChange={(e) => setcAddy(e.target.value)}
+                  />
+                </Form.Group>
 
-                    <Form.Group
-                      className='mt-3'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>
-                        Phone Number
-                      </Form.Label>
+                <Form.Group
+                  className='mt-3'
+                  controlId='exampleForm.ControlInput1'
+                >
+                  <Form.Label className='form-label'>Phone Number</Form.Label>
 
-                      <Form.Control
-                        type='number'
-                        placeholder='Enter Your Phone Number'
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                      />
-                    </Form.Group>
+                  <Form.Control
+                    type='number'
+                    placeholder='Enter Your Phone Number'
+                    value={cphone}
+                    onChange={(e) => setcPhone(e.target.value)}
+                  />
+                </Form.Group>
 
-                    <Form.Group
-                      className='mt-3 mb-4 mb-lg-0'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>Email </Form.Label>
+                <Form.Group
+                  className='mt-3 mb-4'
+                  controlId='exampleForm.ControlInput1'
+                >
+                  <Form.Label className='form-label'>Email </Form.Label>
 
-                      <Form.Control
-                        type='email'
-                        placeholder='Enter Your Email Address'
-                        value={mail}
-                        onChange={(e) => setMail(e.target.value)}
-                      />
-                    </Form.Group>
-                  </Form>
-                </div>
-              </Col>
-              {/* Customer Form */}
-              <Col xs={12} lg={6}>
-                <div>
-                  <h5
-                    style={{
-                      backgroundColor: "rgb(2, 23, 50)",
-                      color: "white",
-                    }}
-                    className='p-2 rounded-1'
-                  >
-                    CUSTOMER
-                  </h5>
-                  <Form>
-                    <Form.Group
-                      className='mt-3'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>Name </Form.Label>
-
-                      <Form.Control
-                        type='text'
-                        placeholder='Enter Your Name'
-                        value={props.datar && props.datar.FirstName}
-                      />
-                    </Form.Group>
-
-                    <Form.Group
-                      className='mt-3'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>Address </Form.Label>
-
-                      <Form.Control
-                        type='text'
-                        placeholder='Enter Your Address'
-                        value={caddy}
-                        onChange={(e) => setcAddy(e.target.value)}
-                      />
-                    </Form.Group>
-
-                    <Form.Group
-                      className='mt-3'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>
-                        Phone Number
-                      </Form.Label>
-
-                      <Form.Control
-                        type='number'
-                        placeholder='Enter Your Phone Number'
-                        value={cphone}
-                        onChange={(e) => setcPhone(e.target.value)}
-                      />
-                    </Form.Group>
-
-                    <Form.Group
-                      className='mt-3 mb-4'
-                      controlId='exampleForm.ControlInput1'
-                    >
-                      <Form.Label className='form-label'>Email </Form.Label>
-
-                      <Form.Control
-                        type='email'
-                        placeholder='Enter Your Email Address'
-                        value={cmail}
-                        onChange={(e) => setcMail(e.target.value)}
-                      />
-                    </Form.Group>
-                  </Form>
-                </div>
-              </Col>
-            </Row>
+                  <Form.Control
+                    type='email'
+                    placeholder='Enter Your Email Address'
+                    value={cmail}
+                    onChange={(e) => setcMail(e.target.value)}
+                  />
+                </Form.Group>
+              </Form>
+            </div>
           </Container>
           {/* Search Results For Products */}
           <div className='mt-5'>
@@ -264,12 +199,18 @@ function Order(props) {
                 >
                   <div className='d-flex justify-content-between'>
                     <h5 style={{ color: "white" }}>{item.Name} </h5>
+                    <h6 style={{ color: "white" }}>{item.collectionName}</h6>
                     <h6 style={{ color: "white" }}>
-                      {" "}
                       <TbCurrencyNaira size={"1.5em"} />
                       {item.Price}
                     </h6>
-                    <IoIosAddCircle size={"1.5em"} style={{ color: "white" }} />
+                    <IoIosAddCircle
+                      size={"1.5em"}
+                      style={{ color: "white" }}
+                      onClick={() =>
+                        handleOrder(item._id, item.Name, item.Price)
+                      }
+                    />
                   </div>
                 </div>
               ))}
@@ -301,34 +242,20 @@ function Order(props) {
                 <tr>
                   <th className='text-center'>S/N</th>
                   <th className='text-center'>Product</th>
-                  <th className='text-center'>Quantity</th>
                   <th className='text-center'>Unit Price</th>
-                  <th className='text-center'>Amount</th>
                 </tr>
               </thead>
               <tbody>
-                {props.datar &&
-                  props.datar.itemsBought.map((item, index) => {
+                {cartItems &&
+                  cartItems.map((item, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td className='text-center'>{index + 1}</td>
-                        <td>{item.item}</td>
-                        <td className='text-center'>{item.quantity}</td>
-                        <td className='text-center'>{item.sold}</td>
-                        <td className='text-center'>
-                          {item.sold * item.quantity}
-                        </td>
+                        <td>{item.name}</td>
+                        <td className='text-center'>{item.price}</td>
                       </tr>
                     );
                   })}
-
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <th>Total : {props.datar && props.datar.TotalAmountPaid}</th>
-                </tr>
               </tbody>
             </Table>
           </section>
