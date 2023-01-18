@@ -7,7 +7,7 @@ import Login from "Pages/LoginComponent/Login"
 import Signup from "Pages/SignupComponent/Signup"
 import Admin from 'Pages/AdminComponent/Admin';
 import About from "Pages/AdminComponent/Admin"
-import Sales from "Pages/SalesComponent/Sales"
+import Sales from "Pages/SalesComponent/SalesMain"
 import Verify from "Pages/VerificationComponent/Verify"
 import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 import EnquiryTable from 'Pages/EnquiryComponent/EnquiryTable';

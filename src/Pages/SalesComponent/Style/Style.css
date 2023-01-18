@@ -90,3 +90,15 @@
         width: 100%;
     }
 }
+.SalesMain{
+    margin-top: 7%;
+}
+
+.SalesListGroup{
+    border-color: white;
+    color: white;
+}
+.listitem{
+    background:black;
+    color: white;
+}
