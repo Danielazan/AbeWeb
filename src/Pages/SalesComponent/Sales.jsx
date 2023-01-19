@@ -25,6 +25,7 @@ function Sales() {
   const { iteam, dispatchItem } = IteamHook();
   const { Product, dispatch } = useProductContext();
   const { User, dispatchU } = UserHook();
+  const [carried, setCarried] = useState()
 
   function searchValue(e) {
     setProd(e.target.value);

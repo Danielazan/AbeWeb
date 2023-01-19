@@ -8,6 +8,7 @@ import pic from "Assets/Images/pic15.svg";
 import { Link } from "react-router-dom";
 import Report from "Pages/TableComponent/Table";
 import base from "base.js";
+import Refunds from "./Refunds"
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 function Main() {
@@ -173,6 +174,22 @@ function Main() {
                 style={{ textDecoration: "none", color: "white" }}
               >
                 View Sales Report
+              </Link>
+            </Button>
+
+            <Button
+              style={{
+                backgroundColor: "rgb(1, 152, 122)",
+                color: "white",
+                fontWeight: "700",
+              }}
+              className='border-0'
+            >
+              <Link
+                to='/Refunds'
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Refunds
               </Link>
             </Button>
           </ButtonGroup>
