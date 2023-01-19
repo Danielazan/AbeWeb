@@ -59,7 +59,7 @@ function From() {
         
             setPassword("")
         
-            navigate('/Order')
+            navigate('/SalesMain')
 
         }
 

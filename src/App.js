@@ -7,7 +7,7 @@ import Login from "Pages/LoginComponent/Login"
 import Signup from "Pages/SignupComponent/Signup"
 import Admin from 'Pages/AdminComponent/Admin';
 import About from "Pages/AdminComponent/Admin"
-import Sales from "Pages/SalesComponent/Sales"
+import Refunds from "Pages/AdminComponent/Refunds"
 import Verify from "Pages/VerificationComponent/Verify"
 import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 import EnquiryTable from 'Pages/EnquiryComponent/EnquiryTable';
@@ -17,6 +17,8 @@ import Order from 'Pages/SalesComponent/Order';
 import Table from 'Pages/TableComponent/Table';
 
 import UserHook from "Hook/UserHook";
+import Sales from './Pages/SalesComponent/Sales';
+import SalesMain from './Pages/SalesComponent/SalesMain';
 
 function App() {
   const { User } = UserHook();
@@ -43,6 +45,8 @@ function App() {
 
           <Route path='/Table' element={<Table />} />
 
+          <Route path='/Refunds' element={<Refunds />} />
+
           <Route
             path='/Order'
             element={User ? <Order /> : <Navigate to='/Login' />}
@@ -65,9 +69,14 @@ function App() {
           <Route path='/EnquiryTable' element={<EnquiryTable />} />
 
           <Route
-            path='/Sales'
-            element={User ? <Sales /> : <Navigate to='/Login' />}
+            path='/SalesMain'
+            element={User ? <SalesMain /> : <Navigate to='/Login' />}
+
+
           />
+          <Route 
+            path = "/Sales" element= {User ? <Sales/>: <Navigate to="/Login"/>}/>
+            
         </Routes>
       </BrowserRouter>
     </div>

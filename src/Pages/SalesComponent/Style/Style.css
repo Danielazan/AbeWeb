@@ -63,7 +63,7 @@
 
 .Order{
     min-height: 100vh;
-    padding-top: 130px;
+    padding-top: 50px;
 }
 
 .Order-main{
@@ -89,4 +89,16 @@
     
         width: 100%;
     }
+}
+.SalesMain{
+    margin-top:7rem;
+}
+
+.SalesListGroup{
+    border-color: white;
+    color: white;
+}
+.listitem{
+    
+    color: black;
 }
