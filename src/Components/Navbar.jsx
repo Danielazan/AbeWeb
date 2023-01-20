@@ -26,17 +26,17 @@ function Navigate() {
                 <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav className="me-auto mar">
                 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Admin" className={nav ? "link-active" : "link"}>Admin</Link></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/Admin" className={nav ? "link-active" : "link"}>Admin</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/" className={nav ? "link-active" : "link"}>Home</Link></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/" className={nav ? "link-active" : "link"}>Home</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Order" className={nav ? "link-active" : "link"}>Sales</Link></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/Order" className={nav ? "link-active" : "link"}>Sales</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Enquiry" className={nav ? "link-active" : "link"}>Enquiry</Link></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/Enquiry" className={nav ? "link-active" : "link"}>Enquiry</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Login" className={nav ? "link-active" : "link"}>Login</Link></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/Login" className={nav ? "link-active" : "link"}>Login</Link></Nav.Link>
 
-                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Signup" className={nav ? "link-active" : "link"}>Signup</Link></Nav.Link>
+                    <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/Signup" className={nav ? "link-active" : "link"}>Signup</Link></Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

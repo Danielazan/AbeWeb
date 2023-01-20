@@ -1,7 +1,7 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container,Row,Col} from "react-bootstrap"
-import {BsGem,BsLaptop,BsGlobe,BsHeart} from "react-icons/bs"
+import {BsGem,BsLaptop,BsGlobe} from "react-icons/bs"
 
 function Service() {
   return (

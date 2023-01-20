@@ -128,7 +128,7 @@ function Main() {
         <h2 className='main-h2 pb-3'>Collections</h2>
 
         <Container className='my-3'>
-          <ButtonGroup aria-label='Basic example'>
+          <ButtonGroup>
             <Button
               style={{
                 backgroundColor: "rgb(1, 152, 122)",
@@ -141,7 +141,7 @@ function Main() {
                 to='/Stats'
                 style={{ textDecoration: "none", color: "white" }}
               >
-                Click here to view statistics of products
+                Product Stats
               </Link>
             </Button>
 
@@ -173,7 +173,7 @@ function Main() {
                 to='/Table'
                 style={{ textDecoration: "none", color: "white" }}
               >
-                View Sales Report
+                Sales Report
               </Link>
             </Button>
 

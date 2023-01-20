@@ -1,6 +1,5 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-import {Container} from "react-bootstrap"
 import {Route,Routes,BrowserRouter, Navigate} from "react-router-dom"
 import Home from "Pages/HomeComponent/Home"
 import Login from "Pages/LoginComponent/Login"
@@ -13,9 +12,7 @@ import Enquiry from 'Pages/EnquiryComponent/Enquiry';
 import EnquiryTable from 'Pages/EnquiryComponent/EnquiryTable';
 import Stock from "Pages/ManageStock"
 import Stats from 'Pages/StatsComponent/Stats';
-import Order from 'Pages/SalesComponent/Order';
 import Table from 'Pages/TableComponent/Table';
-
 import UserHook from "Hook/UserHook";
 import Sales from './Pages/SalesComponent/Sales';
 import SalesMain from './Pages/SalesComponent/SalesMain';
@@ -49,7 +46,7 @@ function App() {
 
           <Route
             path='/Order'
-            element={User ? <Order /> : <Navigate to='/Login' />}
+            element={User ? <SalesMain /> : <Navigate to='/Login' />}
           />
 
           <Route

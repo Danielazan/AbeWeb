@@ -1,6 +1,6 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
-import {Container,Row,Col,Button} from "react-bootstrap"
+import {Container,Row,Col} from "react-bootstrap"
 import pic5 from "Assets/Images/pic05.jpg"
 import pic4 from "Assets/Images/pic04.jpg"
 import pic6 from "Assets/Images/pic06.jpg"
