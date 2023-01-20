@@ -26,9 +26,9 @@ function Navigate() {
                 <Navbar.Collapse id="basic-navbar-nav" >
                 <Nav className="me-auto mar2">
                 
-                  <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/" className={nav ? "link-active" : "link"}>Home</Link></Nav.Link>
+                  <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/" className={nav ? "link-active" : "link"}>Home</Link></Nav.Link>
 
-                  <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link Navigate to="/Login" className={nav ? "link-active" : "link"}>Login</Link></Nav.Link>
+                  <Nav.Link className='mx-1 ms-3 ms-lg-0' ><Link to="/Login" className={nav ? "link-active" : "link"}>Login</Link></Nav.Link>
 
                 </Nav>
                 </Navbar.Collapse>

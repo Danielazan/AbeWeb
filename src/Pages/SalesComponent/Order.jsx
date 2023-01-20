@@ -11,15 +11,15 @@ import Navbar from "Components/NavbarDark";
 import { useProductContext } from "Hook/useProduct";
 import Sales from "./Sales";
 
-function Order(props) {
+function Order() {
   const [name, setName] = useState("");
   const [addy, setAddy] = useState("");
   const [phone, setPhone] = useState("");
   const [mail, setMail] = useState("");
-  const [caddy, setcAddy] = useState("");
-  const [cphone, setcPhone] = useState("");
-  const [cmail, setcMail] = useState("");
+  const [qty, setQty] = useState("");
+  const [sup, setSup] = useState("");
   const [prod, setProd] = useState("");
+  const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { Product, dispatch } = useProductContext();
 
@@ -34,15 +34,36 @@ function Order(props) {
   }, [dispatch]);
 
   const handleOrder = (id,name, price) => {
+    
     let data = {
       id:id,
       name: name,
       price: price,
+      supplied:sup,
+      quantity:qty
     };
 
+    const details={
+      Name:name,
+      Address:addy,
+      PhoneNumber:phone,
+      Email:mail,
+      TotalAmount:200,
+      Price:0,
+      itemsOrdered:cartItems
+    }
+    
     setCartItems([...cartItems, data]);
 
     console.log(cartItems);
+
+    axios.post(`${base.url}/api/report`,details).then((res) => {
+      console.log(res.data)
+    })
+
+    setQty("")
+    setSup("")
+
   };
 
   return (
@@ -109,7 +130,7 @@ function Order(props) {
             </section>
           </div>
 
-          <div className="d-none">
+          <div className='d-none'>
             <Sales cartItems={cartItems} />
           </div>
 
@@ -135,7 +156,8 @@ function Order(props) {
                   <Form.Control
                     type='text'
                     placeholder='Enter Your Name'
-                    value={props.datar && props.datar.FirstName}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </Form.Group>
 
@@ -148,8 +170,8 @@ function Order(props) {
                   <Form.Control
                     type='text'
                     placeholder='Enter Your Address'
-                    value={caddy}
-                    onChange={(e) => setcAddy(e.target.value)}
+                    value={addy}
+                    onChange={(e) => setAddy(e.target.value)}
                   />
                 </Form.Group>
 
@@ -162,8 +184,8 @@ function Order(props) {
                   <Form.Control
                     type='number'
                     placeholder='Enter Your Phone Number'
-                    value={cphone}
-                    onChange={(e) => setcPhone(e.target.value)}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </Form.Group>
 
@@ -176,8 +198,8 @@ function Order(props) {
                   <Form.Control
                     type='email'
                     placeholder='Enter Your Email Address'
-                    value={cmail}
-                    onChange={(e) => setcMail(e.target.value)}
+                    value={mail}
+                    onChange={(e) => setMail(e.target.value)}
                   />
                 </Form.Group>
               </Form>
@@ -207,10 +229,34 @@ function Order(props) {
                     <IoIosAddCircle
                       size={"1.5em"}
                       style={{ color: "white" }}
+                      onClick={() => setShow(!show)}
+                    />
+                  </div>
+
+                  <div className={`${show ? "d-block" : "d-none"} mt-lg-2`}>
+                    <Form.Control
+                      type='text'
+                      className='my-2'
+                      placeholder='Quantity'
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                    />
+
+                    <Form.Control
+                      type='text'
+                      className='my-2'
+                      placeholder='Supplied'
+                      value={sup}
+                      onChange={(e) => setSup(e.target.value)}
+                    />
+
+                    <Button
                       onClick={() =>
                         handleOrder(item._id, item.Name, item.Price)
                       }
-                    />
+                    >
+                      Add
+                    </Button>
                   </div>
                 </div>
               ))}

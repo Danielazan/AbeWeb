@@ -31,7 +31,7 @@ function Navigate() {
             className={`${nav ? "brand-active" : "brand"} ms-3 `}
           >
             <h3>
-              Authentic Roofing Tiles <br />{" "}
+              Authentic Roofing Tiles <br />
               <span style={{ fontSize: "14px" }}>Intercontinental Limited</span>
             </h3>
           </Link>
@@ -40,7 +40,6 @@ function Navigate() {
             <Nav className='me-auto mar'>
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
                 <Link
-                  Navigate
                   to='/Admin'
                   className={nav ? "link-active" : "link"}
                 >
@@ -49,14 +48,13 @@ function Navigate() {
               </Nav.Link>
 
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
-                <Link Navigate to='/' className={nav ? "link-active" : "link"}>
+                <Link to='/' className={nav ? "link-active" : "link"}>
                   Home
                 </Link>
               </Nav.Link>
 
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
                 <Link
-                  Navigate
                   to='/Order'
                   className={nav ? "link-active" : "link"}
                 >
@@ -66,7 +64,6 @@ function Navigate() {
 
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
                 <Link
-                  Navigate
                   to='/Enquiry'
                   className={nav ? "link-active" : "link"}
                 >
@@ -76,7 +73,6 @@ function Navigate() {
 
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
                 <Link
-                  Navigate
                   to='/Login'
                   className={nav ? "link-active" : "link"}
                 >
@@ -86,7 +82,6 @@ function Navigate() {
 
               <Nav.Link className='mx-1 ms-3 ms-lg-0'>
                 <Link
-                  Navigate
                   to='/Signup'
                   className={nav ? "link-active" : "link"}
                 >
