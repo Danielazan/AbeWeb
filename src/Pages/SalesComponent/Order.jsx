@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Button, Form, Table } from "react-bootstrap";
+import { Container, Button, Form, Table,Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Style/Style.css";
 import axios from "axios";
@@ -19,9 +19,14 @@ function Order() {
   const [qty, setQty] = useState("");
   const [sup, setSup] = useState("");
   const [prod, setProd] = useState("");
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { Product, dispatch } = useProductContext();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios.get(`${base.url}/api/material`).then((res) => {
@@ -64,7 +69,11 @@ function Order() {
     setQty("")
     setSup("")
 
+    handleClose()
+
   };
+
+  
 
   return (
     <React.Fragment>
@@ -226,37 +235,69 @@ function Order() {
                       <TbCurrencyNaira size={"1.5em"} />
                       {item.Price}
                     </h6>
-                    <IoIosAddCircle
-                      size={"1.5em"}
-                      style={{ color: "white" }}
-                      onClick={() => setShow(!show)}
-                    />
-                  </div>
 
-                  <div className={`${show ? "d-block" : "d-none"} mt-lg-2`}>
-                    <Form.Control
-                      type='text'
-                      className='my-2'
-                      placeholder='Quantity'
-                      value={qty}
-                      onChange={(e) => setQty(e.target.value)}
-                    />
+                    <Button variant="primary" onClick={handleShow}>
+                        <IoIosAddCircle
+                          size={"1.5em"}
+                          style={{ color: "white" }}
+                        />
+                      </Button>
 
-                    <Form.Control
-                      type='text'
-                      className='my-2'
-                      placeholder='Supplied'
-                      value={sup}
-                      onChange={(e) => setSup(e.target.value)}
-                    />
+                      <Modal show={show} onHide={handleClose}>
 
-                    <Button
-                      onClick={() =>
+                        <Modal.Header closeButton>
+                          <Modal.Title>{item.Name}</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            <Form.Control
+                                type='text'
+                                className='my-2'
+                                placeholder='Quantity'
+                                value={qty}
+                                onChange={(e) => setQty(e.target.value)}
+                              />
+
+                            <Form.Control
+                                type='text'
+                                className='my-2'
+                                placeholder='Supplied'
+                                value={sup}
+                                onChange={(e) => setSup(e.target.value)}
+                              />
+
+                            <Form.Control
+                                type='text'
+                                className='my-2'
+                                placeholder='Carried'
+                                value={sup}
+                                onChange={(e) => setSup(e.target.value)}
+                              />
+
+                            <Form.Control
+                                type='text'
+                                className='my-2'
+                                placeholder='Paid'
+                                value={sup}
+                                onChange={(e) => setSup(e.target.value)}
+                              />
+
+
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+
+                          <Button variant="primary" onClick={() =>
                         handleOrder(item._id, item.Name, item.Price)
-                      }
-                    >
-                      Add
-                    </Button>
+                      }>
+                            Save Changes
+                          </Button>
+
+                        </Modal.Footer>
+                      </Modal>
                   </div>
                 </div>
               ))}
