@@ -4,6 +4,7 @@ import Navbar from "Components/NavbarSales";
 import  PurchasedOrder from "./PurchasedOrder"
 import { HiMenuAlt1 } from "react-icons/hi";
 import Order from "./Order"
+import Sales from "./Sales"
 import { Container,ListGroup, Row, Col, Button,Offcanvas} from 'react-bootstrap'
 
 function SalesMain() {
@@ -12,6 +13,10 @@ function SalesMain() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const setActual = async ()=>{
+    setView (<Sales/>)
+  }
 
   const setPurchase = async ()=>{
     setView (<PurchasedOrder/>)
@@ -37,8 +42,8 @@ function SalesMain() {
                   <ListGroup.Item onClick={setPurchase} className='listitem mt-lg-5'>
                     Purchase Order
                   </ListGroup.Item>
+                  <ListGroup.Item onClick={setActual}>Actual Order</ListGroup.Item>
                   <ListGroup.Item>Not Supplied</ListGroup.Item>
-                  <ListGroup.Item>Danger</ListGroup.Item>
                  
                 </ListGroup>
               </Offcanvas.Body>
