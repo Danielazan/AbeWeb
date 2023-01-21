@@ -18,13 +18,12 @@ function Order() {
   const [mail, setMail] = useState("");
   const [qty, setQty] = useState("");
   const [sup, setSup] = useState("");
+  const [carried, setCarried] = useState("");
+  const [paid, setPaid] = useState("")
   const [prod, setProd] = useState("");
-  // const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { Product, dispatch } = useProductContext();
-
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -34,7 +33,6 @@ function Order() {
 
       dispatch({ type: "SET Product", payload: json });
 
-      console.log(Product);
     });
   }, [dispatch]);
 
@@ -45,8 +43,12 @@ function Order() {
       name: name,
       price: price,
       supplied:sup,
-      quantity:qty
+      quantity:qty,
+      carried:carried,
+      paid:paid,
     };
+    
+    cartItems.push(data);
 
     const details={
       Name:name,
@@ -58,8 +60,6 @@ function Order() {
       itemsOrdered:cartItems
     }
     
-    setCartItems([...cartItems, data]);
-
     console.log(cartItems);
 
     axios.post(`${base.url}/api/report`,details).then((res) => {
@@ -68,6 +68,8 @@ function Order() {
 
     setQty("")
     setSup("")
+    setCarried("")
+    setPaid("")
 
     handleClose()
 
@@ -236,7 +238,7 @@ function Order() {
                       {item.Price}
                     </h6>
 
-                    <Button variant="primary" onClick={handleShow}>
+                    <Button className="bg-transparent border-0" onClick={handleShow}>
                         <IoIosAddCircle
                           size={"1.5em"}
                           style={{ color: "white" }}
@@ -270,16 +272,16 @@ function Order() {
                                 type='text'
                                 className='my-2'
                                 placeholder='Carried'
-                                value={sup}
-                                onChange={(e) => setSup(e.target.value)}
+                                value={carried}
+                                onChange={(e) => setCarried(e.target.value)}
                               />
 
                             <Form.Control
                                 type='text'
                                 className='my-2'
                                 placeholder='Paid'
-                                value={sup}
-                                onChange={(e) => setSup(e.target.value)}
+                                value={paid}
+                                onChange={(e) => setPaid(e.target.value)}
                               />
 
 

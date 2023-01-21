@@ -73,11 +73,20 @@
 }
 .Order-table{
     box-shadow: 0px 0px 8px 4px #a6a6a6;
-
 }
 
+.order-card{
+    box-shadow: 0px 0px 5px 4px #c4c4c4;
+    border: 7px solid rgb(255, 255, 255);
+
+}
 .result{
     background-color: rgb(2, 23, 50);
+}
+
+.rad{
+    background-color: rgba(2, 23, 50, 0.536);
+
 }
 
 @media screen and (max-width:980px) {
