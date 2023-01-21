@@ -110,8 +110,6 @@ function Sales() {
     setTog(true);
   }
 
-  console.log(User.user.isSalesPerson);
-
   if (!User.user.isSalesPerson && !User.user.isAdmin) {
     return (
       <div>

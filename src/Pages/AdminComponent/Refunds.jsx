@@ -1,121 +1,153 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
-import { Br, Cut, Line, Printer, Text,  render } from 'react-thermal-printer';
-import axios from "axios"
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  ListGroup,
+  Button,
+  Modal,
+  Table,
+} from "react-bootstrap";
+import "./Style/Style.css";
+import axios from "axios";
 import base from "base.js";
+import Navbar from "Components/NavbarAdmin";
+import { useNavigate } from "react-router-dom";
 
-function Refunds(props) {
-    const [Customer, setCustomer] = useState([])
+function PurchasedOrder() {
+  const [Customer, setCustomer] = useState([]);
+  const [cart, setcart] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        getcustomer()
-    }, [])
-    
-    const getcustomer = async ()=>{
-        const url = `${base.url}/api/customer`;
+  useEffect(() => {
+    axios.get(`${base.url}/api/order`).then((res) => {
+      const json = res.data;
+      setCustomer(json);
+    });
+  }, []);
 
-    const response = await axios.get(url);
+  function VerticalModal(props) {
+    return (
+      <Modal
+        {...props}
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-vcenter'>
+            <h3>Items Table</h3>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart &&
+                cart.map((stuff, index) => (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{stuff.name}</td>
+                    <td>{stuff.price}</td>
+                    <td>{stuff.quantity}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            style={{ backgroundColor: "rgb(1, 152, 122)" }}
+            onClick={props.onHide}
+            className='border-0'
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
-    const json = await response.data;
+  const [modalShow, setModalShow] = React.useState(false);
 
-    await setCustomer(json)
-   
-    }
-
-  console.log(props.datar);
   return (
     <React.Fragment>
-      <Container fluid className='Receipt'>
-        <h3 className='text-center mb-4'>
-          Authentic Roofing Tiles <br />{" "}
-          <span style={{ fontSize: "14px" }}>Intercontinental Limited</span>
-        </h3>
-        <p className='text-black'>
-          4<sup>th</sup> Line Shop G4 (Second Building) Enugu South
-          International Building Material Market, Ugwuaji Enugu
-        </p>
+      <Navbar />
 
-        <h6>
-          Phone : 080-367-778-66,
-          <br />
-          091-340-839-67
-        </h6>
+      <Container fluid className='Order'>
+        <Container className='Refund'>
+          <h1 className='text-center'>Orders</h1>
 
-        <h2 className='py-4'>Sales Invoice</h2>
-
-        {
-            Customer && Customer.map(item =>{
-                
-            })
-        }
-
-        <p className='text-black'>
-          Customer : {props.datar && props.datar.FirstName}
-          {props.datar && props.datar.LastName}
-        </p>
-        <p className='text-black'>
-          Invoice Number : {props.datar && props.datar.InvoiceNumber}
-        </p>
-
-        <Row className='rec-row py-2'>
-          <Col xs={1} className='text-center'>
-            Qty
-          </Col>
-
-          <Col xs={6} className='text-center'>
-            Description
-          </Col>
-
-          <Col xs={2} className='text-center'>
-            Price
-          </Col>
-
-          <Col xs={3} className='text-center'>
-            Total
-          </Col>
-        </Row>
-
-        {props.datar &&
-          props.datar.itemsBought.map((item, index) => {
-            return (
-              <Row key={index} className='py-2'>
-                <Col xs={1} className='text-center'>
-                  {item.quantity}
-                </Col>
-
-                <Col xs={6} className='text-center'>
-                  {item.item}
-                </Col>
-
-                <Col xs={2} className='text-center'>
-                  {item.sold}
-                </Col>
-
-                <Col xs={3} className='text-center'>
-                  {item.sold * item.quantity}
-                </Col>
-              </Row>
-            );
-          })}
-
-        <Row style={{ borderTop: "2px solid black" }} className='mt-4 py-2'>
-          <Col xs={1} className='text-center'>
-            Total
-          </Col>
-          <Col xs={8}></Col>
-          <Col xs={3} className='text-center'>
-            {props.datar && props.datar.TotalAmountPaid}
-          </Col>
-        </Row>
-
-        <p className='text-black'>
-          Cashier : {props.datar && props.datar.RecievedBy}
-        </p>
-        <h6>Thanks For Your Patronage...</h6>
+          <VerticalModal show={modalShow} onHide={() => setModalShow(false)} />
+          <Row>
+            {Customer &&
+              Customer.map((item) => {
+                return (
+                  <Col className='d-flex justify-content-center'>
+                    <Card
+                      style={{ width: "18rem", height: "" }}
+                      className='my-2 order-card'
+                    >
+                      <Card.Body className='rounded-1 p-0'>
+                        <div>
+                          <Card.Title
+                            style={{
+                              height: "6em",
+                              backgroundColor: "rgb(1, 152, 122)",
+                              color: "white",
+                            }}
+                            className='d-flex justify-content-center align-items-center text-uppercase'
+                          >
+                            {item.Name}
+                          </Card.Title>
+                        </div>
+                        <ListGroup className='list-group-flush'>
+                          <ListGroup.Item>
+                            Phone : {item.PhoneNumber}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Address : {item.Address}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Total : {item.TotalAmount}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Items : {item.itemsOrdered.length}
+                          </ListGroup.Item>
+                        </ListGroup>
+                        <Button
+                          style={{
+                            textDecoration: "none",
+                            color: "white",
+                            backgroundColor: " rgb(1, 123, 122, 0.8)",
+                          }}
+                          className='ms-3 px-2 py-1 rounded-2 mb-5'
+                          onClick={() => {
+                            setModalShow(true);
+                            setcart(item.itemsOrdered);
+                          }}
+                        >
+                          View Items
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                );
+              })}
+          </Row>
+        </Container>
       </Container>
     </React.Fragment>
   );
 }
 
-export default Refunds;
+export default PurchasedOrder;

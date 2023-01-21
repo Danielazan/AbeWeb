@@ -17,14 +17,9 @@ function SalesForm(props) {
   const [site, setSite] = useState("");
   const [payment, setPayment] = useState("");
   const [sales, setSales] = useState("");
-  const [supplied, setSupplied] = useState(false);
+  const [supplied, setSupplied] = useState(true);
   const [datar, setDatar] = useState(null);
-  
-
   const { iteam } = IteamHook();
-  console.log(iteam);
-
-    
 
   const submitCustomer = async () => {
     let data = {
@@ -35,13 +30,16 @@ function SalesForm(props) {
       SiteLocation: site,
       InvoiceNumber: props.invoice,
       PaymentMethod: payment,
+      Profit_Loss: 6789,
+      Refunds: [],
+      DateOfSupplied: new Date(),
       RecievedBy: sales,
-      supplied:supplied,
+      supplied: supplied,
       TotalAmountPaid: props.price,
       itemsBought: iteam,
     };
 
-    setDatar(data)
+    setDatar(data);
 
     await axios.post(`${base.url}/api/customer`, data).then((res) => {
       console.log(res.data);
@@ -189,9 +187,7 @@ function SalesForm(props) {
                       type='radio'
                       value={true}
                       defaultChecked
-                      onClick={(e) =>
-                        setSupplied(e.target.value, console.log(supplied))
-                      }
+                      onClick={()=>setSupplied(true)}
                     />
 
                     <Form.Check
@@ -200,9 +196,7 @@ function SalesForm(props) {
                       name='supplied'
                       type='radio'
                       value={false}
-                      onClick={(e) =>
-                        setSupplied(e.target.value, console.log(supplied))
-                      }
+                      onClick={()=>setSupplied(false)}
                     />
                   </div>
                 </Form.Group>

@@ -7,8 +7,7 @@ import base from "base.js";
 import Navbar from "Components/NavbarDark";
 import { useNavigate } from "react-router-dom";
 
-function PurchasedOrder(props) {
-  const [cartItems, setCartItems] = useState([]);
+function PurchasedOrder() {
   const [Customer, setCustomer] = useState([]);
   const navigate = useNavigate();
 
@@ -19,7 +18,6 @@ function PurchasedOrder(props) {
       // dispatch({ type: "SET Product", payload: json });
       setCustomer(json);
 
-      console.log(json);
     });
   }, []);
 
@@ -38,25 +36,52 @@ function PurchasedOrder(props) {
               {Customer &&
                 Customer.map((item) => {
                   return (
-                    <Col>
-                      <Card style={{ width: "18rem" }} className='mb-2'>
-                        <Card.Body>
-                          <Card.Title>{item.Name}</Card.Title>
-                          <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
-                          </Card.Text>
-                        </Card.Body>
-                        <ListGroup className='list-group-flush'>
-                          <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                          <ListGroup.Item>
-                            Dapibus ac facilisis in
-                          </ListGroup.Item>
-                          <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                        </ListGroup>
-                        <Card.Body>
-                          <Card.Link onClick={NavSales}>Card Link</Card.Link>
-                          <Card.Link href='#'>Another Link</Card.Link>
+                    <Col className='d-flex justify-content-center'>
+                      <Card
+                        style={{ width: "18rem", height: "" }}
+                        className='order-card'
+                      >
+                        <Card.Body className='rounded-1 p-0'>
+                          <div>
+                            <Card.Title
+                              style={{
+                                height: "6em",
+                                backgroundColor: "rgb(2, 23, 50)",
+                                color: "white",
+                              }}
+                              className='d-flex justify-content-center align-items-center text-uppercase'
+                            >
+                              {item.Name}
+                            </Card.Title>
+                          </div>
+
+                          <ListGroup className='list-group-flush'>
+                            <ListGroup.Item>
+                              Phone : {item.PhoneNumber}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              Address : {item.Address}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              Total : {item.TotalAmount}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {" "}
+                              Items : {item.itemsOrdered.length}
+                            </ListGroup.Item>
+                          </ListGroup>
+
+                          <Card.Link
+                            style={{
+                              textDecoration: "none",
+                              color: "white",
+                              backgroundColor: " rgb(2, 23, 50, 0.8)",
+                            }}
+                            className='ms-3 px-2 py-1 rounded-2 mb-5'
+                            onClick={NavSales}
+                          >
+                            Card Link
+                          </Card.Link>
                         </Card.Body>
                       </Card>
                     </Col>
