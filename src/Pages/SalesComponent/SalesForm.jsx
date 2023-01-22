@@ -38,7 +38,9 @@ function SalesForm(props) {
       itemsBought: iteam,
     };
 
+
     console.log(iteam)
+
     setDatar(data);
 
     await axios.post(`${base.url}/api/customer`, data).then((res) => {
