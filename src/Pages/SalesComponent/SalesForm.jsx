@@ -30,7 +30,6 @@ function SalesForm(props) {
       SiteLocation: site,
       InvoiceNumber: props.invoice,
       PaymentMethod: payment,
-      Profit_Loss: 6789,
       Refunds: [],
       DateOfSupplied: new Date(),
       RecievedBy: sales,
@@ -39,13 +38,14 @@ function SalesForm(props) {
       itemsBought: iteam,
     };
 
+    console.log(iteam);
     setDatar(data);
 
     await axios.post(`${base.url}/api/customer`, data).then((res) => {
       console.log(res.data);
     });
 
-    await iteam.map((ele) => {
+    await iteam.map(async(ele) => {
       const id = ele._id;
 
       const sky = {
@@ -54,11 +54,14 @@ function SalesForm(props) {
       const hell = {
         MaterialName: ele.item,
         StockOut: ele.quantity,
+        AmountSold: ele.sold,
+        NormalPrice: ele.Price,
+        Quantity: ele.quantity,
       };
 
-      axios.patch(`${base.url}/api/Batch/${id}`, sky);
+      await axios.patch(`${base.url}/api/Batch/${id}`, sky);
 
-      axios.post(`${base.url}/api/upCreate/${id}`, hell);
+      await axios.post(`${base.url}/api/upCreate/${id}`, hell);
 
       console.log(hell);
     });

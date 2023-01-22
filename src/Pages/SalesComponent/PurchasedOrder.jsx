@@ -5,19 +5,19 @@ import "./Style/Style.css";
 import axios from "axios";
 import base from "base.js";
 import Navbar from "Components/NavbarDark";
+import img from "Assets/Images/pic14.svg";
 import { useNavigate } from "react-router-dom";
 
 function PurchasedOrder() {
   const [Customer, setCustomer] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${base.url}/api/order`).then((res) => {
       const json = res.data;
-
-      // dispatch({ type: "SET Product", payload: json });
       setCustomer(json);
-
+      setLoading(false);
     });
   }, []);
 
@@ -31,12 +31,23 @@ function PurchasedOrder() {
         <Navbar />
 
         <Container>
+          <h1 className='text-center'>Orders</h1>
+          {loading ? (
+            <center>
+              <img className="my-3" src={img} alt='Loading...' height='100px' />
+            </center>
+          ) : null}
           <div className='d-lg-flex justify-content-between'>
             <Row>
               {Customer &&
                 Customer.map((item) => {
                   return (
-                    <Col className='d-flex justify-content-center'>
+                    <Col
+                      xs={12}
+                      lg={4}
+                      className='d-flex justify-content-center'
+                      key={item._id}
+                    >
                       <Card
                         style={{ width: "18rem", height: "" }}
                         className='order-card'
@@ -66,7 +77,6 @@ function PurchasedOrder() {
                               Total : {item.TotalAmount}
                             </ListGroup.Item>
                             <ListGroup.Item>
-                              {" "}
                               Items : {item.itemsOrdered.length}
                             </ListGroup.Item>
                           </ListGroup>
