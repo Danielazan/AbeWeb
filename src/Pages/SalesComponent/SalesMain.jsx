@@ -25,26 +25,51 @@ function SalesMain() {
     <React.Fragment>
       <Navbar />
       <Container fluid className='SalesMain '>
-        <Row className=''>
-          <Col xs={2} lg={1} className='mt-1'>
+        <Row>
+          <Col xs={0} lg={1} className='mt-1 colo'>
             <Button
               className='d-lg-none bg-transparent border-0'
               onClick={handleShow}
             >
-              <HiMenuAlt1 size={"2em"} style={{ color: "021732" }} />
+              <HiMenuAlt1 size={"2em"} style={{ color: "rgb(2, 23, 50)" }} />
             </Button>
-            <Offcanvas show={show} onHide={handleClose} responsive='lg'>
+            <Offcanvas
+              style={{ backgroundColor: "rgb(2, 23, 50)", color: "white" }}
+              show={show}
+              onHide={handleClose}
+              responsive='lg'
+            >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Sales Mangemaent</Offcanvas.Title>
+                <Offcanvas.Title className='text-white'>
+                  Sales Mangemaent
+                </Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body>
-                <ListGroup variant="flush" className='SalesListGroup'>
-                  <ListGroup.Item onClick={setPurchase} className='listitem mt-lg-5'>
+              <Offcanvas.Body style={{ backgroundColor: "rgb(2, 23, 50)" }}>
+                <ListGroup
+                  style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                  variant='flush'
+                  className='SalesListGroup m-0 p-0'
+                >
+                  <ListGroup.Item
+                    onClick={setPurchase}
+                    className='mt-lg-5 px-0 text-white'
+                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                  >
                     Purchase Order
                   </ListGroup.Item>
-                  <ListGroup.Item onClick={setActual}>Actual Order</ListGroup.Item>
-                  <ListGroup.Item>Not Supplied</ListGroup.Item>
-                 
+                  <ListGroup.Item
+                    className='text-white px-0'
+                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                    onClick={setActual}
+                  >
+                    Actual Order
+                  </ListGroup.Item>
+                  <ListGroup.Item
+                    className='text-white px-0'
+                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                  >
+                    Not Supplied
+                  </ListGroup.Item>
                 </ListGroup>
               </Offcanvas.Body>
             </Offcanvas>

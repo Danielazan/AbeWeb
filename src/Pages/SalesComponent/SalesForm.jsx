@@ -30,7 +30,6 @@ function SalesForm(props) {
       SiteLocation: site,
       InvoiceNumber: props.invoice,
       PaymentMethod: payment,
-      Profit_Loss: 6789,
       Refunds: [],
       DateOfSupplied: new Date(),
       RecievedBy: sales,
@@ -39,7 +38,9 @@ function SalesForm(props) {
       itemsBought: iteam,
     };
 
-      console.log(iteam)
+
+    console.log(iteam)
+
     setDatar(data);
 
     await axios.post(`${base.url}/api/customer`, data).then((res) => {
@@ -57,7 +58,7 @@ function SalesForm(props) {
         StockOut: ele.quantity,
         AmountSold:ele.sold,
         NormalPrice:ele.Price,
-        Quantity:ele.quantity
+        Quantity:ele.quantity,
       };
 
       await axios.patch(`${base.url}/api/Batch/${id}`, sky);

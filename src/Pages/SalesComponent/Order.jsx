@@ -10,6 +10,7 @@ import { TbCurrencyNaira } from "react-icons/tb";
 import Navbar from "Components/NavbarDark";
 import { useProductContext } from "Hook/useProduct";
 import Sales from "./Sales";
+import { type } from "@testing-library/user-event/dist/type";
 
 function Order() {
   const [name, setName] = useState("");
@@ -18,9 +19,11 @@ function Order() {
   const [mail, setMail] = useState("");
   const [qty, setQty] = useState("");
   const [sup, setSup] = useState("");
-  const [carried, setCarried] = useState("");
+  const [date, setDate ] = useState("");
   const [paid, setPaid] = useState("")
   const [prod, setProd] = useState("");
+  const [colour, setColour] = useState("");
+  const [type, setType] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const { Product, dispatch } = useProductContext();
   const [show, setShow] = useState(false);
@@ -36,16 +39,18 @@ function Order() {
     });
   }, [dispatch]);
 
-  const handleOrder = (id,name, price) => {
+  const handleOrder = (id,pname, price) => {
     
     let data = {
       id:id,
-      name: name,
+      name: pname,
       price: price,
       supplied:sup,
       quantity:qty,
-      carried:carried,
+      date:date,
       paid:paid,
+      type:type,
+      colour:colour,
     };
     
     cartItems.push(data);
@@ -68,8 +73,10 @@ function Order() {
 
     setQty("")
     setSup("")
-    setCarried("")
+    setDate("")
     setPaid("")
+    setColour("")
+    setType("")
 
     handleClose()
 
@@ -238,68 +245,104 @@ function Order() {
                       {item.Price}
                     </h6>
 
-                    <Button className="bg-transparent border-0" onClick={handleShow}>
-                        <IoIosAddCircle
-                          size={"1.5em"}
-                          style={{ color: "white" }}
+                    <Button
+                      className='bg-transparent border-0'
+                      onClick={handleShow}
+                    >
+                      <IoIosAddCircle
+                        size={"1.5em"}
+                        style={{ color: "white" }}
+                      />
+                    </Button>
+
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>{item.Name}</Modal.Title>
+                      </Modal.Header>
+
+                      <Modal.Body>
+                        <Form.Control
+                          type='text'
+                          className='my-2'
+                          placeholder='Type'
+                          value={type}
+                          onChange={(e) => setType(e.target.value)}
                         />
-                      </Button>
 
-                      <Modal show={show} onHide={handleClose}>
+                        <Form.Control
+                          type='text'
+                          className='my-2'
+                          placeholder='Colour'
+                          value={colour}
+                          onChange={(e) => setColour(e.target.value)}
+                        />
 
-                        <Modal.Header closeButton>
-                          <Modal.Title>{item.Name}</Modal.Title>
-                        </Modal.Header>
+                        <Form.Control
+                          type='text'
+                          className='my-2'
+                          placeholder='Quantity'
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        />
 
-                        <Modal.Body>
-                            <Form.Control
-                                type='text'
-                                className='my-2'
-                                placeholder='Quantity'
-                                value={qty}
-                                onChange={(e) => setQty(e.target.value)}
-                              />
+                        <Form.Control
+                          type='text'
+                          className='my-2'
+                          placeholder='Total Paid'
+                          value={paid}
+                          onChange={(e) => setPaid(e.target.value)}
+                        />
 
-                            <Form.Control
-                                type='text'
-                                className='my-2'
-                                placeholder='Supplied'
-                                value={sup}
-                                onChange={(e) => setSup(e.target.value)}
-                              />
+                        <Form.Group>
+                          <Form.Label className='form-label'>
+                            Supply Status
+                          </Form.Label>
 
-                            <Form.Control
-                                type='text'
-                                className='my-2'
-                                placeholder='Carried'
-                                value={carried}
-                                onChange={(e) => setCarried(e.target.value)}
-                              />
+                          <div className='mb-3'>
+                            <Form.Check
+                              inline
+                              label='Supplied'
+                              name='supplied'
+                              type='radio'
+                              value={true}
+                              defaultChecked
+                              onClick={() => setSup(true)}
+                            />
 
-                            <Form.Control
-                                type='text'
-                                className='my-2'
-                                placeholder='Paid'
-                                value={paid}
-                                onChange={(e) => setPaid(e.target.value)}
-                              />
+                            <Form.Check
+                              inline
+                              label='Not Supplied'
+                              name='supplied'
+                              type='radio'
+                              value={false}
+                              onClick={() => setSup(false)}
+                            />
+                          </div>
+                        </Form.Group>
 
+                        <Form.Control
+                          type='date'
+                          className='my-2'
+                          value={date}
+                          onChange={(e) => setDate(e.target.value)}
+                        />
+                      </Modal.Body>
 
-                        </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant='secondary' onClick={handleClose}>
+                          Close
+                        </Button>
 
-                        <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose}>
-                            Close
-                          </Button>
-
-                          <Button variant="primary" onClick={() =>
-                        handleOrder(item._id, item.Name, item.Price)
-                      }>
-                            Save Changes
-                          </Button>
-
-                        </Modal.Footer>
-                      </Modal>
+                        <Button
+                          variant='primary'
+                          onClick={() =>
+                            handleOrder(item._id, item.Name, item.Price)
+                          }
+                        >
+                          Save Changes
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 </div>
               ))}

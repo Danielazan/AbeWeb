@@ -9,8 +9,6 @@ import UserHook from "Hook/UserHook";
 
 function Admin() {
   const { User, dispatchU } = UserHook();
-  console.log(User.user.isAdmin);
-
   // if (!User.user.isAdmin){
   //   return (
   //     <div>

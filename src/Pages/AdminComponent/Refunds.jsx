@@ -14,17 +14,21 @@ import "./Style/Style.css";
 import axios from "axios";
 import base from "base.js";
 import Navbar from "Components/NavbarAdmin";
+import img from "Assets/Images/pic15.svg";
 import { useNavigate } from "react-router-dom";
 
 function PurchasedOrder() {
   const [Customer, setCustomer] = useState([]);
-  const [cart, setcart] = useState(null);
+  const [cart, setcart] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${base.url}/api/order`).then((res) => {
       const json = res.data;
       setCustomer(json);
+      setLoading(false);
+
     });
   }, []);
 
@@ -49,16 +53,20 @@ function PurchasedOrder() {
                 <th>Product</th>
                 <th>Price</th>
                 <th>Qty</th>
+                <th>Colour</th>
+                <th>Type</th>
               </tr>
             </thead>
             <tbody>
               {cart &&
                 cart.map((stuff, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{stuff.name}</td>
                     <td>{stuff.price}</td>
                     <td>{stuff.quantity}</td>
+                    <td>{stuff.colour}</td>
+                    <td>{stuff.type}</td>
                   </tr>
                 ))}
             </tbody>
@@ -86,13 +94,17 @@ function PurchasedOrder() {
       <Container fluid className='Order'>
         <Container className='Refund'>
           <h1 className='text-center'>Orders</h1>
-
+          {loading ? (
+            <center>
+              <img src={img} alt='Loading...' height='100px' />
+            </center>
+          ) : null}
           <VerticalModal show={modalShow} onHide={() => setModalShow(false)} />
           <Row>
             {Customer &&
-              Customer.map((item) => {
+              Customer.map((item,index) => {
                 return (
-                  <Col className='d-flex justify-content-center'>
+                  <Col key={index} xs={12} lg={4} className='d-flex justify-content-center'>
                     <Card
                       style={{ width: "18rem", height: "" }}
                       className='my-2 order-card'
