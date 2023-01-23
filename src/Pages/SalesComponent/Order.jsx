@@ -11,6 +11,7 @@ import Navbar from "Components/NavbarDark";
 import { useProductContext } from "Hook/useProduct";
 import Sales from "./Sales";
 import { type } from "@testing-library/user-event/dist/type";
+import OrderHook from "Hook/UseOrderHook";
 
 function Order() {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ function Order() {
   const [phone, setPhone] = useState("");
   const [mail, setMail] = useState("");
   const [qty, setQty] = useState("");
-  const [sup, setSup] = useState("");
+  const [sup, setSup] = useState(true);
   const [date, setDate ] = useState("");
   const [paid, setPaid] = useState("")
   const [prod, setProd] = useState("");
@@ -29,6 +30,7 @@ function Order() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { Order, dispatchOrder } = OrderHook()
 
   useEffect(() => {
     axios.get(`${base.url}/api/material`).then((res) => {
@@ -39,8 +41,8 @@ function Order() {
     });
   }, [dispatch]);
 
-  const handleOrder = (id,pname, price) => {
-    
+  const handlesave = async(id,pname, price)=>{
+
     let data = {
       id:id,
       name: pname,
@@ -55,6 +57,16 @@ function Order() {
     
     cartItems.push(data);
 
+    setQty("")
+    setSup("")
+    setDate("")
+    setPaid("")
+    setColour("")
+    setType("")
+    handleClose()
+  }
+  const handleOrder = () => {
+    
     const details={
       Name:name,
       Address:addy,
@@ -67,16 +79,21 @@ function Order() {
     
     console.log(cartItems);
 
-    axios.post(`${base.url}/api/report`,details).then((res) => {
+    axios.post(`${base.url}/api/order`,details).then((res) => {
       console.log(res.data)
     })
 
+    setMail("")
+    setPhone("")
+    setAddy("")
+    setName("")
     setQty("")
     setSup("")
     setDate("")
     setPaid("")
     setColour("")
     setType("")
+    setCartItems([])
 
     handleClose()
 
@@ -174,6 +191,7 @@ function Order() {
                   <Form.Control
                     type='text'
                     placeholder='Enter Your Name'
+                    required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -188,6 +206,7 @@ function Order() {
                   <Form.Control
                     type='text'
                     placeholder='Enter Your Address'
+                    required
                     value={addy}
                     onChange={(e) => setAddy(e.target.value)}
                   />
@@ -202,6 +221,7 @@ function Order() {
                   <Form.Control
                     type='number'
                     placeholder='Enter Your Phone Number'
+                    required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
@@ -265,6 +285,7 @@ function Order() {
                           type='text'
                           className='my-2'
                           placeholder='Type'
+                          required
                           value={type}
                           onChange={(e) => setType(e.target.value)}
                         />
@@ -273,6 +294,7 @@ function Order() {
                           type='text'
                           className='my-2'
                           placeholder='Colour'
+                          required
                           value={colour}
                           onChange={(e) => setColour(e.target.value)}
                         />
@@ -281,6 +303,7 @@ function Order() {
                           type='text'
                           className='my-2'
                           placeholder='Quantity'
+                          required
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         />
@@ -289,6 +312,7 @@ function Order() {
                           type='text'
                           className='my-2'
                           placeholder='Total Paid'
+                          required
                           value={paid}
                           onChange={(e) => setPaid(e.target.value)}
                         />
@@ -304,6 +328,7 @@ function Order() {
                               label='Supplied'
                               name='supplied'
                               type='radio'
+                              required
                               value={true}
                               defaultChecked
                               onClick={() => setSup(true)}
@@ -313,6 +338,7 @@ function Order() {
                               inline
                               label='Not Supplied'
                               name='supplied'
+                              required
                               type='radio'
                               value={false}
                               onClick={() => setSup(false)}
@@ -323,6 +349,7 @@ function Order() {
                         <Form.Control
                           type='date'
                           className='my-2'
+                          required
                           value={date}
                           onChange={(e) => setDate(e.target.value)}
                         />
@@ -336,9 +363,7 @@ function Order() {
                         <Button
                           variant='primary'
                           onClick={() =>
-                            handleOrder(item._id, item.Name, item.Price)
-                          }
-                        >
+                            handlesave(item._id, item.Name, item.Price)}>
                           Save Changes
                         </Button>
                       </Modal.Footer>
@@ -390,6 +415,9 @@ function Order() {
                   })}
               </tbody>
             </Table>
+            <Button onClick={handleOrder}>
+                  Submitt Order
+                </Button>
           </section>
         </Container>
       </Container>

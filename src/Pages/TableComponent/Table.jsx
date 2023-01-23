@@ -3,13 +3,14 @@ import React, {
   useState,
   useRef,
   forwardRef,
-  useImperativeHandle,
+ 
 } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Navbar from "Components/NavbarSales";
 import axios from "axios";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import base from "base.js";
+// import nodemailer from 'nodemailer';
 
 
 import "./Style/Style.css";
@@ -26,8 +27,47 @@ const Table = forwardRef((reff) => {
   }, []);
 
   const handleExportWithFunction = (event) => {
-    savePDF(PDFReport.current, { paperSize: "A2" });
+   const save= savePDF(PDFReport.current, { paperSize: "A2" });
+
+   console.log (save)
+
+    
   };
+
+  // const sendEmail = () => {
+  //   // create a new transporter object
+  //   let transporter = nodemailer.createTransport({
+  //     service:"gmail",
+  //     auth: {
+  //       user: 'eaglelazan@gmail.com',
+  //       pass: 'ywjartjtsmkgmyed',
+  //     },
+  //   });
+
+  //   // setup email data
+  //   let mailOptions = {
+  //     from: 'eaglelazan@gmail.com',
+  //     to: "danfrancix@gmail.com" ,
+  //     subject: 'Daily sales Report',
+  //     text: 'Please find the attached PDF file',
+  //     attachments: [
+  //       {
+  //         filename: 'pdfFile.pdf',
+  //         content: ""
+  //       },
+  //     ],
+  //   };
+
+  //   // send email
+  //   transporter.sendMail(mailOptions, (error, info) => {
+  //     if (error) {
+  //       console.log(error);
+  //     } else {
+  //       console.log('Email sent: ' + info.response);
+  //     }
+  //   });
+  // };
+
 
   //   useImperativeHandle(reff,() => {
   //     handleExportWithFunction  ()
