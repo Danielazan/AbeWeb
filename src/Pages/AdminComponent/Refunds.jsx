@@ -85,6 +85,17 @@ function PurchasedOrder() {
     );
   }
 
+  const Refund = async (id)=>{
+    // setLoading(true)
+     await axios.get(`${base.url}/api/refund/${id}`).then(res=>{
+      const json = res.data
+      setcart(json)
+    //   setLoading(false)
+      setModalShow(true)
+      console.log(json)
+     })
+  }
+
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -149,6 +160,17 @@ function PurchasedOrder() {
                           }}
                         >
                           View Items
+                        </Button>
+                        <Button
+                          style={{
+                            textDecoration: "none",
+                            color: "white",
+                            backgroundColor: " rgb(1, 123, 122, 0.8)",
+                          }}
+                          className='ms-3 px-2 py-1 rounded-2 mb-5'
+                          onClick={()=>Refund(item._id)}
+                        >
+                         Refund
                         </Button>
                       </Card.Body>
                     </Card>

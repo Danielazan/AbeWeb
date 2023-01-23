@@ -8,7 +8,7 @@ import { CollectionContextProvider} from "Context/CollectionContext"
 import UserContextProvider from "Context/UserContext"
 import CustomerContextProvider from "Context/CustomerContext"
 import ItemContextProvider from "Context/itemContext"
-
+import OrderContextProvider from "Context/PurchasedOrderContext"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -16,9 +16,11 @@ root.render(
     <CollectionContextProvider>
         <CustomerContextProvider>
         <ItemContextProvider>
+          <OrderContextProvider>
                 <ProductContextProvider>
                     <App />
                 </ProductContextProvider>
+            </OrderContextProvider>
             </ItemContextProvider>
           </CustomerContextProvider>
           </CollectionContextProvider>
