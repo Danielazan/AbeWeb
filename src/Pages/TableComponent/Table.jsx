@@ -10,12 +10,13 @@ import Navbar from "Components/NavbarSales";
 import axios from "axios";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import base from "base.js";
-// import nodemailer from 'nodemailer';
-
-
 import "./Style/Style.css";
+
+
+
 const Table = forwardRef((reff) => {
   const [customers, setCustomers] = useState([]);
+
   const PDFReport = useRef(null);
 
   useEffect(() => {
@@ -34,6 +35,18 @@ const Table = forwardRef((reff) => {
     
   };
 
+  const handleExport = async () => {
+    const pdfDatum =  savePDF(PDFReport.current, { paperSize: "A2" });
+    
+  const datas ={
+      pdfData:pdfDatum
+  }
+
+
+    const respond =await axios.post(`http://localhost:5000/api/report`,datas)
+
+    console.log(respond.data)
+  };
   // const sendEmail = () => {
   //   // create a new transporter object
   //   let transporter = nodemailer.createTransport({
@@ -73,6 +86,7 @@ const Table = forwardRef((reff) => {
   //     handleExportWithFunction  ()
   //    }
   //  )
+
   return (
     <React.Fragment>
       <Container fluid className='Tab'>
@@ -82,7 +96,7 @@ const Table = forwardRef((reff) => {
             <Button
               className='border-0'
               style={{ backgroundColor: "rgb(26, 20, 100)" }}
-              onClick={handleExportWithFunction}
+              onClick={handleExport}
             >
               Download Report
             </Button>
