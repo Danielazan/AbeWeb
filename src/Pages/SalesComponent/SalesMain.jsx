@@ -64,12 +64,7 @@ function SalesMain() {
                   >
                     Actual Order
                   </ListGroup.Item>
-                  <ListGroup.Item
-                    className='text-white px-0'
-                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
-                  >
-                    Not Supplied
-                  </ListGroup.Item>
+                 
                 </ListGroup>
               </Offcanvas.Body>
             </Offcanvas>
