@@ -38,7 +38,7 @@ function Receipt(props) {
           </Col>
 
           <Col xs={6} className='text-center'>
-            Description
+            Des
           </Col>
 
           <Col xs={2} className='text-center'>

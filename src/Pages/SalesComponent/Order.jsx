@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Button, Form, Table,Modal } from "react-bootstrap";
+import { Container, Button, Form, Table, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Style/Style.css";
 import axios from "axios";
@@ -20,8 +20,8 @@ function Order() {
   const [mail, setMail] = useState("");
   const [qty, setQty] = useState("");
   const [sup, setSup] = useState(true);
-  const [date, setDate ] = useState("");
-  const [paid, setPaid] = useState("")
+  const [date, setDate] = useState("");
+  const [paid, setPaid] = useState("");
   const [prod, setProd] = useState("");
   const [colour, setColour] = useState("");
   const [type, setType] = useState("");
@@ -30,76 +30,70 @@ function Order() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { Order, dispatchOrder } = OrderHook()
+  const { Order, dispatchOrder } = OrderHook();
 
   useEffect(() => {
     axios.get(`${base.url}/api/material`).then((res) => {
       const json = res.data;
 
       dispatch({ type: "SET Product", payload: json });
-
     });
   }, [dispatch]);
 
-  const handlesave = async(id,pname, price)=>{
-
+  const handlesave = async (id, pname, price) => {
     let data = {
-      id:id,
+      id: id,
       name: pname,
       price: price,
-      supplied:sup,
-      quantity:qty,
-      date:date,
-      paid:paid,
-      type:type,
-      colour:colour,
+      supplied: sup,
+      quantity: qty,
+      date: date,
+      paid: paid,
+      type: type,
+      colour: colour,
     };
-    
+
     cartItems.push(data);
 
-    setQty("")
-    setSup("")
-    setDate("")
-    setPaid("")
-    setColour("")
-    setType("")
-    handleClose()
-  }
+    setQty("");
+    setSup("");
+    setDate("");
+    setPaid("");
+    setColour("");
+    setType("");
+    handleClose();
+  };
   const handleOrder = () => {
-    
-    const details={
-      Name:name,
-      Address:addy,
-      PhoneNumber:phone,
-      Email:mail,
-      TotalAmount:200,
-      Price:0,
-      itemsOrdered:cartItems
-    }
-    
+    const details = {
+      Name: name,
+      Address: addy,
+      PhoneNumber: phone,
+      Email: mail,
+      TotalAmount: 200,
+      Price: 0,
+      itemsOrdered: cartItems,
+    };
+
     console.log(cartItems);
 
-    axios.post(`${base.url}/api/order`,details).then((res) => {
-      console.log(res.data)
-    })
+    axios.post(`${base.url}/api/order`, details).then((res) => {
+      console.log(res.data);
+    });
 
-    setMail("")
-    setPhone("")
-    setAddy("")
-    setName("")
-    setQty("")
-    setSup("")
-    setDate("")
-    setPaid("")
-    setColour("")
-    setType("")
-    setCartItems([])
+    setMail("");
+    setPhone("");
+    setAddy("");
+    setName("");
+    setQty("");
+    setSup("");
+    setDate("");
+    setPaid("");
+    setColour("");
+    setType("");
+    setCartItems([]);
 
-    handleClose()
-
+    handleClose();
   };
-
-  
 
   return (
     <React.Fragment>
@@ -363,7 +357,9 @@ function Order() {
                         <Button
                           variant='primary'
                           onClick={() =>
-                            handlesave(item._id, item.Name, item.Price)}>
+                            handlesave(item._id, item.Name, item.Price)
+                          }
+                        >
                           Save Changes
                         </Button>
                       </Modal.Footer>
@@ -372,7 +368,7 @@ function Order() {
                 </div>
               ))}
           </div>
-
+         
           <section>
             <div
               className='rounded-1 d-flex justify-content-between mt-5 mb-1 p-3'
@@ -415,9 +411,16 @@ function Order() {
                   })}
               </tbody>
             </Table>
-            <Button onClick={handleOrder}>
-                  Submitt Order
-                </Button>
+            <Button
+              style={{
+                backgroundColor: "rgb(2, 23, 50)",
+                color: "white",
+              }}
+              className='p-2 rounded-1 mb-5 border-0'
+              onClick={handleOrder}
+            >
+              Submit Order
+            </Button>
           </section>
         </Container>
       </Container>
