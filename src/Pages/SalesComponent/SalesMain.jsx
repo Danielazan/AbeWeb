@@ -6,6 +6,7 @@ import { HiMenuAlt1 } from "react-icons/hi";
 import Order from "./Order"
 import Sales from "./Sales"
 import { Container,ListGroup, Row, Col, Button,Offcanvas} from 'react-bootstrap'
+import Inventry from "./Inventry"
 
 function SalesMain() {
   const [show, setShow] = useState(false);
@@ -20,6 +21,10 @@ function SalesMain() {
 
   const setPurchase = async ()=>{
     setView (<PurchasedOrder/>)
+  }
+
+  const setInventry = async ()=>{
+    setView(<Inventry/>)
   }
   return (
     <React.Fragment>
@@ -63,6 +68,14 @@ function SalesMain() {
                     onClick={setActual}
                   >
                     Actual Order
+                  </ListGroup.Item>
+
+                  <ListGroup.Item
+                    className='text-white px-0'
+                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                    onClick={setActual}
+                  >
+                    Inventry
                   </ListGroup.Item>
                  
                 </ListGroup>
