@@ -1,7 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col,Button } from "react-bootstrap";
 import { Br, Cut, Line, Printer, Text,  render } from 'react-thermal-printer';
+
+const handlePrint = () => {
+  window.print();
+}
 
 function Receipt(props) {
   return (
@@ -87,7 +91,9 @@ function Receipt(props) {
           Cashier : {props.datar && props.datar.RecievedBy}
         </p>
         <h6>Thanks For Your Patronage...</h6>
+        <Button onClick={handlePrint}>Print</Button>
       </Container>
+      
     </React.Fragment>
   );
 }
