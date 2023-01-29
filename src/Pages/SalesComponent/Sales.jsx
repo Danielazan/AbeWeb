@@ -10,11 +10,11 @@ import SalesForm from "./SalesForm";
 import { TbCurrencyNaira } from "react-icons/tb";
 import IteamHook from "Hook/IteamHook";
 import { useProductContext } from "Hook/useProduct";
-import base from "base.js"
+import base from "base.js";
 import UserHook from "Hook/UserHook";
 
 function Sales() {
-  const [prod, setProd] = useState("");
+  const [prod, setProd] = useState(" ");
   const [price, setPrice] = useState(0);
   const [loading, setLoading] = useState(true);
   const [tog, setTog] = useState(true);
@@ -25,7 +25,7 @@ function Sales() {
   const { iteam, dispatchItem } = IteamHook();
   const { Product, dispatch } = useProductContext();
   const { User, dispatchU } = UserHook();
-  const [carried, setCarried] = useState()
+  const [carried, setCarried] = useState();
 
   function searchValue(e) {
     setProd(e.target.value);
@@ -103,7 +103,7 @@ function Sales() {
   function call() {
     setTog(false);
 
-    generateInvoiceNumber()
+    generateInvoiceNumber();
   }
 
   function hide() {
@@ -149,7 +149,13 @@ function Sales() {
 
           <Row className='mt-5'>
             <Col xs={12} xl={7} className='check'>
-              <SalesForm tog={tog} invoice={invoice} hide={hide} clear={clearCart} price={sold} />
+              <SalesForm
+                tog={tog}
+                invoice={invoice}
+                hide={hide}
+                clear={clearCart}
+                price={sold}
+              />
 
               <div className={tog ? "changeDis" : "Dis"}>
                 <Row

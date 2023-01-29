@@ -13,7 +13,7 @@ function Inventory() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [temp, setTemp] = useState(null)
+  const [temp, setTemp] = useState(undefined)
   const [qty, setQty] = useState("");
   const [date, setDate] = useState("")
 
@@ -24,14 +24,15 @@ function Inventory() {
     });
   }, []);
 
-  const handleInventory = (item) => {
+  const handleInventory = async (item) => {
 
-    const data = {
+    const detail = {
       Name: item.Name,
-      Inventries: [date,qty],
+      Inventries: [qty],
     };
-    axios.post(`${base.url}/api/inventry`,data).then((res)=>{
-      console.log(res.data)
+
+    await axios.post(`${base.url}/api/inventry`, detail).then((res)=>{
+      console.log(res)
     });
     setQty("");
     setDate("")
@@ -52,7 +53,6 @@ function Inventory() {
               type='text'
               className='my-2'
               placeholder='Quantity'
-              required
               value={qty}
               onChange={(e) => setQty(e.target.value)}
             />
@@ -60,7 +60,6 @@ function Inventory() {
             <Form.Control
               type='date'
               className='my-2'
-              required
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
