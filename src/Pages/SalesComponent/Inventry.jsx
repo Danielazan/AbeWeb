@@ -28,9 +28,7 @@ function Inventory() {
 
     const data = {
       Name: item.Name,
-      Quantity: qty,
-      Date: date,
-      Inventries: [],
+      Inventries: [date,qty],
     };
     axios.post(`${base.url}/api/inventry`,data).then((res)=>{
       console.log(res.data)
