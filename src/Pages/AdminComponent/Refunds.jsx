@@ -104,10 +104,10 @@ function PurchasedOrder() {
 
       <Container fluid className='Order'>
         <Container className='Refund'>
-          <h1 className='text-center'>Orders</h1>
+          <h1 className='py-3 refund-h1 rounded-2'>Orders</h1>
           {loading ? (
             <center>
-              <img src={img} alt='Loading...' height='100px' />
+              <img src={img} alt='Loading...' height='80px' />
             </center>
           ) : null}
           <VerticalModal show={modalShow} onHide={() => setModalShow(false)} />
@@ -115,10 +115,16 @@ function PurchasedOrder() {
             {Customer &&
               Customer.map((item,index) => {
                 return (
-                  <Col key={index} xs={12} lg={4} className='d-flex justify-content-center'>
+                  <Col
+                    key={index}
+                    xs={12}
+                    lg={4}
+                    md={6}
+                    className='d-flex justify-content-center'
+                  >
                     <Card
                       style={{ width: "18rem", height: "" }}
-                      className='my-2 order-card'
+                      className='my-3 refund-card'
                     >
                       <Card.Body className='rounded-1 p-0'>
                         <div>
@@ -133,17 +139,17 @@ function PurchasedOrder() {
                             {item.Name}
                           </Card.Title>
                         </div>
-                        <ListGroup className='list-group-flush'>
-                          <ListGroup.Item>
+                        <ListGroup className='list-group-flush '>
+                          <ListGroup.Item className='bg-transparent'>
                             Phone : {item.PhoneNumber}
                           </ListGroup.Item>
-                          <ListGroup.Item>
+                          <ListGroup.Item className='bg-transparent'>
                             Address : {item.Address}
                           </ListGroup.Item>
-                          <ListGroup.Item>
+                          <ListGroup.Item className='bg-transparent'>
                             Total : {item.TotalAmount}
                           </ListGroup.Item>
-                          <ListGroup.Item>
+                          <ListGroup.Item className='bg-transparent'>
                             Items : {item.itemsOrdered.length}
                           </ListGroup.Item>
                         </ListGroup>
@@ -153,7 +159,7 @@ function PurchasedOrder() {
                             color: "white",
                             backgroundColor: " rgb(1, 123, 122, 0.8)",
                           }}
-                          className='ms-3 px-2 py-1 rounded-2 mb-5'
+                          className='ms-3 px-2 py-1 rounded-2 mb-5 border-0'
                           onClick={() => {
                             setModalShow(true);
                             setcart(item.itemsOrdered);
@@ -167,10 +173,10 @@ function PurchasedOrder() {
                             color: "white",
                             backgroundColor: " rgb(1, 123, 122, 0.8)",
                           }}
-                          className='ms-3 px-2 py-1 rounded-2 mb-5'
-                          onClick={()=>Refund(item._id)}
+                          className='ms-3 px-2 py-1 rounded-2 mb-5 border-0'
+                          onClick={() => Refund(item._id)}
                         >
-                         Refund
+                          Refund
                         </Button>
                       </Card.Body>
                     </Card>

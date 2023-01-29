@@ -65,10 +65,10 @@ function PurchasedOrder() {
         <Navbar />
 
         <Container>
-          <h1 className='text-center'>Orders</h1>
+          <h1 className="order-h1">Orders</h1>
           {loading ? (
             <center>
-              <img className='my-3' src={img} alt='Loading...' height='100px' />
+              <img className='my-3' src={img} alt='Loading...' height='80px' />
             </center>
           ) : null}
 
@@ -171,55 +171,61 @@ function PurchasedOrder() {
                     <Col
                       xs={12}
                       lg={4}
+                      md={6}
                       className='d-flex justify-content-center'
                       key={item._id}
                     >
                       <Card
                         style={{ width: "18rem", height: "" }}
-                        className='order-card'
+                        className='order-card my-3 rounded-2'
                       >
-                        <Card.Body className='rounded-1 p-0'>
+                        <Card.Body className='p-0 rounded-2'>
                           <div>
                             <Card.Title
                               style={{
                                 height: "6em",
-                                backgroundColor: "rgb(2, 23, 50)",
+                                background:
+                                  "linear-gradient(to left, rgb(3,23,50), rgb(2, 23, 50))",
                                 color: "white",
                               }}
-                              className='d-flex justify-content-center align-items-center text-uppercase'
+                              className='d-flex justify-content-center align-items-center text-uppercase rounded-1'
                             >
                               {item.Name}
                             </Card.Title>
                           </div>
 
                           <ListGroup className='list-group-flush'>
-                            <ListGroup.Item>
+                            <ListGroup.Item className='bg-transparent'>
                               Phone : {item.PhoneNumber}
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            <ListGroup.Item className='bg-transparent'>
                               Address : {item.Address}
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            <ListGroup.Item className='bg-transparent'>
                               Total : {item.TotalAmount}
                             </ListGroup.Item>
-                            <ListGroup.Item>
+                            <ListGroup.Item className='bg-transparent'>
                               Items : {item.itemsOrdered.length}
                             </ListGroup.Item>
-                          </ListGroup>
 
-                          <Card.Link
-                            style={{
-                              textDecoration: "none",
-                              color: "white",
-                              backgroundColor: " rgb(2, 23, 50, 0.8)",
-                            }}
-                            className='ms-3 px-2 py-1 rounded-2 mb-5'
-                            onClick={()=> {setShow(true);
-                              edit(item._id,item.Name,item.Price)
-                            }}
-                          >
-                            Card Link 
-                          </Card.Link>
+                            <ListGroup.Item className=' bg-transparent'>
+                              <Card.Link
+                                style={{
+                                  textDecoration: "none",
+                                  color: "white",
+                                  backgroundColor: " rgb(2, 23, 50, 0.9)",
+                                  cursor: "pointer",
+                                }}
+                                className='px-5 py-1 rounded-2'
+                                onClick={() => {
+                                  setShow(true);
+                                  edit(item._id, item.Name, item.Price);
+                                }}
+                              >
+                                Edit
+                              </Card.Link>
+                            </ListGroup.Item>
+                          </ListGroup>
                         </Card.Body>
                       </Card>
                     </Col>

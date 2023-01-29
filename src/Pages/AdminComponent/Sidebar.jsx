@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button, Offcanvas, ListGroup, Form, Accordion } from "react-bootstrap";
 import { MdAdminPanelSettings, MdRoofing } from "react-icons/md";
 import { AiFillFolderAdd } from "react-icons/ai";
-import { HiUsers } from "react-icons/hi";
 import axios from "axios";
 import { useCollectionContext } from "Hook/CollectionHook";
 import { useProductContext } from "Hook/useProduct";
@@ -243,7 +242,7 @@ function SideBar2() {
                             color: "rgb(1, 152, 122)",
                             borderColor: "rgb(1, 152, 122)",
                           }}
-                          className='my-2 py-3 p-0 '
+                          className='my-2 py-3 p-0 trun'
                         >
                           {user.email}
 

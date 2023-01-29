@@ -143,7 +143,7 @@ function Sales() {
 
           {loading ? (
             <center>
-              <img src={img} alt='Loading...' height='100px' />
+              <img src={img} alt='Loading...' height='80px' />
             </center>
           ) : null}
 

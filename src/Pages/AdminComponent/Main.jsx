@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Table, Button, Form, Container,ButtonGroup } from "react-bootstrap";
+import { Button, Form, Container,ButtonGroup } from "react-bootstrap";
 import axios from "axios";
 import { useProductContext } from "Hook/useProduct";
 import { MdEdit, MdDelete } from "react-icons/md";
-import { IoIosAddCircle } from "react-icons/io";
 import pic from "Assets/Images/pic15.svg";
 import { Link } from "react-router-dom";
 import Report from "Pages/TableComponent/Table";
@@ -127,15 +126,14 @@ function Main() {
       <div style={{ color: "rgb(1, 152, 122)" }}>
         <h2 className='main-h2 pb-3'>Collections</h2>
 
-        <Container className='my-3'>
-          <ButtonGroup>
+        <div fluid className='my-3 w-100 d-flex justify-content-between'>
             <Button
               style={{
                 backgroundColor: "rgb(1, 152, 122)",
                 color: "white",
                 fontWeight: "700",
               }}
-              className='border-0'
+              className='border-0 trun'
             >
               <Link
                 to='/Stats'
@@ -151,7 +149,7 @@ function Main() {
                 color: "white",
                 fontWeight: "700",
               }}
-              className='border-0'
+              className='border-0 trun'
             >
               <Link
                 to='/EnquiryTable'
@@ -167,7 +165,7 @@ function Main() {
                 color: "white",
                 fontWeight: "700",
               }}
-              className='border-0'
+              className='border-0 trun'
             >
               <Link
                 to='/Table'
@@ -183,7 +181,7 @@ function Main() {
                 color: "white",
                 fontWeight: "700",
               }}
-              className='border-0'
+              className='border-0 trun'
             >
               <Link
                 to='/Refunds'
@@ -192,8 +190,7 @@ function Main() {
                 Refunds
               </Link>
             </Button>
-          </ButtonGroup>
-        </Container>
+        </div>
 
         <section>
           <table
@@ -346,7 +343,7 @@ function Main() {
 
         {loading ? (
           <center>
-            <img src={pic} height='100px' alt='Loading...' />{" "}
+            <img src={pic} height='80px' alt='Loading...' />{" "}
           </center>
         ) : null}
 
