@@ -14,7 +14,7 @@ import base from "base.js";
 import UserHook from "Hook/UserHook";
 
 function Sales() {
-  const [prod, setProd] = useState(" ");
+  const [prod, setProd] = useState("");
   const [price, setPrice] = useState(0);
   const [loading, setLoading] = useState(true);
   const [tog, setTog] = useState(true);
@@ -26,6 +26,7 @@ function Sales() {
   const { Product, dispatch } = useProductContext();
   const { User, dispatchU } = UserHook();
   const [carried, setCarried] = useState();
+  const [Reprod, setReprod] = useState([])
 
   function searchValue(e) {
     setProd(e.target.value);
@@ -37,7 +38,11 @@ function Sales() {
 
       dispatch({ type: "SET Product", payload: json });
 
+      setReprod(json)
+
       setLoading(false);
+      
+      console.log(Product)
     });
   }, [dispatch]);
 
@@ -183,10 +188,10 @@ function Sales() {
                 </Row>
 
                 {Product &&
-                  Product.filter((item) => {
+                  Product.filter((items) => {
                     return prod.toLowerCase() === ""
-                      ? item
-                      : item.Name.toLowerCase().includes(prod);
+                      ? items
+                      : items.Name.toLowerCase().includes(prod);
                   }).map((item) => {
                     return (
                       <Row

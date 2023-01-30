@@ -26,7 +26,7 @@ function Order() {
   const [colour, setColour] = useState("");
   const [type, setType] = useState("");
   const [cartItems, setCartItems] = useState([]);
-  const { Product, dispatch } = useProductContext();
+  // const { Product, dispatch } = useProductContext();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -36,9 +36,9 @@ function Order() {
     axios.get(`${base.url}/api/material`).then((res) => {
       const json = res.data;
 
-      dispatch({ type: "SET Product", payload: json });
+      dispatchOrder({ type: "SET iteam", payload: json });
     });
-  }, [dispatch]);
+  }, [dispatchOrder]);
 
   const handlesave = async (id, pname, price) => {
     let data = {
@@ -239,8 +239,8 @@ function Order() {
           </Container>
           {/* Search Results For Products */}
           <div className='mt-5'>
-            {Product &&
-              Product.filter((item) => {
+            { Order &&
+               Order.filter((item) => {
                 return prod.toLowerCase() === ""
                   ? item
                   : item.Name.toLowerCase().includes(prod);
