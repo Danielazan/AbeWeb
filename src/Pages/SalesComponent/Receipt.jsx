@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col,Button } from "react-bootstrap";
-import { Br, Cut, Line, Printer, Text,  render } from 'react-thermal-printer';
+import ReactToPrint from "react-to-print";
 
 const handlePrint = () => {
   window.print();
 }
 
 function Receipt(props) {
+  const componentRef = useRef();
   return (
     <React.Fragment>
-      <Container fluid className='Receipt'>
-        <h3 className='text-center mb-4'>
+      <Container fluid className='Receipt' ref={componentRef}>
+      <div>
+          <h3 className='text-center mb-4'>
           Authentic Roofing Tiles <br />{" "}
           <span style={{ fontSize: "14px" }}>Intercontinental Limited</span>
         </h3>
@@ -91,9 +93,17 @@ function Receipt(props) {
           Cashier : {props.datar && props.datar.RecievedBy}
         </p>
         <h6>Thanks For Your Patronage...</h6>
-        <Button onClick={handlePrint}>Print</Button>
+        
+      </div>
+        
       </Container>
-      
+      <div>
+      <ReactToPrint
+          trigger={() => <Button>Print this out!</Button>}
+          content={() => componentRef.current}
+        />
+      {/* <Button onClick={handlePrint}>Print</Button> */}
+      </div>
     </React.Fragment>
   );
 }
