@@ -5,7 +5,6 @@ import { useProductContext } from "Hook/useProduct";
 import { useCollectionContext } from "Hook/CollectionHook";
 import base from "base.js";
 
-
 function Sectiontrack() {
   const [name, setName] = useState("");
 
@@ -63,7 +62,7 @@ function Sectiontrack() {
   return (
     <React.Fragment>
       <section className='widget'>
-        <Form className='ms-3 '>
+        <Form className='ms-lg-3 '>
           <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
             <Form.Label style={{ color: "rgb(1, 152, 122)" }}>Name</Form.Label>
             <Form.Control
@@ -134,7 +133,7 @@ function Sectiontrack() {
             style={{
               backgroundColor: "rgb(1, 152, 122)",
               color: "white",
-              fontWeight:"600"
+              fontWeight: "600",
             }}
             onClick={handlePost}
           >

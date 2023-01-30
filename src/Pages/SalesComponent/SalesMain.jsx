@@ -19,6 +19,10 @@ function SalesMain() {
     setView (<Sales/>)
   }
 
+  const setOrder = async () => {
+    setView(<Order />);
+  };
+
   const setPurchase = async ()=>{
     setView (<PurchasedOrder/>)
   }
@@ -44,7 +48,7 @@ function SalesMain() {
               onHide={handleClose}
               responsive='lg'
             >
-              <Offcanvas.Header closeButton>
+              <Offcanvas.Header closeButton variant='light'>
                 <Offcanvas.Title className='text-white'>
                   Sales Mangemaent
                 </Offcanvas.Title>
@@ -56,28 +60,47 @@ function SalesMain() {
                   className='SalesListGroup m-0 p-0'
                 >
                   <ListGroup.Item
-                    onClick={setPurchase}
-                    className='mt-lg-5 px-0 text-white'
-                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                    className='px-0 mt-lg-5 sales-item'
+                    style={{
+                      backgroundColor: "rgb(2, 23, 50)",
+                      cursor: "pointer",
+                    }}
+                    onClick={setOrder}
                   >
-                    Purchase Order
+                    Sales Form
+                  </ListGroup.Item>
+
+                  <ListGroup.Item
+                    onClick={setPurchase}
+                    className='px-0 sales-item'
+                    style={{
+                      backgroundColor: "rgb(2, 23, 50)",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Purchased Order
                   </ListGroup.Item>
                   <ListGroup.Item
-                    className='text-white px-0'
-                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
+                    className='px-0 sales-item'
+                    style={{
+                      backgroundColor: "rgb(2, 23, 50)",
+                      cursor: "pointer",
+                    }}
                     onClick={setActual}
                   >
                     Actual Order
                   </ListGroup.Item>
 
                   <ListGroup.Item
-                    className='text-white px-0'
-                    style={{ backgroundColor: "rgb(2, 23, 50)" }}
-                    onClick={setActual}
+                    className='px-0 sales-item'
+                    style={{
+                      backgroundColor: "rgb(2, 23, 50)",
+                      cursor: "pointer",
+                    }}
+                    onClick={setInventry}
                   >
-                    Inventry
+                    Inventory
                   </ListGroup.Item>
-                 
                 </ListGroup>
               </Offcanvas.Body>
             </Offcanvas>

@@ -105,12 +105,7 @@ function From() {
               </Form.Group>
 
               <Container fluid className='d-flex justify-content-between'>
-                <Form.Check
-                  style={{ fontSize: "12px" }}
-                  type='checkbox'
-                  id='custom-switch'
-                  label='Remember For 30 days'
-                />
+                
 
                 <Link
                   Navigate
@@ -148,7 +143,7 @@ function From() {
               )}
             </Form>
             <Container className='d-flex justify-content-around my-4'>
-              <p className='form-p'>Don't have an account?</p>
+              <p className='form-p' style={{fontSize:"10px"}}>Don't have an account?</p>
 
               <Link
                 Navigate
@@ -156,6 +151,7 @@ function From() {
                   textDecoration: "none",
                   fontWeight: "600",
                   color: "black",
+                  fontSize:"10px"
                 }}
                 to='/'
               >
