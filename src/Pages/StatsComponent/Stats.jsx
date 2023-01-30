@@ -213,7 +213,7 @@ const handleForm= async ()=> {
 
                     <div className='d-flex justify-content-center'>
                     
-                      <img className={` ${isLoading ? "d-block" : "d-none" }  border-0 py-4 `} src={pic} alt='Logging In...' height='100px' />
+                      <img className={` ${isLoading ? "d-block" : "d-none" }  border-0 py-4 `} src={pic} alt='Logging In...' height='80px' />
                     
                       <Button
                         disabled={isLoading}
