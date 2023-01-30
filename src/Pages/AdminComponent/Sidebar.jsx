@@ -294,7 +294,7 @@ function SideBar2() {
               </Accordion.Header>
               <Accordion.Body
                 style={{ backgroundColor: "white", color: "rgb(1, 152, 122)" }}
-              >
+              > 
                 <ListGroup
                   style={{
                     backgroundColor: "white",

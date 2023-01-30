@@ -45,6 +45,7 @@
     padding: 2rem;
     border: 2px solid black;
     width: 2.16in;
+    align-items: center
 }
 
 .rec-row{
